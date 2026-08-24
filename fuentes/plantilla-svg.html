@@ -7,12 +7,13 @@
 <title>China 2027 · Plan de viaje</title>
 <style>
 :root{
-  --paper:#FAFAF8; --card:#FFFFFF; --ink:#16171B; --ink2:#3C3E46;
-  --mute:#6C6E76; --line:#E4E3DE; --line2:#EFEEEA;
-  --r1:#D4541F; --r2:#1F7A4C; --r3:#5B3DD1; --r4:#00747E; --r5:#C2185B; --r6:#2F4858;
-  --warn:#8A3B12; --warnbg:#FCF3EC; --warnbd:#F0DFCE;
+  --paper:#F7F5F1; --card:#FFFFFF; --ink:#12141A; --ink2:#42474F;
+  --mute:#787E88; --line:#E5E2DA; --line2:#F1EEE8;
+  /* el mapa va sobre fondo oscuro: los trazados se leen mucho mejor */
+  --mapbg:#11151C; --mapland:#1E242F; --mapedge:#2E3743; --maptext:#7E8896;
+  --warn:#8A4A12; --warnbg:#FBF3E9; --warnbd:#EFDFC9;
   --rad:16px; --radsm:10px;
-  --shadow:0 1px 2px rgba(22,23,27,.05), 0 8px 28px -12px rgba(22,23,27,.16);
+  --shadow:0 1px 2px rgba(18,20,26,.04), 0 10px 30px -14px rgba(18,20,26,.18);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -173,8 +174,25 @@ html.js .rv.in{opacity:1;transform:none;
 @media print{.seasonbar,.chips,.viewer{display:none}section{page-break-inside:avoid}}
 
 /* ---------- mapa propio en SVG: sin librerías y sin conexión ---------- */
-:root{--mapH:min(48dvh,440px)}
-.route-map{position:sticky;top:var(--barH,54px);z-index:60;margin-top:32px;
+:root{--mapH:min(46dvh,400px)}
+/* En móvil el mapa es una tira fija arriba. En ordenador pasa a columna lateral
+   y se queda quieto mientras el itinerario se desplaza al lado. */
+.routegrid{display:grid;gap:28px}
+.routegrid>#routebox{order:2;min-width:0;margin-top:0}
+.routegrid>.route-map{order:1}
+@media(min-width:1000px){
+  :root{--mapH:min(64dvh,580px)}
+  .wrap.wide{max-width:1340px}
+  .routegrid{grid-template-columns:minmax(0,1fr) 430px;gap:46px;align-items:start}
+  .routegrid>#routebox{order:1}
+  .routegrid>.route-map{order:2;position:sticky;top:calc(var(--barH,54px) + 20px);
+    margin-top:0;padding-bottom:0}
+  .route-map .mapbar{cursor:default;border-bottom:0;padding-top:0}
+  .route-map .mb-ico{display:none}
+  .route-map .mapbox{max-height:none!important;opacity:1!important;margin-top:0!important}
+  .day{grid-template-columns:76px minmax(0,1fr) 226px}
+}
+.route-map{position:sticky;top:var(--barH,54px);z-index:60;
   background:var(--paper);padding-bottom:10px;transition:box-shadow .35s ease}
 .route-map[data-state=mini]{box-shadow:0 12px 26px -20px rgba(22,23,27,.5)}
 .mapbar{display:flex;align-items:center;gap:12px;width:100%;padding:10px 2px 12px;background:none;
@@ -199,33 +217,40 @@ html.js .rv.in{opacity:1;transform:none;
   margin-top .42s ease}
 .route-map[data-state=open] .mapbox{max-height:var(--mapH);margin-top:12px;opacity:1}
 .route-map[data-state=mini] .mapbox{max-height:0;opacity:0;margin-top:0}
-#mapsvg{width:100%;height:var(--mapH);display:block;border:1px solid var(--line);
-  border-radius:var(--rad);background:linear-gradient(#FBFBF9,#F6F5F1)}
-#mapsvg .land{fill:#EFEEE9;stroke:#DAD8D1;stroke-width:1.1;vector-effect:non-scaling-stroke}
-#mapsvg .leg{fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.16;
-  transition:opacity .32s ease,stroke-width .3s ease}
-#mapsvg .leg.done{opacity:.95}
-#mapsvg .leg.now{stroke-width:11}
-#mapsvg .leg.tren{stroke-width:7}
-#mapsvg .leg.avion{stroke-width:6;stroke-dasharray:20 14}
-#mapsvg .leg.bus{stroke-width:5;stroke-dasharray:2 12}
+#mapsvg{width:100%;height:var(--mapH);display:block;border:1px solid var(--mapedge);
+  border-radius:var(--rad);background:var(--mapbg)}
+#mapsvg .land{fill:var(--mapland);stroke:var(--mapedge);stroke-width:1;
+  vector-effect:non-scaling-stroke}
+/* non-scaling-stroke: al acercar el encuadre de cada ruta, el grosor no se dispara */
+#mapsvg .leg{fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.2;
+  vector-effect:non-scaling-stroke;transition:opacity .32s ease,stroke-width .3s ease}
+#mapsvg .leg.done{opacity:1}
+#mapsvg .leg.tren{stroke-width:4.4}
+#mapsvg .leg.avion{stroke-width:3.4;stroke-dasharray:9 7}
+#mapsvg .leg.bus{stroke-width:2.6;stroke-dasharray:1.5 6}
+#mapsvg .leg.now{stroke-width:6.4}
+#mapsvg .leg.now.avion{stroke-width:5.2}
 #mapsvg .mode{opacity:0;transition:opacity .3s}
 #mapsvg .mode.done{opacity:.9}
-#mapsvg .node circle{fill:#fff;stroke:#9A9CA3;stroke-width:3;transition:fill .3s,stroke .3s,r .25s}
-#mapsvg .node text{font-size:20px;font-weight:650;fill:var(--mute);paint-order:stroke;
-  stroke:#FBFBF9;stroke-width:6;transition:fill .3s}
+#mapsvg .node circle{fill:var(--mapbg);stroke:#46505F;stroke-width:2;
+  vector-effect:non-scaling-stroke;transition:fill .3s,stroke .3s}
+#mapsvg .node text{font-weight:620;fill:var(--maptext);paint-order:stroke;
+  stroke:var(--mapbg);stroke-linejoin:round;transition:fill .3s}
 #mapsvg .node.seen circle{stroke:currentColor}
-#mapsvg .node.seen text{fill:var(--ink2)}
-#mapsvg .node.here circle{fill:currentColor;stroke:currentColor;r:15}
-#mapsvg .node.here text{fill:var(--ink);font-weight:800}
+#mapsvg .node.seen text{fill:#C3CBD6}
+#mapsvg .node.here circle{fill:currentColor;stroke:currentColor;stroke-width:3}
+#mapsvg .node.here text{fill:#fff;font-weight:760}
 #mapsvg .node{cursor:pointer}
 #mapsvg .node:hover circle:not(.hit){stroke:currentColor}
 #mapsvg .node:focus-visible{outline:none}
-#mapsvg .node:focus-visible circle:not(.hit){stroke:currentColor;stroke-width:6}
+#mapsvg .node:focus-visible circle:not(.hit){stroke:#fff;stroke-width:4}
 #mapsvg .leg{cursor:help}
 .maplegend{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:.8rem;color:var(--mute)}
 .day{scroll-margin-top:120px}
-.day.on{background:linear-gradient(90deg,rgba(0,0,0,.035),transparent 60%);border-radius:var(--radsm)}
+.day{border-left:2px solid transparent;padding-left:14px;margin-left:-16px;
+  transition:border-color .3s ease,background .3s ease}
+.day.on{border-left-color:currentColor;
+  background:linear-gradient(90deg,color-mix(in srgb,currentColor 7%,transparent),transparent 55%)}
 
 /* ---------- móvil ---------- */
 @media (max-width:760px){
@@ -240,11 +265,9 @@ html.js .rv.in{opacity:1;transform:none;
   .maplegend{gap:12px;font-size:.74rem;margin-top:10px;
     transition:max-height .35s ease,opacity .3s ease,margin-top .35s ease;overflow:hidden}
   .route-map[data-state=mini] .maplegend{max-height:0;opacity:0;margin-top:0}
-  #mapsvg .node text{font-size:26px;stroke-width:8}
-  #mapsvg .node circle{r:11}
-  #mapsvg .leg.tren{stroke-width:9}
-  #mapsvg .leg.avion{stroke-width:8;stroke-dasharray:22 15}
-  #mapsvg .leg.bus{stroke-width:7;stroke-dasharray:2 14}
+  #mapsvg .leg.tren{stroke-width:5}
+  #mapsvg .leg.avion{stroke-width:4;stroke-dasharray:10 8}
+  #mapsvg .leg.bus{stroke-width:3;stroke-dasharray:1.5 7}
   .chips{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;
     margin:0 -16px;padding:0 16px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .chips::-webkit-scrollbar{display:none}
@@ -313,7 +336,7 @@ html.js .rv.in{opacity:1;transform:none;
 </section>
 
 <section>
-  <div class="wrap">
+  <div class="wrap wide">
     <div class="narrow stack">
       <h2>Las seis rutas</h2>
       <p class="lede">Los siete deseos (Muralla, Terracota, minorías, Shenzhen, Ruta de la Seda,
@@ -324,6 +347,8 @@ html.js .rv.in{opacity:1;transform:none;
       que tengáis seleccionada arriba.</p>
     </div>
     <div class="chips rv" id="chips" style="margin-top:32px"></div>
+    <div class="routegrid">
+      <div id="routebox"></div>
     <div class="route-map" id="routemap" data-state="open">
       <button class="mapbar" type="button" id="mapbar" aria-expanded="true"
               aria-controls="mapbox" aria-label="Mostrar u ocultar el mapa">
@@ -343,7 +368,7 @@ html.js .rv.in{opacity:1;transform:none;
         <span class="mute">El trazado se enciende según el día que estás leyendo</span>
       </div>
     </div>
-    <div id="routebox" style="margin-top:52px"></div>
+    </div>
   </div>
 </section>
 
@@ -491,16 +516,23 @@ function diaDeNodo(M,id){
   return primero;
 }
 
+function anchoGrande(){return window.matchMedia('(min-width:1000px)').matches}
+
 function pintaMapa(clave){
   var M=MAPA.rutas[clave];
   svg.innerHTML='';
   if(!M){mapaActual=null;return}
+  // cada ruta trae su propio encuadre, así no se ve media China vacía
+  if(M.vista)svg.setAttribute('viewBox',M.vista.join(' '));
   svg.appendChild(nodo('path',{'class':'land',d:MAPA.contorno}));
-  svg.style.color=M.hex;
+  var COL=M.hexm||M.hex;                       // sobre el mapa oscuro manda el tono claro
+  svg.style.color=COL;
+  var movil=window.matchMedia('(max-width:760px)').matches;
+  var fs=(M.fuente||20)*(movil?1.34:1), rad=(M.r||9)*(movil?1.22:1), toque=M.toque||30;
   var gl=nodo('g',{'class':'legs'}); svg.appendChild(gl);
   var NOMBREMODO={tren:'Tren',avion:'Avión',bus:'Bus o coche'};
   M.tramos.forEach(function(t,i){
-    var p=nodo('path',{'class':'leg '+t.modo,'data-i':i,d:t.d,stroke:M.hex});
+    var p=nodo('path',{'class':'leg '+t.modo,'data-i':i,d:t.d,stroke:COL});
     var info=document.createElementNS(NS,'title');
     info.textContent=nombreNodo(M,t.de)+' a '+nombreNodo(M,t.a)+' · '+NOMBREMODO[t.modo]+
       ' · '+t.km.toLocaleString('es-ES')+' km · '+t.dur;
@@ -511,10 +543,11 @@ function pintaMapa(clave){
   M.nodos.forEach(function(n){
     var g=nodo('g',{'class':'node','data-id':n.id,tabindex:'0',role:'button',
                     'aria-label':'Ir al día en el que llegáis a '+n.n});
-    g.appendChild(nodo('circle',{'class':'hit',cx:n.x,cy:n.y,r:30,fill:'transparent'}));
-    g.appendChild(nodo('circle',{cx:n.x,cy:n.y,r:9}));
+    g.appendChild(nodo('circle',{'class':'hit',cx:n.x,cy:n.y,r:toque,fill:'transparent'}));
+    g.appendChild(nodo('circle',{cx:n.x,cy:n.y,r:rad}));
     var t=nodo('text',{x:n.x+(n.dx||16),y:n.y+(n.dy===undefined?7:n.dy),
-                       'text-anchor':n.lado||'start'});
+                       'text-anchor':n.lado||'start','font-size':fs,
+                       'stroke-width':fs*0.30});
     t.textContent=n.n; g.appendChild(t);
     function ir(){
       var d=diaDeNodo(M,n.id);
@@ -529,7 +562,7 @@ function pintaMapa(clave){
     });
     gn.appendChild(g);
   });
-  mapaActual={clave:clave,M:M,legs:[].slice.call(gl.children),nodes:[].slice.call(gn.children),estado:-2};
+  mapaActual={clave:clave,M:M,rad:rad,legs:[].slice.call(gl.children),nodes:[].slice.call(gn.children),estado:-2};
   marcaMapa(0,'');
 }
 
@@ -551,6 +584,8 @@ function marcaMapa(dia,titulo){
       var id=g.getAttribute('data-id');
       g.classList.toggle('seen',!!vistos[id]);
       g.classList.toggle('here',id===aqui);
+      var c=g.querySelector('circle:not(.hit)');
+      if(c)c.setAttribute('r',(id===aqui?mapaActual.rad*1.55:mapaActual.rad).toFixed(1));
     });
   }
   mbDay.textContent=dia>0?('Día '+(dia<10?'0':'')+dia):('Ruta '+current);
@@ -560,19 +595,27 @@ function marcaMapa(dia,titulo){
 }
 
 function estadoMapa(v){
+  if(anchoGrande())v='open';
   if(rmap.dataset.state===v)return;
   rmap.dataset.state=v;
-  bar.setAttribute('aria-expanded',String(v==='open'));
+  if(anchoGrande()){bar.removeAttribute('aria-expanded');bar.removeAttribute('aria-controls')}
+  else bar.setAttribute('aria-expanded',String(v==='open'));
 }
 bar.addEventListener('click',function(){
+  if(anchoGrande())return;              // en columna lateral no se pliega
   manual=true; estadoMapa(rmap.dataset.state==='mini'?'open':'mini');
 });
 
 /* el día que se está leyendo manda: enciende su tramo y titula la barra */
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-var mqEstrecho=matchMedia('(max-width:760px)');
+var mqEstrecho=matchMedia('(max-width:999px)');
 function estrecho(){return mqEstrecho.matches}
-mqEstrecho.addEventListener('change',function(){manual=false;alScroll()});
+mqEstrecho.addEventListener('change',function(){
+  manual=false;
+  if(anchoGrande())estadoMapa('open');
+  if(mapaActual)pintaMapa(mapaActual.clave);   // el texto del mapa cambia de tamaño
+  alScroll();
+});
 function vh(){return window.innerHeight||document.documentElement.clientHeight||800}
 var pendiente=false;
 function sincroniza(){

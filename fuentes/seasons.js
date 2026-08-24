@@ -1,6 +1,6 @@
 var SEASONS={
 may:{
- label:"MAYO", rango:"sáb 1 → mar 11 de mayo de 2027", dias:10, vac:8,
+ label:"MAYO", rango:"dom 2 → mar 11 de mayo de 2027", dias:10, vac:8,
  hero:"jinshanling_2", heroAlt:"Gran Muralla de Jinshanling recorriendo la cresta de la montaña",
  title:"China, del desierto al futuro",
  pills:["30 abril → 12 mayo 2027","10 días en tierra","8 días de vacaciones","6 rutas a elegir"],
@@ -41,7 +41,7 @@ ago:{
  condTitle:"Agosto cambia las reglas",
  condLede:"En agosto no hay un Golden Week que esquivar: la masificación dura el mes entero. A cambio, el festivo del lunes 16 regala un día, se ganan cuatro días de viaje y se abre el altiplano de Qinghai, que en mayo no funciona.",
  cards:[
-  {n:"9",col:"var(--r4)",h:"días de vacaciones para 14 en China",p:"Saliendo el <b>viernes 13</b> después de trabajar y volviendo el <b>domingo 29</b>. El lunes 16 es festivo en Zaragoza, así que solo se piden nueve días. Es el mejor rendimiento de todo el año."},
+  {n:"9",col:"var(--r4)",h:"días de vacaciones para 14 en China",p:"Saliendo el <b>viernes 13</b> después de trabajar y volviendo el <b>domingo 29</b>. El lunes 16 es festivo en Zaragoza, así que solo se piden nueve días: martes 17, miércoles 18, jueves 19 y viernes 20, y luego de lunes 23 a viernes 27. Es el mejor rendimiento de todo el año."},
   {n:"4-6",col:"var(--r1)",h:"tifones de media en agosto",p:"Agosto es el pico de la temporada de tifones en Guangdong. Afecta directamente a <b>Shenzhen</b>: cancelaciones de vuelos y trenes son habituales. Hay que dejar colchón y no poner Shenzhen el último día."},
   {n:"22°",col:"var(--r3)",h:"en Xining mientras el resto arde",p:"El altiplano de Qinghai se queda en <b>22 a 25 grados</b> en agosto mientras Xi'an pasa de 38. Es el único momento del año en que ese tramo tiene sentido, y en mayo aún está pelado y frío."}],
  alertT:"En agosto no hay ventana limpia, se asume",

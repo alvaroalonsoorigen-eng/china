@@ -1,5 +1,5 @@
 var ROUTES=[
-{id:1,name:"La Ruta de la Seda",hex:"#D4541F",curve:.11,rec:true,
+{id:1,name:"La Ruta de la Seda",hex:"#B45309",hexm:"#F6B44E",curve:.11,rec:true,
  sub:"El corredor del Hexi de punta a punta",
  may:{
   sub:"Shenzhen · Zhangye · Jiayuguan · Dunhuang · Xi'an · Pekín",
@@ -42,7 +42,7 @@ var ROUTES=[
   {d:"Vie 27",t:"Gran Muralla salvaje",img:"gubeikou_1",cap:"Gubeikou, muralla sin restaurar",x:"De Gubeikou a Jinshanling, entre 10 y 15 km por muralla sin restaurar. En agosto se sale al alba para evitar el calor y se lleva el doble de agua. Se duerme al pie de la muralla.",m:["bus","Pekín a Gubeikou, 2 h"]},
   {d:"Sáb 28",t:"Amanecer sobre la muralla",img:"jinshanling_1",cap:"Jinshanling al amanecer, medio restaurada y medio salvaje",x:"Se sube de noche y se ve salir el sol sobre la cresta, sin nadie. Vuelta a Pekín, últimas horas y vuelo de madrugada."}]}},
 
-{id:2,name:"La China del Sur",hex:"#1F7A4C",curve:.06,
+{id:2,name:"La China del sur",hex:"#05684D",hexm:"#3FD79A",curve:.06,
  sub:"Aldeas dong y miao, Avatar y Terracota",
  may:{
   sub:"Shenzhen · Zhaoxing · Basha · Furong · Zhangjiajie · Xi'an · Pekín",
@@ -74,7 +74,7 @@ var ROUTES=[
   {d:"Lun 16",t:"Shenzhen y salto a Guizhou",img:"shenzhen_2",cap:"Huaqiangbei, componentes y drones por manzanas enteras",x:"Mañana de robotaxi, DJI y reparto con dron. Por la tarde, tren a Congjiang y coche a Zhaoxing.",m:["tren","Shenzhen a Congjiang, 3 h 30"]},
   {d:"Mar 17",t:"Zhaoxing, la aldea dong",img:"dong_1",cap:"Torre del tambor dong, construida sin un solo clavo",x:"Cinco torres del tambor, puentes del viento y la lluvia, casas de madera apiladas. En agosto el arroz está verde y crecido, y por la noche refresca de verdad en el valle."},
   {d:"Mié 18",t:"Tang'an y las terrazas",img:"jiabang_1",cap:"Terrazas de arroz talladas durante siglos",x:"Caminata de Zhaoxing a Tang'an por las terrazas, hora y media subiendo. En agosto están en pleno verde. Se hace temprano, antes de que apriete."},
-  {d:"Jue 19",t:"Basha Miao",img:"basha_1",cap:"Aldeas de Guizhou en las laderas",x:"La única comunidad de China autorizada a llevar armas de fuego. Los hombres se afeitan la cabeza con una hoz. No hay puesta en escena: es como viven."},
+  {d:"Jue 19",t:"Basha, la aldea miao",img:"basha_1",cap:"Aldeas de Guizhou en las laderas",x:"La única comunidad de China autorizada a llevar armas de fuego. Los hombres se afeitan la cabeza con una hoz. No hay puesta en escena: es como viven."},
   {d:"Vie 20",t:"Dehang, cañón kárstico",img:"fenghuang_1",cap:"Xiangxi: aldeas miao entre paredes de caliza",x:"Tren al norte, a Xiangxi. Dehang es una aldea miao metida en un cañón de caliza con cascadas, y en agosto el agua es justamente lo que se agradece.",m:["tren","Congjiang a Jishou, 3 h"]},
   {d:"Sáb 21",t:"Fenghuang",img:"fenghuang_1",cap:"Casas sobre pilotes en el río Tuo",x:"El pueblo de casas sobre pilotes colgadas del río. Está muy turistificado, pero al amanecer y de noche con los faroles encendidos sigue mereciendo la pena.",m:["bus","Jishou a Fenghuang, 1 h"]},
   {d:"Dom 22",t:"Furong, el pueblo sobre la cascada",img:"furong_1",cap:"Furong, pueblo tujia de 2.000 años sobre un salto de agua",x:"Dos mil años construido literalmente encima de una cascada, que en agosto baja con todo el caudal del verano. Tren a Zhangjiajie.",m:["tren","Furong a Zhangjiajie, 30 min"]},
@@ -85,7 +85,7 @@ var ROUTES=[
   {d:"Vie 27",t:"Guerreros de Terracota",img:"terracota_1",cap:"Cada guerrero tiene una cara distinta",x:"Guerreros a primera hora, que en agosto Xi'an llega a 38 grados. Muralla en bici al atardecer y barrio musulmán de noche.",m:["tren","Xi'an a Pekín por la noche, 4 h 30"]},
   {d:"Sáb 28",t:"Gran Muralla de Jinshanling",img:"jinshanling_2",cap:"Jinshanling, la más fotogénica y la menos concurrida",x:"Día completo en la muralla con el bus directo desde Dongzhimen, saliendo al alba. Vuelta a Pekín y vuelo de madrugada.",m:["bus","Pekín a Jinshanling, 2 h"]}]}},
 
-{id:3,name:"El Gran Zigzag",hex:"#5B3DD1",curve:-.12,
+{id:3,name:"El gran zigzag",hex:"#6541D6",hexm:"#A98CFF",curve:-.12,
  sub:"Máxima cobertura, máximo desgaste",
  may:{
   sub:"Shenzhen · Dunhuang · Jiayuguan · Xi'an · Zhangjiajie · Pekín",
@@ -94,16 +94,16 @@ var ROUTES=[
   no:["Sin minorías","Sin pandas","Cinco vuelos internos"],
   legs:[["shenzhen","dunhuang","avion",3000,"5 h con escala"],["dunhuang","jiayuguan","tren",370,"2-3 h"],["jiayuguan","xian","avion",1265,"2 h 30"],["xian","zhangjiajie","avion",900,"2 h"],["zhangjiajie","beijing","avion",1400,"2 h 30"],["beijing","jinshanling","bus",130,"2 h"]],
   days:[
-  {d:"Dom 2",t:"Aterrizaje en Shenzhen",img:"shenzhen_1",cap:"El perfil de Shenzhen desde la bahía",x:"Llegada al amanecer. Huaqiangbei y la ciudad nueva."},
-  {d:"Lun 3",t:"Shenzhen y salto al desierto",img:"shenzhen_3",cap:"Ping An Finance Center",x:"Robotaxi, DJI, drones de reparto. Por la noche, vuelo al otro extremo del país.",m:["avion","Shenzhen a Dunhuang, 5 h con escala"]},
-  {d:"Mar 4",t:"Mogao y Mingsha",img:"mingsha_1",cap:"El lago de la Media Luna entre las dunas de Mingsha",x:"Las grutas por la mañana y las dunas al atardecer, subiendo a pie o en camello."},
-  {d:"Mié 5",t:"Yumen y Yardang",img:"yardang_1",cap:"Geoparque de Yardang, roca esculpida por el viento",x:"Paso de Yumen, la Muralla Han de hace 2.100 años y el desierto de yardangs. Tren a Jiayuguan.",m:["tren","Dunhuang a Jiayuguan, 2-3 h"]},
-  {d:"Jue 6",t:"Jiayuguan",img:"jiayuguan_2",cap:"La fortaleza que cerraba el imperio por el oeste",x:"Fortaleza, Muralla Colgante y Primera Atalaya. Vuelo a Xi'an.",m:["avion","Jiayuguan a Xi'an, 2 h 30"]},
-  {d:"Vie 7",t:"Guerreros de Terracota",img:"terracota_2",cap:"Ocho mil figuras, ninguna repetida",x:"Primer día tras el festivo. Guerreros por la mañana y muralla en bici. Vuelo nocturno.",m:["avion","Xi'an a Zhangjiajie, 2 h"]},
-  {d:"Sáb 8",t:"Wulingyuan",img:"wulingyuan_1",cap:"Los pilares que inspiraron Avatar",x:"Ascensor Bailong, Yuanjiajie, Tianzi Shan."},
-  {d:"Dom 9",t:"Tianmen Shan",img:"tianmen_1",cap:"Vista desde lo alto de Tianmen",x:"Teleférico, 999 escalones y pasarelas de cristal. Vuelo nocturno a Pekín.",m:["avion","Zhangjiajie a Pekín, 2 h 30"]},
-  {d:"Lun 10",t:"Gran Muralla salvaje",img:"gubeikou_1",cap:"Gubeikou, sin restaurar",x:"Gubeikou a Jinshanling caminando. Se duerme en la muralla.",m:["bus","Pekín a Gubeikou, 2 h"]},
-  {d:"Mar 11",t:"Amanecer y vuelta",img:"jinshanling_1",cap:"Amanecer en Jinshanling",x:"Sol saliendo sobre la cresta, vuelta a Pekín y vuelo de madrugada."}]},
+  {d:"Dom 2",t:"Aterrizaje en Shenzhen",img:"shenzhen_1",cap:"El perfil de Shenzhen desde la bahía",x:"Llegáis al amanecer con el día entero por delante. Huaqiangbei son 35 mercados de componentes apilados en manzanas enteras, y a la vuelta de la esquina la estación de Gangxia North parece el interior de una nave."},
+  {d:"Lun 3",t:"Shenzhen y salto al desierto",img:"shenzhen_3",cap:"Ping An Finance Center",x:"Robotaxi de nivel 4 con Pony.ai por Nanshan, sin nadie al volante, DJI Sky City y reparto con dron de Meituan. Por la noche, vuelo al otro extremo del país: 3.000 km de una sentada.",m:["avion","Shenzhen a Dunhuang, 5 h con escala"]},
+  {d:"Mar 4",t:"Mogao y Mingsha",img:"mingsha_1",cap:"El lago de la Media Luna entre las dunas de Mingsha",x:"Las 492 cuevas de Mogao por la mañana, mil años de pintura budista excavada en el acantilado. Por la tarde, las dunas de Mingsha, que suenan cuando sopla el viento, y el lago de la Media Luna."},
+  {d:"Mié 5",t:"Yumen y Yardang",img:"yardang_1",cap:"Geoparque de Yardang, roca esculpida por el viento",x:"Paso de Yumen, donde se acababa el imperio, la Muralla Han de barro y caña de hace 2.100 años, y el geoparque de Yardang al atardecer, con la roca esculpida por el viento del Gobi.",m:["tren","Dunhuang a Jiayuguan, 2-3 h"]},
+  {d:"Jue 6",t:"Jiayuguan",img:"jiayuguan_2",cap:"La fortaleza que cerraba el imperio por el oeste",x:"La fortaleza que cerraba China por el oeste, la Muralla Colgante trepando la ladera y la Primera Atalaya asomada al cañón del río Taolai, ochenta metros en vertical.",m:["avion","Jiayuguan a Xi'an, 2 h 30"]},
+  {d:"Vie 7",t:"Guerreros de Terracota",img:"terracota_2",cap:"Ocho mil figuras, ninguna repetida",x:"Primer día limpio tras el Golden Week, y por eso la ruta va en este orden y no al revés. Ocho mil figuras, ninguna con la misma cara. Por la tarde, los 14 km de muralla de Xi'an en bici.",m:["avion","Xi'an a Zhangjiajie, 2 h"]},
+  {d:"Sáb 8",t:"Wulingyuan",img:"wulingyuan_1",cap:"Los pilares que inspiraron Avatar",x:"Ascensor Bailong, 326 metros clavados en el acantilado, y arriba Yuanjiajie con el pilar que rebautizaron como Hallelujah después de Avatar. Tianzi Shan al atardecer, cuando sube la niebla."},
+  {d:"Dom 9",t:"Tianmen Shan",img:"tianmen_1",cap:"Vista desde lo alto de Tianmen",x:"El teleférico más largo del mundo, 7,5 km desde la propia ciudad. La carretera de las 99 curvas, los 999 escalones hasta la Puerta del Cielo y las pasarelas de cristal clavadas en la pared.",m:["avion","Zhangjiajie a Pekín, 2 h 30"]},
+  {d:"Lun 10",t:"Gran Muralla salvaje",img:"gubeikou_1",cap:"Gubeikou, sin restaurar",x:"De Gubeikou a Jinshanling: entre 10 y 15 km por muralla sin restaurar, con hierba entre las almenas y torres derruidas. Se duerme en una casa rural al pie de la muralla.",m:["bus","Pekín a Gubeikou, 2 h"]},
+  {d:"Mar 11",t:"Amanecer y vuelta",img:"jinshanling_1",cap:"Amanecer en Jinshanling",x:"Se sube de noche para ver salir el sol sobre la cresta, sin nadie alrededor. Vuelta a Pekín, últimas horas y vuelo de madrugada."}]},
  ago:{
   sub:"Shenzhen · Dunhuang · Jiayuguan · Zhangye · Xi'an · Zhangjiajie · Pekín",
   pitch:"Con cuatro días más el Zigzag deja de ser una campaña militar: entra Zhangye, sobra un día en Xi'an y Zhangjiajie se hace en tres jornadas en vez de dos. Sigue siendo la ruta con más aviones, pero ya se puede respirar entre ellos.",
@@ -126,25 +126,25 @@ var ROUTES=[
   {d:"Vie 27",t:"Gran Muralla salvaje",img:"gubeikou_1",cap:"Gubeikou, sin restaurar",x:"De Gubeikou a Jinshanling caminando, saliendo al alba por el calor. Se duerme al pie de la muralla.",m:["bus","Pekín a Gubeikou, 2 h"]},
   {d:"Sáb 28",t:"Amanecer y vuelta",img:"jinshanling_1",cap:"Amanecer en Jinshanling",x:"Sol saliendo sobre la cresta, vuelta a Pekín y vuelo de madrugada."}]}},
 
-{id:4,name:"Seda y Panda",hex:"#00747E",curve:-.19,
+{id:4,name:"Seda y panda",hex:"#0E7490",hexm:"#3ED0E6",curve:-.19,
  sub:"Desierto, Muralla, Terracota y pandas",
  may:{
   sub:"Shenzhen · Dunhuang · Jiayuguan · Pekín · Xi'an · Chengdú",
   pitch:"El desierto, la Muralla, los Guerreros y los pandas de Chengdú, rematado con el vuelo directo Chengdú a Madrid. Es la ruta que mejor cierra: acabáis en Sichuan comiendo picante y salís sin volver sobre vuestros pasos.",
   yes:["Muralla, dos veces","Terracota","Ruta de la Seda","Shenzhen","Pandas de Chengdú","Sichuan"],
   no:["Sin Zhangjiajie","Sin minorías"],
-  legs:[["shenzhen","dunhuang","avion",3000,"5 h con escala"],["dunhuang","jiayuguan","tren",370,"2-3 h"],["jiayuguan","beijing","avion",2000,"3 h 30"],["beijing","jinshanling","bus",130,"2 h"],["beijing","xian","tren",1200,"4 h 30"],["xian","qinling","bus",70,"1 h 30"],["xian","chengdu","tren",700,"3 h 10"]],
+  legs:[["shenzhen","dunhuang","avion",3000,"5 h con escala"],["dunhuang","jiayuguan","tren",370,"2-3 h"],["jiayuguan","beijing","avion",2000,"3 h 30"],["beijing","jinshanling","bus",130,"2 h"],["beijing","xian","tren",1200,"4 h 30"],["xian","chengdu","tren",700,"3 h 10"]],
   days:[
-  {d:"Dom 2",t:"Aterrizaje en Shenzhen",img:"shenzhen_2",cap:"Huaqiangbei",x:"Llegada al amanecer, Huaqiangbei y Gangxia North."},
-  {d:"Lun 3",t:"Shenzhen y salto al desierto",img:"shenzhen_1",cap:"El perfil de Shenzhen desde la bahía",x:"Robotaxi, DJI, drones. Vuelo nocturno a Dunhuang.",m:["avion","Shenzhen a Dunhuang, 5 h con escala"]},
-  {d:"Mar 4",t:"Mogao y las dunas",img:"mogao_2",cap:"Murales de Mogao, mil años de pintura budista",x:"Las 492 cuevas por la mañana, las dunas de Mingsha y el lago de la Media Luna al atardecer."},
-  {d:"Mié 5",t:"Yumen, Muralla Han y Yardang",img:"yumen_1",cap:"Muralla Han en Yumen, hace 2.100 años",x:"Día de desierto puro, el tramo de muralla más antiguo en pie y el geoparque de Yardang. Tren a Jiayuguan.",m:["tren","Dunhuang a Jiayuguan, 2-3 h"]},
-  {d:"Jue 6",t:"Jiayuguan y salto a Pekín",img:"jiayuguan_1",cap:"Fortaleza de Jiayuguan",x:"La fortaleza del extremo oeste, la Muralla Colgante y la Primera Atalaya. Vuelo a Pekín.",m:["avion","Jiayuguan a Pekín, 3 h 30"]},
-  {d:"Vie 7",t:"Gran Muralla salvaje",img:"gubeikou_1",cap:"Gubeikou, muralla sin restaurar",x:"Primer día tras el festivo, perfecto para la muralla. De Gubeikou a Jinshanling caminando. Se duerme allí.",m:["bus","Pekín a Gubeikou, 2 h"]},
-  {d:"Sáb 8",t:"Amanecer en la muralla y Pekín",img:"tiantan_1",cap:"Templo del Cielo, a las siete de la mañana es un parque vivo",x:"Amanecer en Jinshanling, vuelta a Pekín y tarde por los hutongs. Tren nocturno a Xi'an.",m:["tren","Pekín a Xi'an, 4 h 30"]},
-  {d:"Dom 9",t:"Guerreros de Terracota",img:"terracota_1",cap:"Ninguna figura repite rostro",x:"Guerreros por la mañana, muralla en bici por la tarde y barrio musulmán al anochecer."},
-  {d:"Lun 10",t:"Chengdú",img:"chengdu_2",cap:"Jinli, calle de casas de té y comida callejera",x:"Tren rápido a Sichuan. Tarde de casas de té, Jinli y hotpot sichuanés, que es un rito social de tres horas.",m:["tren","Xi'an a Chengdú, 3 h 10"]},
-  {d:"Mar 11",t:"Pandas al amanecer",img:"panda_1",cap:"Los pandas están activos de 7:30 a 10:00, después duermen",x:"A la base de cría a primera hora, la única franja en que los pandas hacen algo. Por la noche, vuelo directo Chengdú a Madrid.",m:["avion","Chengdú a Madrid, directo 12 h 20"]}]},
+  {d:"Dom 2",t:"Aterrizaje en Shenzhen",img:"shenzhen_2",cap:"Huaqiangbei",x:"Llegáis al amanecer. Huaqiangbei, el mayor mercado de electrónica del mundo con más de 115.000 negocios, y la estación de Gangxia North, que parece un decorado de ciencia ficción. Cena en Shekou."},
+  {d:"Lun 3",t:"Shenzhen y salto al desierto",img:"shenzhen_1",cap:"El perfil de Shenzhen desde la bahía",x:"Robotaxi de nivel 4 por Nanshan, DJI Sky City y tiendas de robots humanoides. Por la noche, vuelo al desierto: del delta más denso del planeta a la nada en cinco horas.",m:["avion","Shenzhen a Dunhuang, 5 h con escala"]},
+  {d:"Mar 4",t:"Mogao y las dunas",img:"mogao_2",cap:"Murales de Mogao, mil años de pintura budista",x:"Mogao por la mañana: 492 cuevas y 45.000 metros cuadrados de mural. Por la tarde, las dunas de Mingsha y el lago de la Media Luna, un oasis que la arena no ha tragado en dos mil años."},
+  {d:"Mié 5",t:"Yumen, Muralla Han y Yardang",img:"yumen_1",cap:"Muralla Han en Yumen, hace 2.100 años",x:"Día de desierto puro. El paso de Yumen, el tramo de Muralla Han más antiguo que sigue en pie, hecho de capas de barro y caña, y el geoparque de Yardang al atardecer.",m:["tren","Dunhuang a Jiayuguan, 2-3 h"]},
+  {d:"Jue 6",t:"Jiayuguan y salto a Pekín",img:"jiayuguan_1",cap:"Fortaleza de Jiayuguan",x:"La fortaleza del extremo occidental de la Muralla Ming, adonde se desterraba a la gente, la Muralla Colgante y la Primera Atalaya sobre el cañón del Taolai. Por la tarde, vuelo a Pekín.",m:["avion","Jiayuguan a Pekín, 3 h 30"]},
+  {d:"Vie 7",t:"Gran Muralla salvaje",img:"gubeikou_1",cap:"Gubeikou, muralla sin restaurar",x:"Primer día tras el festivo, que es justo cuando la muralla se vacía. De Gubeikou a Jinshanling caminando, sin restaurar y sin una sola tienda de recuerdos. Se duerme al pie.",m:["bus","Pekín a Gubeikou, 2 h"]},
+  {d:"Sáb 8",t:"Amanecer en la muralla y Pekín",img:"tiantan_1",cap:"Templo del Cielo, a las siete de la mañana es un parque vivo",x:"Amanecer sobre la cresta y vuelta a Pekín. Tarde por los hutongs de Gulou en bici y el Templo del Cielo, que a esas horas es un parque de barrio. Tren nocturno a Xi'an.",m:["tren","Pekín a Xi'an, 4 h 30"]},
+  {d:"Dom 9",t:"Guerreros de Terracota",img:"terracota_1",cap:"Ninguna figura repite rostro",x:"Los Guerreros por la mañana: ocho mil figuras enterradas 2.200 años hasta que unos campesinos cavaron un pozo en 1974. Muralla en bici por la tarde y barrio musulmán al anochecer."},
+  {d:"Lun 10",t:"Chengdú",img:"chengdu_2",cap:"Jinli, calle de casas de té y comida callejera",x:"Tren rápido a Sichuan atravesando las montañas Qinling por túnel. Casas de té en el parque del Pueblo, donde los jubilados juegan al mahjong, y hotpot por la noche, un rito de tres horas.",m:["tren","Xi'an a Chengdú, 3 h 10"]},
+  {d:"Mar 11",t:"Pandas al amanecer",img:"panda_1",cap:"Los pandas están activos de 7:30 a 10:00, después duermen",x:"A la base de cría a las 7:30, la única franja en la que los pandas están despiertos y comiendo; a partir de las diez se duermen. Por la noche, vuelo directo de Chengdú a Madrid.",m:["avion","Chengdú a Madrid, directo 12 h 20"]}]},
  ago:{
   sub:"Shenzhen · Xining · Qinghai · Zhangye · Jiayuguan · Dunhuang · Pekín · Xi'an · Chengdú",
   pitch:"La versión larga mete el altiplano de Qinghai al principio y el Buda de Leshan al final, y añade los pandas de Qinling además de los de Chengdú. Empieza a 3.200 metros y acaba comiendo picante en Sichuan, saliendo por el directo a Madrid.",
@@ -167,7 +167,7 @@ var ROUTES=[
   {d:"Vie 27",t:"Chengdú",img:"chengdu_2",cap:"Jinli, calle de casas de té y comida callejera",x:"Tren a Sichuan. Casas de té en el parque del Pueblo, donde los jubilados juegan al mahjong, y hotpot por la noche.",m:["tren","Xi'an a Chengdú, 3 h 10"]},
   {d:"Sáb 28",t:"Pandas y el Buda de Leshan",img:"leshan_1",cap:"El Buda de Leshan, 71 metros tallados en el acantilado",x:"Pandas a las 7:30, la única franja en que están despiertos, y por la tarde el Buda gigante de Leshan, a una hora en tren: 71 metros excavados en la roca en el siglo VIII. Vuelo directo a Madrid de madrugada.",m:["avion","Chengdú a Madrid, directo 12 h 20"]}]}},
 
-{id:5,name:"El Triángulo Clásico",hex:"#C2185B",curve:.13,classic:true,
+{id:5,name:"El triángulo clásico",hex:"#B8195C",hexm:"#FB7CA9",curve:.13,classic:true,
  sub:"El primer viaje a China de toda la vida",
  may:{
   sub:"Shanghái · Suzhou · Hangzhou · Xi'an · Pekín",
@@ -210,7 +210,7 @@ var ROUTES=[
   {d:"Vie 27",t:"Datong y las grutas de Yungang",img:"yungang_1",cap:"Yungang: 51.000 estatuas budistas talladas en el siglo V",x:"Dos horas de tren al oeste. Cincuenta y una mil estatuas excavadas en arenisca en el siglo V, patrimonio de la Unesco y con una décima parte de la gente que hay en Pekín.",m:["tren","Pekín a Datong, 2 h"]},
   {d:"Sáb 28",t:"Monasterio Colgante y vuelta",img:"yungang_1",cap:"Las grutas de Yungang, en Datong",x:"El Monasterio Colgante de Hengshan, encajado en la pared de un barranco desde hace 1.500 años, y vuelta a Pekín para el vuelo de madrugada.",m:["tren","Datong a Pekín, 2 h"]}]}},
 
-{id:6,name:"El Clásico Ampliado",hex:"#2F4858",curve:-.07,classic:true,
+{id:6,name:"El clásico ampliado",hex:"#33608E",hexm:"#8CBCE8",curve:-.07,classic:true,
  sub:"El circuito de dos semanas de las agencias",
  may:{
   sub:"Shenzhen · Yangshuo · Longji · Chengdú · Xi'an · Pekín",

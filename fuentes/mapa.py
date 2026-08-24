@@ -15,6 +15,8 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 W, H = 1000.0, 720.0
 LAT0, LAT1, LON0 = 25.0, 47.0, 105.0     # paralelos estándar y meridiano central
 VENTANA = (92.0, 20.3, 123.5, 43.0)      # el trozo de China por el que pasan las rutas
+PANEL_W, PANEL_H = 430.0, 576.0          # el panel lateral del ordenador, en píxeles
+LETRA_PX = 13.0                          # tamaño en pantalla al que debe quedar cada nombre
 RAD = math.pi / 180.0
 
 
@@ -26,7 +28,9 @@ def albers(lon, lat):
     fi, lam = lat * RAD, (lon - LON0) * RAD
     ro = math.sqrt(c - 2 * n * math.sin(fi)) / n
     th = n * lam
-    return ro * math.sin(th), ro0 - ro * math.cos(th)
+    # OJO: en Albers la Y crece hacia el norte y en SVG hacia abajo, así que se invierte.
+    # Sin este signo el mapa sale boca abajo (Pekín al sur de Shenzhen).
+    return ro * math.sin(th), -(ro0 - ro * math.cos(th))
 
 
 def _encaje():
@@ -76,8 +80,10 @@ def arco(a, b, k):
     bx, by = b
     mx, my = (ax + bx) / 2, (ay + by) / 2
     cx, cy = mx - (by - ay) * k, my + (bx - ax) * k
-    return "M%g %g Q%.1f %.1f %g %g" % (ax, ay, cx, cy, bx, by), (
-        round(0.25 * ax + 0.5 * cx + 0.25 * bx, 1), round(0.25 * ay + 0.5 * cy + 0.25 * by, 1))
+    return ("M%g %g Q%.1f %.1f %g %g" % (ax, ay, cx, cy, bx, by),
+            (round(0.25 * ax + 0.5 * cx + 0.25 * bx, 1),
+             round(0.25 * ay + 0.5 * cy + 0.25 * by, 1)),
+            (cx, cy))
 
 
 # de qué ciudad habla la foto de cada día; las genéricas heredan el día anterior
@@ -93,43 +99,68 @@ LUGAR_DE_FOTO = {
     "furong": "furong", "fenghuang": "fenghuang", "jishou": "jishou",
     "dong": "zhaoxing", "jiabang": "congjiang", "basha": "basha", "congjiang": "congjiang",
     "longji": "longji", "yangshuo": "yangshuo", "lijiang": "yangshuo", "guilin": "guilin",
-    "chengdu": "chengdu", "panda": None, "leshan": "leshan",
+    "chengdu": "chengdu", "leshan": "leshan",
+    # el panda es ambiguo, así que aquí manda el nombre completo de la foto
+    "panda_3": "qinling", "panda_1": "chengdu", "panda_2": "chengdu", "panda": None,
     "shanghai": "shanghai", "bund": "shanghai", "suzhou": "suzhou", "hangzhou": "hangzhou",
     "huangshan": "huangshan", "crh": None,
 }
 
 
-def coloca_etiquetas(nodos):
-    """Elige lado y desplazamiento de cada nombre para que no se pisen entre ellos."""
-    ANCHO_CAR, ALTO = 10.5, 26.0
-    # los propios círculos de ciudad son obstáculos: ningún nombre debe caer encima
-    puestas = [(n["x"] - 17, n["y"] - 17, n["x"] + 17, n["y"] + 17) for n in nodos]
+def coloca_etiquetas(nodos, esc, limites):
+    """Elige lado y desplazamiento de cada nombre para que no se pisen entre ellos.
+
+    esc es el zoom de la ruta: al encuadrar más cerca, las unidades de usuario valen
+    más píxeles, así que el texto tiene que medir menos para verse igual de grande.
+    """
+    ANCHO_CAR, ALTO, SEP = 10.5 * esc, 26.0 * esc, 19.0 * esc
+    bx0, by0, bx1, by1 = limites
+    radio = 17.0 * esc
+    puestas = [(n["x"] - radio, n["y"] - radio, n["x"] + radio, n["y"] + radio) for n in nodos]
+    cajas = []
     orden = sorted(range(len(nodos)), key=lambda i: (nodos[i]["y"], nodos[i]["x"]))
     for i in orden:
         n = nodos[i]
         ancho = len(n["n"]) * ANCHO_CAR
-        opciones = [("start", 19, 7), ("end", -19, 7),
-                    ("middle", 0, -22), ("middle", 0, 34),
-                    ("start", 19, -14), ("end", -19, -14),
-                    ("start", 19, 28), ("end", -19, 28)]
-        elegida = opciones[0]
+        opciones = [("start", SEP, 7 * esc), ("end", -SEP, 7 * esc),
+                    ("middle", 0, -22 * esc), ("middle", 0, 34 * esc),
+                    ("start", SEP, -14 * esc), ("end", -SEP, -14 * esc),
+                    ("start", SEP, 28 * esc), ("end", -SEP, 28 * esc),
+                    ("middle", 0, -40 * esc), ("middle", 0, 52 * esc)]
+        elegida, mejor = None, None
         for lado, dx, dy in opciones:
             x = n["x"] + dx
             x0 = x if lado == "start" else (x - ancho if lado == "end" else x - ancho / 2)
             caja = (x0, n["y"] + dy - ALTO * 0.75, x0 + ancho, n["y"] + dy + ALTO * 0.25)
-            if caja[0] < 6 or caja[2] > W - 6 or caja[1] < 4 or caja[3] > H - 4:
-                continue
-            if any(not (caja[2] < c[0] or caja[0] > c[2] or caja[3] < c[1] or caja[1] > c[3])
-                   for c in puestas):
-                continue
-            elegida = (lado, dx, dy)
-            break
-        lado, dx, dy = elegida
-        x = n["x"] + dx
-        x0 = x if lado == "start" else (x - ancho if lado == "end" else x - ancho / 2)
-        puestas.append((x0, n["y"] + dy - ALTO * 0.75, x0 + ancho, n["y"] + dy + ALTO * 0.25))
-        n["lado"], n["dx"], n["dy"] = lado, dx, dy
-    return nodos
+            fuera = max(0.0, bx0 - caja[0]) + max(0.0, caja[2] - bx1) \
+                  + max(0.0, by0 - caja[1]) + max(0.0, caja[3] - by1)
+            choque = sum(max(0.0, min(caja[2], c[2]) - max(caja[0], c[0]))
+                         * max(0.0, min(caja[3], c[3]) - max(caja[1], c[1]))
+                         for c in puestas)
+            coste = choque + fuera * 40.0
+            if coste == 0:
+                elegida = (lado, dx, dy, caja)
+                break
+            if mejor is None or coste < mejor[0]:
+                mejor = (coste, (lado, dx, dy, caja))
+        if elegida is None:
+            elegida = mejor[1]
+        lado, dx, dy, caja = elegida
+        puestas.append(caja)
+        cajas.append(caja)
+        n["lado"], n["dx"], n["dy"] = lado, round(dx, 1), round(dy, 1)
+    return cajas
+
+
+def muestrea(a, c, b, n=14):
+    """Puntos a lo largo del arco cuadrático, para saber cuánto sitio ocupa."""
+    pts = []
+    for i in range(n + 1):
+        u = i / n
+        v = 1 - u
+        pts.append((v * v * a[0] + 2 * v * u * c[0] + u * u * b[0],
+                    v * v * a[1] + 2 * v * u * c[1] + u * u * b[1]))
+    return pts
 
 
 def datos_js():
@@ -161,13 +192,14 @@ def main():
             if not S_:
                 continue
             k = R.get("curve", 0.08)
-            tramos, nodos, orden = [], [], []
+            tramos, nodos, orden, curvas = [], [], [], []
             for a, b, modo, km, dur in S_.get("legs", []):
                 if a not in C or b not in C:
                     continue
                 pa = proj(C[a][1], C[a][0])
                 pb = proj(C[b][1], C[b][0])
-                camino, medio = arco(pa, pb, 0 if modo == "bus" else k)
+                camino, medio, control = arco(pa, pb, 0 if modo == "bus" else k)
+                curvas.append((pa, control, pb))
                 tramos.append({"de": a, "a": b, "modo": modo, "km": km, "dur": dur,
                                "d": camino, "mx": medio[0], "my": medio[1]})
                 for slug, p in ((a, pa), (b, pb)):
@@ -194,12 +226,50 @@ def main():
 
             dia_tramo, actual = [], -1
             for dia in S_.get("days", []):
-                prefijo = re.sub(r"_\d+$", "", dia.get("img", "") or "")
-                actual = max(actual, indice(LUGAR_DE_FOTO.get(prefijo), actual))
+                img = dia.get("img", "") or ""
+                lugar = LUGAR_DE_FOTO.get(img)
+                if lugar is None and img not in LUGAR_DE_FOTO:
+                    lugar = LUGAR_DE_FOTO.get(re.sub(r"_\d+$", "", img))
+                nuevo = indice(lugar, actual)
+                # Un día con traslado tiene que encender su tramo aunque la foto sea
+                # de la ciudad de la que se sale (el vuelo nocturno del primer día, p. ej.).
+                if dia.get("m") and nuevo <= actual and actual + 1 < len(tramos):
+                    nuevo = actual + 1
+                actual = max(actual, nuevo)
                 dia_tramo.append(actual)
-            coloca_etiquetas(nodos)
+            # ----- encuadre propio: cada ruta usa solo el trozo de China que pisa -----
+            pts = [(n["x"], n["y"]) for n in nodos]
+            for a, c, b in curvas:
+                pts += muestrea(a, c, b)
+            nx0 = min(p[0] for p in pts); nx1 = max(p[0] for p in pts)
+            ny0 = min(p[1] for p in pts); ny1 = max(p[1] for p in pts)
+
+            # El texto debe verse del mismo tamaño en todas las rutas. Como el SVG se
+            # escala para caber en el panel, el tamaño en unidades de usuario depende
+            # del encuadre, y el encuadre depende del texto. Se itera hasta que cuadra.
+            esc, cajas, caja_v = 0.70, [], None
+            for _ in range(6):
+                margen = 46 * esc
+                cajas = coloca_etiquetas(
+                    nodos, esc, (nx0 - margen * 3, ny0 - margen * 2,
+                                 nx1 + margen * 3, ny1 + margen * 2))
+                ex0 = min([nx0] + [c[0] for c in cajas]) - margen
+                ex1 = max([nx1] + [c[2] for c in cajas]) + margen
+                ey0 = min([ny0] + [c[1] for c in cajas]) - margen
+                ey1 = max([ny1] + [c[3] for c in cajas]) + margen
+                caja_v = (ex0, ey0, ex1 - ex0, ey1 - ey0)
+                # el panel lateral del ordenador manda: 430 x 576 px
+                nueva = (LETRA_PX / 20.0) * max(caja_v[2] / PANEL_W, caja_v[3] / PANEL_H)
+                nueva = max(0.28, min(1.80, nueva))
+                if abs(nueva - esc) < 0.008:
+                    break
+                esc = nueva
+            ex0, ey0, vw, vh = caja_v
             salida["rutas"]["%d%s" % (R["id"], temporada)] = {
-                "hex": R["hex"], "tramos": tramos, "nodos": nodos, "diaTramo": dia_tramo}
+                "hex": R["hex"], "hexm": R.get("hexm", R["hex"]), "tramos": tramos, "nodos": nodos, "diaTramo": dia_tramo,
+                "vista": [round(ex0, 1), round(ey0, 1), round(vw, 1), round(vh, 1)],
+                "fuente": round(20 * esc, 1), "r": round(9 * esc, 1),
+                "toque": round(30 * esc, 1)}
 
     json.dump(salida, open(os.path.join(BASE, "mapa.json"), "w"), separators=(",", ":"))
     n = len(salida["rutas"])
