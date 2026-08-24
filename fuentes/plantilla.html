@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>China 2027 · Plan de viaje</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root{
+  --paper:#FAFAF8; --card:#FFFFFF; --ink:#16171B; --ink2:#3C3E46;
+  --mute:#6C6E76; --line:#E4E3DE; --line2:#EFEEEA;
+  --r1:#D4541F; --r2:#1F7A4C; --r3:#5B3DD1; --r4:#00747E; --r5:#C2185B; --r6:#2F4858;
+  --warn:#8A3B12; --warnbg:#FCF3EC; --warnbd:#F0DFCE;
+  --rad:16px; --radsm:10px;
+  --shadow:0 1px 2px rgba(22,23,27,.05), 0 8px 28px -12px rgba(22,23,27,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px}
+
+h1,h2,h3,h4{letter-spacing:-.022em;line-height:1.08;font-weight:680}
+h1{font-size:clamp(2.4rem,6.2vw,4.6rem);letter-spacing:-.035em;line-height:1.0}
+h2{font-size:clamp(1.65rem,3.4vw,2.5rem);letter-spacing:-.028em}
+h3{font-size:1.16rem;letter-spacing:-.012em;line-height:1.3}
+h4{font-size:.95rem;letter-spacing:-.005em}
+p{max-width:68ch}
+.lede{font-size:1.16rem;color:var(--ink2);line-height:1.58}
+.sm{font-size:.86rem;line-height:1.5}
+.mute{color:var(--mute)}
+.eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;color:var(--mute);font-weight:640}
+b,strong{font-weight:640}
+
+/* ---------- selector de temporada ---------- */
+.seasonbar{position:sticky;top:0;z-index:900;background:rgba(250,250,248,.86);
+  backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+  border-bottom:1px solid var(--line)}
+@media (prefers-reduced-transparency:reduce){.seasonbar{background:var(--paper);backdrop-filter:none}}
+.seasonbar .in{max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;
+  gap:16px;flex-wrap:wrap}
+.seg{display:inline-flex;background:#EDEBE5;border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;border-radius:999px;padding:8px 22px;cursor:pointer;
+  font-size:.8rem;font-weight:700;letter-spacing:.09em;color:var(--mute);
+  font-family:inherit;transition:color .18s ease}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.seasonbar .now{font-size:.82rem;color:var(--ink2);font-weight:600}
+.seasonbar .now b{color:var(--ink)}
+
+/* ---------- portada ---------- */
+.hero{position:relative;min-height:min(80dvh,720px);display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,11,14,.34) 0%,rgba(10,11,14,.10) 34%,rgba(10,11,14,.80) 100%)}
+.hero .inner{position:relative;width:100%;padding:0 24px 54px;max-width:1180px;margin:0 auto;color:#fff}
+.hero h1{color:#fff;max-width:15ch;text-shadow:0 2px 30px rgba(0,0,0,.34)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;
+  font-size:.83rem;font-weight:600;background:rgba(255,255,255,.16);color:#fff;
+  border:1px solid rgba(255,255,255,.26);
+  backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%)}
+@media (prefers-reduced-transparency:reduce){.pill{background:rgba(20,20,24,.86);backdrop-filter:none}}
+
+section{padding:78px 0;border-top:1px solid var(--line)}
+.stack>*+*{margin-top:18px}
+.grid{display:grid;gap:20px}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+
+.alert{background:var(--warnbg);border:1px solid var(--warnbd);border-radius:var(--rad);
+  padding:20px 22px;display:flex;gap:15px;align-items:flex-start}
+.alert svg{flex:none;margin-top:2px;color:var(--warn)}
+.alert h3{color:var(--warn);margin-bottom:5px}
+.alert p{color:#5E4531;font-size:.95rem;max-width:none}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);
+  padding:22px;box-shadow:var(--shadow)}
+.card h3{margin-bottom:8px}
+.card p{font-size:.95rem;color:var(--ink2);max-width:none}
+.num{font-size:2.5rem;font-weight:680;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--rad);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.91rem;min-width:620px}
+th,td{padding:14px 16px;text-align:left;vertical-align:top}
+thead th{font-size:.7rem;text-transform:uppercase;letter-spacing:.11em;color:var(--mute);
+  font-weight:640;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody tr+tr td{border-top:1px solid var(--line2)}
+tbody tr.best td{background:#F4F8F4}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;font-weight:640;
+  background:#E9EFE9;color:#1F7A4C}
+.badge.no{background:#F6ECEC;color:#9A3535}
+.badge.dim{background:#EFEEEA;color:var(--mute)}
+
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 17px;
+  font-size:.87rem;font-weight:620;color:var(--ink2);cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;gap:8px;transition:border-color .16s,color .16s,transform .1s}
+.chip:hover{border-color:#C9C7C0}
+.chip:active{transform:translateY(1px)}
+.chip .sw{width:11px;height:11px;border-radius:50%;flex:none}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chipsep{align-self:center;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;
+  font-weight:640;color:var(--mute);padding-left:12px;margin-left:4px;border-left:1px solid var(--line)}
+@media(max-width:720px){
+  .chips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;
+    margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip,.chipsep{flex:none;white-space:nowrap}
+}
+
+#map{height:min(70dvh,600px);border:1px solid var(--line);border-radius:var(--rad);
+  background:#E9E7E1;overflow:hidden}
+.maplegend{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;font-size:.83rem;color:var(--ink2)}
+.maplegend span{display:inline-flex;align-items:center;gap:9px}
+.lgline{width:38px;height:0;display:inline-block}
+.leaflet-container{font:inherit}
+.mlbl{font-size:11.5px;font-weight:640;color:var(--ink);background:transparent!important;border:0!important;
+  box-shadow:none!important;padding:0!important;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff,0 0 4px #fff}
+.mlbl.big{font-size:13.5px;font-weight:700}
+.mlbl:before{display:none!important}
+.modeic{background:none!important;border:0!important}
+
+.routehead{display:flex;align-items:flex-start;gap:16px;margin-bottom:6px}
+.rbar{width:5px;border-radius:3px;align-self:stretch;flex:none;min-height:56px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.day{display:grid;gap:18px;padding:26px 0;border-top:1px solid var(--line2)}
+@media(min-width:860px){.day{grid-template-columns:96px 1fr 300px;align-items:start}}
+.daynum{font-size:.74rem;text-transform:uppercase;letter-spacing:.11em;font-weight:640;color:var(--mute);padding-top:3px}
+.daynum b{display:block;font-size:1.5rem;letter-spacing:-.03em;color:var(--ink);text-transform:none;
+  font-weight:680;line-height:1.1}
+.day h4{margin-bottom:6px}
+.day p{font-size:.94rem;color:var(--ink2);max-width:60ch}
+.day figure{margin:0}
+.day img{border-radius:var(--radsm);aspect-ratio:4/2.7;object-fit:cover;width:100%;cursor:zoom-in}
+.day figcaption{font-size:.75rem;color:var(--mute);margin-top:6px}
+.move{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:.8rem;color:var(--mute);font-weight:600}
+.move svg{flex:none}
+
+.place{padding:34px 0;border-top:1px solid var(--line2)}
+.place:first-child{border-top:0;padding-top:8px}
+.pgrid{display:grid;gap:12px;margin-top:18px}
+@media(min-width:700px){.pgrid{grid-template-columns:repeat(3,1fr)}}
+.pgrid figure{margin:0}
+.pgrid img{border-radius:var(--radsm);aspect-ratio:4/2.7;object-fit:cover;width:100%;cursor:zoom-in;
+  transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.pgrid img:hover{transform:scale(1.014)}
+.pgrid figcaption{font-size:.76rem;color:var(--mute);margin-top:6px;line-height:1.4}
+
+.viewer{position:fixed;inset:0;background:rgba(14,15,18,.93);display:none;z-index:9999;
+  align-items:center;justify-content:center;padding:28px;cursor:zoom-out}
+.viewer.on{display:flex}
+.viewer img{max-width:100%;max-height:88vh;border-radius:8px;object-fit:contain}
+.viewer .cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#D8D6D0;
+  font-size:.82rem;padding:0 24px}
+
+.check{border:1px solid var(--line);border-radius:var(--rad);background:var(--card);overflow:hidden}
+.check li{list-style:none;display:flex;gap:14px;padding:17px 20px;align-items:flex-start}
+.check li+li{border-top:1px solid var(--line2)}
+.check .when{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;font-weight:640;
+  color:var(--mute);flex:none;width:110px;padding-top:3px}
+.check strong{display:block;margin-bottom:2px}
+.check p{font-size:.89rem;color:var(--ink2);max-width:none}
+
+footer{padding:56px 0 76px;border-top:1px solid var(--line);color:var(--mute);font-size:.83rem}
+
+html.js .rv{opacity:0;transform:translateY(16px)}
+html.js .rv.in{opacity:1;transform:none;
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+@media (prefers-reduced-motion:reduce){
+  html.js .rv,html.js .rv.in{opacity:1;transform:none;transition:none}
+  .pgrid img:hover{transform:none}
+  html{scroll-behavior:auto}
+}
+@media print{.seasonbar,.chips,.viewer{display:none}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="seasonbar">
+  <div class="in">
+    <div class="seg" role="group" aria-label="Elegir temporada">
+      <button id="bt-may" aria-pressed="true">MAYO</button>
+      <button id="bt-ago" aria-pressed="false">AGOSTO</button>
+    </div>
+    <div class="now" id="seasonNow"></div>
+  </div>
+</div>
+
+<header class="hero">
+  <img id="heroImg" alt="">
+  <div class="scrim"></div>
+  <div class="inner">
+    <div class="eyebrow" style="color:rgba(255,255,255,.8)">Plan de viaje · dos personas</div>
+    <h1 id="heroTitle">China, del desierto al futuro</h1>
+    <div class="meta" id="heroPills"></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2 id="condTitle"></h2>
+      <p class="lede" id="condLede"></p>
+    </div>
+    <div class="grid g3 rv" id="condCards" style="margin-top:38px"></div>
+    <div id="condAlert" style="margin-top:24px"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2 id="winTitle"></h2>
+      <p class="lede" id="winLede"></p>
+    </div>
+    <div class="tw rv" id="winTable" style="margin-top:34px"></div>
+    <p class="sm mute" style="margin-top:12px" id="winNote"></p>
+    <div class="grid g2 rv" id="winCards" style="margin-top:34px"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2>Las seis rutas</h2>
+      <p class="lede">Los siete deseos (Muralla, Terracota, minorías, Shenzhen, Ruta de la Seda,
+      Zhangjiajie y pandas) no caben todos. Cada ruta renuncia a algo distinto. Elegid por lo que
+      estáis dispuestos a soltar.</p>
+      <p>Las <b>rutas 1 a 4</b> nacen de vuestra lista. Las <b>rutas 5 y 6</b> son los circuitos
+      clásicos de agencia, puestos como referencia. Cada una cambia de longitud según la temporada
+      que tengáis seleccionada arriba.</p>
+    </div>
+    <div class="chips rv" id="chips" style="margin-top:32px"></div>
+    <div id="map" class="rv"></div>
+    <div class="maplegend">
+      <span><i class="lgline" style="border-top:5px solid #3C3E46"></i> Tren de alta velocidad</span>
+      <span><i class="lgline" style="border-top:4px dashed #3C3E46"></i> Avión</span>
+      <span><i class="lgline" style="border-top:3px dotted #8A8C93"></i> Bus o coche</span>
+      <span class="mute">Pasa el ratón por un tramo para ver kilómetros y duración</span>
+    </div>
+    <div id="routebox" style="margin-top:52px"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2>Mayo contra agosto</h2>
+      <p class="lede">No es solo cuestión de días. Las mismas seis rutas se comportan de forma
+      muy distinta según la temporada, y algunos sitios cambian por completo.</p>
+    </div>
+    <div class="tw rv" style="margin-top:34px">
+      <table>
+        <thead><tr><th></th><th>Mayo</th><th>Agosto</th></tr></thead>
+        <tbody>
+          <tr><td><b>Días en China</b></td><td class="n">10</td><td class="n">14 (o hasta 28)</td></tr>
+          <tr><td><b>Días de vacaciones</b></td><td class="n">8</td><td class="n">9</td></tr>
+          <tr><td><b>Días de viaje por cada día de vacaciones</b></td><td class="n">1,25</td><td class="n"><b>1,56</b></td></tr>
+          <tr><td><b>Problema de masificación</b></td><td>Golden Week, del 30 de abril al 6 de mayo. Concentrado y esquivable ordenando bien la ruta.</td><td>Vacaciones escolares chinas. <b>Todo el mes</b>, sin ventana limpia. No se esquiva, se asume.</td></tr>
+          <tr><td><b>Temperatura</b></td><td>Ideal casi en todo el país, 14 a 26 grados en el norte.</td><td>Brutal: 32 a 40 grados con humedad alta en el sur y el centro.</td></tr>
+          <tr><td><b>Riesgo meteorológico</b></td><td>Bajo.</td><td><b>Tifones</b> en Guangdong, 4 a 6 de media en agosto. Afecta a Shenzhen.</td></tr>
+          <tr><td><b>Desierto de Gansu</b></td><td>Perfecto, 28 grados y seco.</td><td>Muy bueno: 33 grados de día, 18 de noche, 6 mm de lluvia en todo el mes.</td></tr>
+          <tr><td><b>Zhangjiajie</b></td><td>Bueno.</td><td>Regular: 18 días de lluvia de media, aunque la montaña está 5 a 10 grados más fresca que la ciudad.</td></tr>
+          <tr><td><b>Lago Qinghai y Chaka</b></td><td><span class="badge no">No funciona</span> Aún frío y pelado.</td><td><span class="badge">Solo en agosto</span> Xining a 22-25 grados mientras el resto de China arde, y la colza en flor hasta principios de mes.</td></tr>
+          <tr><td><b>Terrazas de Longji</b></td><td>Inundadas y reflejando.</td><td>Verdes y crecidas.</td></tr>
+          <tr><td><b>Hyrox</b></td><td>Shanghái 14-16 de mayo, tres días después de la vuelta.</td><td>En 2026 hubo Chengdú el 1-2 y Shenzhen el 15-16 de agosto. Las fechas de 2027 aún no están publicadas, pero el patrón juega a favor.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2>Qué se ve exactamente</h2>
+      <p class="lede">Fotografías reales de cada sitio, para que sepáis a qué estáis diciendo que sí
+      y a qué estáis renunciando. Pincha en cualquiera para verla grande.</p>
+    </div>
+    <div id="places" style="margin-top:30px"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2>Lo que hay que hacer y cuándo</h2>
+      <p class="lede">Varios de estos puntos tienen fecha límite real. El de los trenes es el que
+      más viajes ha arruinado en temporada alta china.</p>
+    </div>
+    <ul class="check rv" id="checklist" style="margin-top:32px"></ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="max-width:none">Documento de trabajo, no una reserva. Horarios de vuelo y tren según los
+    patrones publicados a día de hoy: las programaciones definitivas de 2027 salen a lo largo de 2026.<br>
+    Fotografías de Wikimedia Commons, uso personal. Calendario laboral de Zaragoza 2027 verificado.</p>
+  </div>
+</footer>
+
+<div class="viewer" id="viewer"><img alt=""><div class="cap"></div></div>
+
+<script>
+/*__IMGDATA__*/
+
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+function el(t,cls,html){var e=document.createElement(t);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+function src(k){return IMG[k]?('data:image/jpeg;base64,'+IMG[k].b64):''}
+
+var ICO={
+ tren:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="13" rx="2"/><path d="M4 10h16M8 20l-2 2M16 20l2 2M9 20h6"/></svg>',
+ avion:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.8 16 14l-4.5-1.3 1 5.7-2 1-1.4-4.3-2.6-.8.5-2 2.6.8L11 9.3 6.7 8 5.6 6l5.7 1 5.8-1.8a1.6 1.6 0 0 1 2 2z"/></svg>',
+ bus:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6M15 6v6M2 12h19.6M18 18h1a1 1 0 0 0 1-1v-4.6a4 4 0 0 0-.6-2.1L17.6 6a2 2 0 0 0-1.7-1H5a2 2 0 0 0-2 2v10a1 1 0 0 0 1 1h2"/><circle cx="7" cy="18" r="2"/><circle cx="16" cy="18" r="2"/></svg>'
+};
+var MODE={tren:{w:'tren de alta velocidad',weight:5.5,dash:null},
+          avion:{w:'avión',weight:4,dash:'11,9'},
+          bus:{w:'bus o coche',weight:3,dash:'2,7'}};
+
+var C={shenzhen:[22.543,114.060],hongkong:[22.319,114.169],guangzhou:[23.129,113.264],
+ beijing:[39.904,116.407],jinshanling:[40.679,117.244],mutianyu:[40.432,116.570],
+ datong:[40.076,113.300],xian:[34.342,108.940],terracota:[34.384,109.279],qinling:[34.060,108.270],
+ lanzhou:[36.061,103.834],xining:[36.617,101.778],qinghai:[36.900,100.180],chaka:[36.760,99.090],
+ zhangye:[38.958,100.125],jiayuguan:[39.802,98.227],dunhuang:[40.142,94.662],
+ zhangjiajie:[29.117,110.479],furong:[28.787,109.996],jishou:[28.314,109.727],
+ fenghuang:[27.948,109.599],congjiang:[25.753,108.906],zhaoxing:[25.899,109.166],
+ basha:[25.722,108.861],guiyang:[26.647,106.630],shanghai:[31.230,121.474],chengdu:[30.572,104.066],
+ leshan:[29.545,103.766],suzhou:[31.299,120.585],hangzhou:[30.274,120.155],huangshan:[30.135,118.166],
+ guilin:[25.274,110.290],yangshuo:[24.778,110.496],longji:[25.798,110.012]};
+var N={shenzhen:"Shenzhen",beijing:"Pekín",jinshanling:"Muralla de Jinshanling",xian:"Xi'an",
+ qinling:"Pandas de Qinling",lanzhou:"Lanzhou",xining:"Xining",qinghai:"Lago Qinghai",chaka:"Chaka",
+ zhangye:"Zhangye",jiayuguan:"Jiayuguan",dunhuang:"Dunhuang",zhangjiajie:"Zhangjiajie",
+ furong:"Furong",jishou:"Jishou",congjiang:"Congjiang",zhaoxing:"Zhaoxing",basha:"Basha",
+ chengdu:"Chengdú",leshan:"Leshan",fenghuang:"Fenghuang",shanghai:"Shanghái",suzhou:"Suzhou",
+ hangzhou:"Hangzhou",huangshan:"Huangshan",guilin:"Guilin",yangshuo:"Yangshuo",
+ longji:"Terrazas de Longji",mutianyu:"Muralla de Mutianyu",datong:"Datong"};
+
+/*__ROUTES__*/
+/*__SEASONS__*/
+/*__PLACES__*/
+
+/* ---------- mapa ---------- */
+var map=L.map('map',{zoomControl:true,scrollWheelZoom:false});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+ {attribution:'&copy; OpenStreetMap, &copy; CARTO',subdomains:'abcd',maxZoom:19}).addTo(map);
+function arc(a,b,k){var mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1];
+ var cx=mx-dy*k,cy=my+dx*k,p=[];
+ for(var t=0;t<=1.0001;t+=0.04){var u=1-t;
+  p.push([u*u*a[0]+2*u*t*cx+t*t*b[0],u*u*a[1]+2*u*t*cy+t*t*b[1]]);}
+ return p;}
+function bez(a,b,k,t){var mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1];
+ var cx=mx-dy*k,cy=my+dx*k,u=1-t;
+ return [u*u*a[0]+2*u*t*cx+t*t*b[0],u*u*a[1]+2*u*t*cy+t*t*b[1]];}
+
+var layer=null;
+function drawRoute(R){
+  if(layer){map.removeLayer(layer);layer=null;}
+  layer=L.layerGroup().addTo(map);
+  (R[SEASON].legs||[]).forEach(function(L4){
+    var a=C[L4[0]],b=C[L4[1]],m=MODE[L4[2]],k=(L4[2]==='bus')?0:R.curve;
+    if(!a||!b)return;
+    L.polyline(arc(a,b,k),{color:R.hex,weight:m.weight,opacity:.93,dashArray:m.dash,
+      lineJoin:'round',lineCap:'round'})
+     .bindTooltip('<b>'+N[L4[0]]+' a '+N[L4[1]]+'</b><br>'+m.w+'<br>'+
+        L4[3].toLocaleString('es-ES')+' km · '+L4[4],{sticky:true}).addTo(layer);
+    L.marker(bez(a,b,k,.5),{icon:L.divIcon({className:'modeic',
+      html:'<span style="color:'+R.hex+';display:block;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff)">'+ICO[L4[2]]+'</span>',
+      iconSize:[15,15],iconAnchor:[7,7]}),interactive:false}).addTo(layer);
+  });
+}
+function mk(pt,txt,o){o=o||{};
+  L.circleMarker(pt,{radius:o.r||4.5,color:'#fff',weight:2,fillColor:o.color||'#16171B',fillOpacity:1})
+   .addTo(map).bindTooltip(txt,{permanent:true,direction:o.dir||'right',
+     className:'mlbl'+(o.big?' big':''),offset:o.off||[6,0]});}
+mk(C.shenzhen,'SHENZHEN',{big:1,color:'#0B5ED7',r:7.5});
+mk(C.beijing,'PEKÍN',{big:1,color:'#0B5ED7',r:7.5,dir:'left',off:[-8,0]});
+mk(C.shanghai,'SHANGHÁI',{big:1,color:'#0B5ED7',r:7});
+mk(C.chengdu,'CHENGDÚ',{big:1,r:7,dir:'bottom',off:[0,7]});
+mk(C.jinshanling,'Muralla salvaje<br>Jinshanling · Gubeikou',{color:'#C0392B',r:6.5});
+mk(C.mutianyu,'Muralla de Mutianyu',{color:'#C0392B',r:6,dir:'left',off:[-7,0]});
+mk(C.terracota,'Guerreros de Terracota',{color:'#C0392B',r:6.5});
+mk(C.qinling,'Pandas de Qinling',{r:6,dir:'left',off:[-7,0]});
+mk(C.xian,"XI'AN",{big:1,dir:'top',off:[0,-8]});
+mk(C.xining,'Xining',{r:4,dir:'bottom',off:[0,5]});
+mk(C.qinghai,'Lago Qinghai',{r:5,dir:'top',off:[0,-6]});
+mk(C.chaka,'Chaka',{r:3.5,dir:'left',off:[-6,0]});
+mk(C.lanzhou,'Lanzhou',{r:3.5,dir:'right'});
+mk(C.zhangye,'Zhangye',{dir:'top',off:[0,-6]});
+mk(C.jiayuguan,'Jiayuguan',{color:'#C0392B',r:6.5,dir:'top',off:[0,-6]});
+mk(C.dunhuang,'DUNHUANG',{big:1,dir:'left',off:[-8,0]});
+mk(C.zhangjiajie,'ZHANGJIAJIE',{big:1,dir:'top',off:[0,-8]});
+mk(C.furong,'Furong',{r:3.5});
+mk(C.fenghuang,'Fenghuang',{r:3.5,dir:'bottom',off:[0,5]});
+mk(C.zhaoxing,'Zhaoxing',{r:4});
+mk(C.basha,'Basha',{r:3.5,dir:'bottom',off:[0,5]});
+mk(C.congjiang,'Congjiang',{r:3.5,dir:'left',off:[-6,0]});
+mk(C.guiyang,'Guiyang',{r:3,dir:'left',off:[-6,0]});
+mk(C.guilin,'Guilin',{r:4,dir:'left',off:[-6,0]});
+mk(C.yangshuo,'Yangshuo',{r:3.5,dir:'bottom',off:[0,5]});
+mk(C.longji,'Longji',{r:4,dir:'left',off:[-6,0]});
+mk(C.leshan,'Leshan',{r:3.5,dir:'bottom',off:[0,5]});
+mk(C.suzhou,'Suzhou',{r:3.5,dir:'top',off:[0,-5]});
+mk(C.hangzhou,'Hangzhou',{r:3.5,dir:'bottom',off:[0,5]});
+mk(C.huangshan,'Huangshan',{r:4,dir:'bottom',off:[0,5]});
+mk(C.datong,'Datong · Yungang',{r:4,dir:'top',off:[0,-5]});
+mk(C.guangzhou,'Cantón',{r:3,dir:'top',off:[0,-5]});
+mk(C.hongkong,'Hong Kong',{r:3,dir:'bottom',off:[0,5]});
+map.fitBounds([[21.5,92.5],[41.5,122.5]],{padding:[22,22]});
+
+/* ---------- render ---------- */
+var SEASON='may', current=1;
+var chips=$('#chips'), box=$('#routebox');
+
+var sepPuesto=false;
+ROUTES.forEach(function(R){
+  if(R.classic && !sepPuesto){sepPuesto=true;chips.appendChild(el('span','chipsep','Clásicos'));}
+  var b=el('button','chip','<span class="sw" style="background:'+R.hex+'"></span>Ruta '+R.id+' · '+R.name+
+    (R.rec?' <span style="opacity:.62;font-weight:500">recomendada</span>':''));
+  b.setAttribute('aria-pressed', R.id===current?'true':'false');
+  b.onclick=function(){showRoute(R.id)};
+  chips.appendChild(b);
+});
+
+function showRoute(id){
+  current=id;
+  $$('.chip',chips).forEach(function(b,i){b.setAttribute('aria-pressed',ROUTES[i].id===id?'true':'false')});
+  var R=ROUTES.filter(function(r){return r.id===id})[0];
+  var S=R[SEASON];
+  drawRoute(R);
+  box.innerHTML='';
+  var head=el('div','routehead');
+  head.appendChild(el('div','rbar','')).style.background=R.hex;
+  var ht=el('div');
+  ht.appendChild(el('div','eyebrow','Ruta '+R.id+' · '+SEASONS[SEASON].label+' · '+S.days.length+' días'));
+  ht.appendChild(el('h2',null,R.name)).style.marginTop='4px';
+  ht.appendChild(el('p','sm mute',S.sub||R.sub)).style.marginTop='6px';
+  head.appendChild(ht); box.appendChild(head);
+  var p=el('p','lede',S.pitch||R.pitch); p.style.margin='20px 0 0'; box.appendChild(p);
+
+  if(S.warn||R.classic){
+    var w=el('div','alert'); w.style.marginTop='20px';
+    var txt=S.warn||('Las rutas 1 a 4 esquivan la masificación cambiando el orden de las paradas. El circuito clásico no tiene esa salida, porque todas sus paradas son justo los sitios donde va todo el mundo. Aquí ya está ordenado lo mejor posible, pero vais a ver más colas que en cualquiera de las otras cuatro.');
+    var tit=S.warnTitle||'Por qué el clásico es el que peor encaja con estas fechas';
+    w.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>'+
+      '<div><h3>'+tit+'</h3><p>'+txt+'</p></div>';
+    box.appendChild(w);
+  }
+
+  var tg=el('div','tags');
+  (S.yes||R.yes).forEach(function(t){tg.appendChild(el('span','badge',t))});
+  (S.no||R.no).forEach(function(t){tg.appendChild(el('span','badge no',t))});
+  box.appendChild(tg);
+
+  var list=el('div'); list.style.marginTop='26px';
+  S.days.forEach(function(D,i){
+    var d=el('div','day');
+    d.appendChild(el('div','daynum','Día '+(i+1)+'<b>'+D.d+'</b>'));
+    var mid=el('div');
+    mid.appendChild(el('h4',null,D.t));
+    mid.appendChild(el('p',null,D.x));
+    if(D.m)mid.appendChild(el('div','move','<span style="color:'+R.hex+'">'+ICO[D.m[0]]+'</span>'+D.m[1]));
+    d.appendChild(mid);
+    var f=el('figure');
+    var im=el('img'); im.src=src(D.img); im.alt=D.cap; im.loading='lazy';
+    im.onclick=function(){openV(D.img,D.cap)};
+    f.appendChild(im); f.appendChild(el('figcaption',null,D.cap));
+    d.appendChild(f); list.appendChild(d);
+  });
+  box.appendChild(list);
+}
+
+/* ---------- galería ---------- */
+var pl=$('#places');
+PLACES.forEach(function(P){
+  var s=el('div','place');
+  s.appendChild(el('h3',null,P.t));
+  s.appendChild(el('p','sm mute',P.s)).style.marginTop='2px';
+  s.appendChild(el('p',null,P.x)).style.marginTop='12px';
+  var rt=el('div','tags');
+  if(P.only){var o=el('span','badge',P.only);rt.appendChild(o);}
+  P.r.forEach(function(id){
+    var R=ROUTES.filter(function(r){return r.id===id})[0];
+    var b=el('span','badge dim','Ruta '+id);
+    b.style.background='transparent'; b.style.border='1px solid '+R.hex; b.style.color=R.hex;
+    rt.appendChild(b);
+  });
+  s.appendChild(rt);
+  var g=el('div','pgrid');
+  P.i.forEach(function(pair){
+    if(!IMG[pair[0]])return;
+    var f=el('figure');
+    var im=el('img'); im.src=src(pair[0]); im.alt=pair[1]; im.loading='lazy';
+    im.onclick=function(){openV(pair[0],pair[1])};
+    f.appendChild(im); f.appendChild(el('figcaption',null,pair[1]));
+    g.appendChild(f);
+  });
+  s.appendChild(g); pl.appendChild(s);
+});
+
+/* ---------- visor ---------- */
+var vw=$('#viewer');
+function openV(k,cap){vw.querySelector('img').src=src(k);vw.querySelector('.cap').textContent=cap;vw.classList.add('on');}
+vw.onclick=function(){vw.classList.remove('on')};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')vw.classList.remove('on')});
+
+/* ---------- temporada ---------- */
+function setSeason(s){
+  SEASON=s;
+  var S=SEASONS[s];
+  $('#bt-may').setAttribute('aria-pressed', s==='may'?'true':'false');
+  $('#bt-ago').setAttribute('aria-pressed', s==='ago'?'true':'false');
+  $('#seasonNow').innerHTML='<b>'+S.rango+'</b> · '+S.dias+' días en China · '+S.vac+' días de vacaciones';
+  $('#heroImg').src=src(S.hero); $('#heroImg').alt=S.heroAlt;
+  $('#heroTitle').textContent=S.title;
+  $('#heroPills').innerHTML=S.pills.map(function(p){return '<span class="pill">'+p+'</span>'}).join('');
+  $('#condTitle').textContent=S.condTitle;
+  $('#condLede').textContent=S.condLede;
+  $('#condCards').innerHTML=S.cards.map(function(c){
+    return '<div class="card"><div class="num" style="color:'+(c.col||'var(--ink)')+'">'+c.n+'</div>'+
+      '<h3 style="margin-top:12px">'+c.h+'</h3><p>'+c.p+'</p></div>';}).join('');
+  $('#condAlert').innerHTML='<div class="alert"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><div><h3>'+S.alertT+'</h3><p>'+S.alertP+'</p></div></div>';
+  $('#winTitle').textContent=S.winTitle;
+  $('#winLede').textContent=S.winLede;
+  $('#winTable').innerHTML=S.winTable;
+  $('#winNote').textContent=S.winNote;
+  $('#winCards').innerHTML=S.winCards;
+  $('#checklist').innerHTML=S.check.map(function(c){
+    return '<li><span class="when">'+c[0]+'</span><div><strong>'+c[1]+'</strong><p>'+c[2]+'</p></div></li>';}).join('');
+  showRoute(current);
+  setTimeout(function(){map.invalidateSize()},120);
+}
+$('#bt-may').onclick=function(){setSeason('may')};
+$('#bt-ago').onclick=function(){setSeason('ago')};
+
+/* ---------- reveal ---------- */
+function revealAll(){$$('.rv').forEach(function(e){e.classList.add('in')})}
+if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.documentElement.className+=' js';
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  $$('.rv').forEach(function(e){io.observe(e)});
+  setTimeout(revealAll,2500);
+}else{revealAll()}
+
+setSeason('may');
+setTimeout(function(){map.invalidateSize()},260);
+</script>
+</body>
+</html>
