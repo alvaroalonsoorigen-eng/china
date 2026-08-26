@@ -15,6 +15,15 @@ for marca, fichero in (("/*__ROUTES__*/", "routes.js"),
     assert tpl.count(marca) == 1, "falta el marcador " + marca
     tpl = tpl.replace(marca, io.open(os.path.join(BASE, fichero), encoding="utf-8").read())
 
+# La tipografia DM Sans viaja embebida: el fichero no depende de Google Fonts
+import base64
+woff = base64.b64encode(open(os.path.join(BASE, "dm-sans-latin.woff2"), "rb").read()).decode()
+fuente = ("@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;"
+          "font-display:swap;src:url(data:font/woff2;base64," + woff + ") format('woff2');"
+          "unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122;}")
+assert tpl.count("/*__FONT__*/") == 1, "falta el marcador /*__FONT__*/"
+tpl = tpl.replace("/*__FONT__*/", fuente)
+
 mapa = json.load(open(os.path.join(BASE, "mapa.json")))
 tpl = tpl.replace("/*__MAPDATA__*/{}", json.dumps(mapa, separators=(",", ":"), ensure_ascii=False))
 

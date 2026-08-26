@@ -91,12 +91,13 @@ LUGAR_DE_FOTO = {
     "shenzhen": "shenzhen", "xining": "xining", "qinghai": "qinghai", "chaka": "chaka",
     "zhangye": "zhangye", "jiayuguan": "jiayuguan",
     "mogao": "dunhuang", "mingsha": "dunhuang", "yumen": "dunhuang", "yardang": "dunhuang",
-    "terracota": "xian", "xianfood": "xian",
+    "terracota": "xian", "xianfood": "xian", "xianwall": "xian",
     "gubeikou": "jinshanling", "jinshanling": "jinshanling", "mutianyu": "mutianyu",
-    "tiantan": "beijing", "gugong": "beijing", "yiheyuan": "beijing",
+    "tiantan": "beijing", "gugong": "beijing", "yiheyuan": "beijing", "hutong": "beijing",
     "yungang": "datong",
     "wulingyuan": "zhangjiajie", "tianmen": "zhangjiajie",
     "furong": "furong", "fenghuang": "fenghuang", "jishou": "jishou",
+    "chongqing": "chongqing", "wangxian": "wangxian",
     "dong": "zhaoxing", "jiabang": "congjiang", "basha": "basha", "congjiang": "congjiang",
     "longji": "longji", "yangshuo": "yangshuo", "lijiang": "yangshuo", "guilin": "guilin",
     "chengdu": "chengdu", "leshan": "leshan",
@@ -233,7 +234,11 @@ def main():
                 nuevo = indice(lugar, actual)
                 # Un día con traslado tiene que encender su tramo aunque la foto sea
                 # de la ciudad de la que se sale (el vuelo nocturno del primer día, p. ej.).
-                if dia.get("m") and nuevo <= actual and actual + 1 < len(tramos):
+                mov = dia.get("m")
+                # los traslados internos (mismo nodo del mapa) llevan "stay" y no encienden tramo
+                if mov and len(mov) > 2 and mov[2] == "stay":
+                    mov = None
+                if mov and nuevo <= actual and actual + 1 < len(tramos):
                     nuevo = actual + 1
                 actual = max(actual, nuevo)
                 dia_tramo.append(actual)
