@@ -27,12 +27,12 @@ may:{
   ["Ahora","Decidir si se alarga hasta el 17 de mayo","Cinco días más y el Hyrox de Shanghái. Es la única decisión que hace que quepa todo. Condiciona la compra."],
   ["6 meses antes","Registrarse en la app 12306 con pasaporte","La verificación de pasaporte, móvil y correo tarda. Hacerla con tiempo, no al llegar."],
   ["2 meses antes","Reservar las Grutas de Mogao por agencia","Los extranjeros no pueden reservar online a título individual. O se compra en persona en el Centro de Exposición Digital el mismo día, o se contrata antes."],
-  ["7 días antes","Reservar la plaza de Tiananmen si toca","Rutas 5, 6 y 7: la plaza tiene reserva propia, gratuita pero obligatoria, en un mini programa de WeChat y con franjas. La bajada de bandera es una franja concreta. Sin reserva no se cruza ni de paso."],
-  ["7 días antes","Reservar la Ciudad Prohibida a las 20:00 hora de Pekín","Solo rutas 5 y 6. Desde 2026 no hay taquilla: reserva online con pasaporte, cupo de 40.000 al día, ventana de solo siete días. Una entrada por pasaporte y día."],
+  ["7 días antes","Reservar la plaza de Tiananmen si toca","Rutas 1, 2 y 3: la plaza tiene reserva propia, gratuita pero obligatoria, en un mini programa de WeChat y con franjas. La bajada de bandera es una franja concreta. Sin reserva no se cruza ni de paso."],
+  ["7 días antes","Reservar la Ciudad Prohibida a las 20:00 hora de Pekín","Solo rutas 2 y 3. Desde 2026 no hay taquilla: reserva online con pasaporte, cupo de 40.000 al día, ventana de solo siete días. Una entrada por pasaporte y día."],
   ["15 días antes","Comprar TODOS los trenes el día que se abren","Los billetes de tren chinos salen a la venta exactamente 15 días antes. En Golden Week las rutas buenas se agotan en minutos."],
   ["Antes de salir","Alipay o WeChat Pay con tarjeta europea vinculada","En China el efectivo es casi folclore. Vincular y probar la tarjeta desde España."],
   ["Antes de salir","eSIM y VPN","Para WhatsApp, Google Maps e Instagram. Se contrata desde España, dentro ya no se puede."],
-  ["Al llegar","Reservar los pandas de Qinling por WeChat","Solo rutas 1 y 4. No tiene taquilla física y cierra los lunes."]]
+  ["Al llegar","Reservar los pandas de Qinling por WeChat","Solo rutas 4 y 7. No tiene taquilla física y cierra los lunes."]]
 },
 ago:{
  label:"AGOSTO", rango:"dom 15 → sáb 28 de agosto de 2027", dias:14, vac:9,
@@ -63,10 +63,10 @@ ago:{
   ["Cuando salgan","Vigilar el calendario Hyrox 2027 de China","En 2026 hubo Chengdú el 1-2 y Shenzhen el 15-16 de agosto. Si repiten patrón, entra en el viaje."],
   ["6 meses antes","Registrarse en la app 12306 con pasaporte","La verificación tarda. Agosto es temporada altísima de tren: sin cuenta lista no hay billetes."],
   ["30 días antes","Reservar las Grutas de Mogao","En verano la reserva anticipada es obligatoria y el cupo diario se agota. Los extranjeros no pueden reservar online solos: hay que ir por agencia."],
-  ["7 días antes","Reservar la Ciudad Prohibida a las 20:00 hora de Pekín","Rutas 5, 6 y 7. Cupo de 40.000 al día y sin taquilla. En agosto se agota en minutos."],
-  ["7 días antes","Reservar la plaza de Tiananmen si toca","Rutas 5, 6 y 7: reserva propia, gratuita pero obligatoria, en un mini programa de WeChat y con franjas. La bajada de bandera es una franja concreta."],
+  ["7 días antes","Reservar la Ciudad Prohibida a las 20:00 hora de Pekín","Rutas 1, 2 y 3. Cupo de 40.000 al día y sin taquilla. En agosto se agota en minutos."],
+  ["7 días antes","Reservar la plaza de Tiananmen si toca","Rutas 1, 2 y 3: reserva propia, gratuita pero obligatoria, en un mini programa de WeChat y con franjas. La bajada de bandera es una franja concreta."],
   ["15 días antes","Comprar TODOS los trenes el día que se abren","Se abren exactamente 15 días antes. En agosto, con las vacaciones escolares chinas, es todavía más crítico que en Golden Week."],
   ["Antes de salir","Seguro con cobertura de cancelación por tifón","Agosto es el pico en Guangdong. Un tifón puede tumbar dos días de itinerario."],
   ["Antes de salir","Alipay o WeChat Pay, eSIM y VPN","Todo se contrata desde España. Dentro ya no se puede."],
-  ["Al llegar","Reservar los pandas de Qinling por WeChat","Solo rutas 1 y 4. Sin taquilla física y cierra los lunes."]]
+  ["Al llegar","Reservar los pandas de Qinling por WeChat","Solo rutas 4 y 7. Sin taquilla física y cierra los lunes."]]
 }};

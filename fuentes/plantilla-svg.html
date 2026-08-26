@@ -17,6 +17,7 @@
   --mapbg:#161B26; --mapland:#222937; --mapedge:#333D4E; --maptext:#8B95A5;
   --warn:#8F4E0E; --warnbg:#FDF3E2; --warnbd:#F1DFC0;
   --ok:#1B7A4E; --okbg:#E4F3EA;
+  --r1:#C53026; --r2:#B8195C; --r3:#33608E; --r4:#B45309; --r5:#05684D; --r6:#6541D6; --r7:#0E7490;
   --rad:14px; --radsm:10px;
   --shadow:0 1px 2px rgba(20,24,31,.04), 0 10px 30px -14px rgba(20,24,31,.18);
 }
@@ -59,6 +60,8 @@ b,strong{font-weight:640}
 /* ---------- portada ---------- */
 .hero{position:relative;min-height:min(80dvh,720px);display:flex;align-items:flex-end;overflow:hidden}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .herovid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion:reduce){.hero .herovid{display:none}}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--grad);z-index:2}
 .hero .scrim{position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(10,11,14,.34) 0%,rgba(10,11,14,.10) 34%,rgba(10,11,14,.80) 100%)}
@@ -109,6 +112,7 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 .chip:active{transform:translateY(1px)}
 .chip .sw{width:11px;height:11px;border-radius:50%;flex:none}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chipsep.first{padding-left:0;margin-left:0;border-left:0}
 .chipsep{align-self:center;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;
   font-weight:640;color:var(--mute);padding-left:12px;margin-left:4px;border-left:1px solid var(--line)}
 @media(max-width:720px){
@@ -178,6 +182,23 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 .xcard p{font-size:.9rem;color:var(--ink2);max-width:none}
 .routeextra .tw{margin-top:20px}
 footer{padding:56px 0 76px;border-top:1px solid var(--line);color:var(--mute);font-size:.83rem}
+/* barra inferior tipo app, solo en movil (heredada del planner de referencia) */
+.bottomnav{display:none}
+@media(max-width:999px){
+  .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:960;display:flex;
+    background:rgba(255,255,255,.94);backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    border-top:1px solid var(--line);
+    padding:7px 6px calc(7px + env(safe-area-inset-bottom,0px))}
+  .bottomnav .bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-size:.62rem;font-weight:700;letter-spacing:.04em;color:var(--mute);
+    text-decoration:none;-webkit-tap-highlight-color:transparent}
+  .bottomnav .bn svg{width:22px;height:22px}
+  .bottomnav .bn.on{color:var(--brand)}
+  body{padding-bottom:76px}
+  footer{padding-bottom:40px}
+}
+@media print{.bottomnav{display:none}}
 
 html.js .rv{opacity:0;transform:translateY(16px)}
 html.js .rv.in{opacity:1;transform:none;
@@ -318,8 +339,10 @@ html.js .rv.in{opacity:1;transform:none;
   </div>
 </div>
 
-<header class="hero">
+<header class="hero" id="top">
   <img id="heroImg" alt="">
+  <video class="herovid" autoplay muted loop playsinline preload="auto"
+         src="/*__VIDEO__*/" aria-hidden="true" tabindex="-1"></video>
   <div class="scrim"></div>
   <div class="inner">
     <div class="eyebrow" style="color:rgba(255,255,255,.8)">Plan de viaje · dos personas</div>
@@ -351,17 +374,18 @@ html.js .rv.in{opacity:1;transform:none;
   </div>
 </section>
 
-<section>
+<section id="rutas">
   <div class="wrap wide">
     <div class="narrow stack">
       <h2>Las siete rutas</h2>
       <p class="lede">Los siete deseos (Muralla, Terracota, minorías, Shenzhen, Ruta de la Seda,
       Zhangjiajie y pandas) no caben todos. Cada ruta renuncia a algo distinto. Elegid por lo que
       estáis dispuestos a soltar.</p>
-      <p>Las <b>rutas 1 a 4</b> nacen de vuestra lista. Las <b>rutas 5 y 6</b> son los circuitos
-      clásicos de agencia, puestos como referencia. Y la <b>ruta 7</b> está calcada de un viaje
-      real de 22 noches por China, con sus avisos, sus trucos y sus hoteles ya probados, comprimida
-      a vuestras fechas. Cada una cambia de longitud según la temporada que tengáis seleccionada arriba.</p>
+      <p>La <b>ruta 1</b> está calcada de un viaje real de 22 noches por China, con sus avisos,
+      sus trucos y sus hoteles ya probados, comprimida a vuestras fechas. Las <b>rutas 2 y 3</b>
+      son los circuitos clásicos de agencia, puestos como referencia. Y las <b>rutas 4 a 7</b>
+      nacen de vuestra lista de deseos. Cada una cambia de longitud según la temporada que
+      tengáis seleccionada arriba.</p>
     </div>
     <div class="chips rv" id="chips" style="margin-top:32px"></div>
     <div class="routegrid">
@@ -417,7 +441,7 @@ html.js .rv.in{opacity:1;transform:none;
   </div>
 </section>
 
-<section>
+<section id="sitios">
   <div class="wrap">
     <div class="narrow stack">
       <h2>Qué se ve exactamente</h2>
@@ -428,7 +452,7 @@ html.js .rv.in{opacity:1;transform:none;
   </div>
 </section>
 
-<section>
+<section id="plan">
   <div class="wrap">
     <div class="narrow stack">
       <h2>Lo que hay que hacer y cuándo</h2>
@@ -670,10 +694,11 @@ addEventListener('beforeprint',function(){
 var SEASON='may', current=1;
 var chips=$('#chips'), box=$('#routebox');
 
-var sepPuesto=false,sepReal=false;
+var sepPuesto=false,sepReal=false,sepMedida=false;
 ROUTES.forEach(function(R){
+  if(R.real && !sepReal){sepReal=true;chips.appendChild(el('span','chipsep first','De un viaje real'));}
   if(R.classic && !sepPuesto){sepPuesto=true;chips.appendChild(el('span','chipsep','Clásicos'));}
-  if(R.real && !sepReal){sepReal=true;chips.appendChild(el('span','chipsep','De un viaje real'));}
+  if(!R.real && !R.classic && !sepMedida){sepMedida=true;chips.appendChild(el('span','chipsep','A vuestra medida'));}
   var b=el('button','chip','<span class="sw" style="background:'+R.hex+'"></span>Ruta '+R.id+' · '+R.name+
     (R.rec?' <span style="opacity:.62;font-weight:500">recomendada</span>':''));
   b.setAttribute('aria-pressed', R.id===current?'true':'false');
@@ -699,7 +724,7 @@ function showRoute(id){
 
   if(S.warn||R.classic){
     var w=el('div','alert'); w.style.marginTop='20px';
-    var txt=S.warn||('Las rutas 1 a 4 esquivan la masificación cambiando el orden de las paradas. El circuito clásico no tiene esa salida, porque todas sus paradas son justo los sitios donde va todo el mundo. Aquí ya está ordenado lo mejor posible, pero vais a ver más colas que en cualquiera de las otras cuatro.');
+    var txt=S.warn||('Las rutas 4 a 7 esquivan la masificación cambiando el orden de las paradas. El circuito clásico no tiene esa salida, porque todas sus paradas son justo los sitios donde va todo el mundo. Aquí ya está ordenado lo mejor posible, pero vais a ver más colas que en cualquiera de las hechas a medida.');
     var tit=S.warnTitle||'Por qué el clásico es el que peor encaja con estas fechas';
     w.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>'+
       '<div><h3>'+tit+'</h3><p>'+txt+'</p></div>';
@@ -810,6 +835,27 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
 }else{revealAll()}
 
 setSeason('may');
+</script>
+<nav class="bottomnav" aria-label="Ir a una sección">
+  <a href="#top" class="bn on" data-sec="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Inicio</a>
+  <a href="#rutas" class="bn" data-sec="rutas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/></svg>Rutas</a>
+  <a href="#sitios" class="bn" data-sec="sitios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg>Sitios</a>
+  <a href="#plan" class="bn" data-sec="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m4 5 1 1 2-2M4 11l1 1 2-2M4 17l1 1 2-2"/></svg>Plan</a>
+</nav>
+<script>
+(function(){
+  var nav=document.querySelector('.bottomnav');
+  if(!nav)return;
+  var enlaces=[].slice.call(nav.querySelectorAll('.bn'));
+  var secciones=enlaces.map(function(a){return document.getElementById(a.getAttribute('data-sec'))});
+  function marca(){
+    var y=window.scrollY+innerHeight*0.42, act=0;
+    secciones.forEach(function(s,i){if(s&&s.offsetTop<=y)act=i});
+    enlaces.forEach(function(a,i){a.classList.toggle('on',i===act)});
+  }
+  addEventListener('scroll',function(){requestAnimationFrame(marca)},{passive:true});
+  marca();
+})();
 </script>
 </body>
 </html>

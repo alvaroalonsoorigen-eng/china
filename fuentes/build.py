@@ -24,6 +24,11 @@ fuente = ("@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 10
 assert tpl.count("/*__FONT__*/") == 1, "falta el marcador /*__FONT__*/"
 tpl = tpl.replace("/*__FONT__*/", fuente)
 
+# El video del heroe (Muralla en slow motion, Pexels) viaja embebido igual que las fotos
+vid = base64.b64encode(open(os.path.join(BASE, "hero_wall.mp4"), "rb").read()).decode()
+assert tpl.count("/*__VIDEO__*/") == 1, "falta el marcador /*__VIDEO__*/"
+tpl = tpl.replace("/*__VIDEO__*/", "data:video/mp4;base64," + vid)
+
 mapa = json.load(open(os.path.join(BASE, "mapa.json")))
 tpl = tpl.replace("/*__MAPDATA__*/{}", json.dumps(mapa, separators=(",", ":"), ensure_ascii=False))
 
