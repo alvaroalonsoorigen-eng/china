@@ -33,11 +33,17 @@ mapa = json.load(open(os.path.join(BASE, "mapa.json")))
 tpl = tpl.replace("/*__MAPDATA__*/{}", json.dumps(mapa, separators=(",", ":"), ensure_ascii=False))
 
 import urllib.parse
-svg = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 720'>"
-       "<rect width='1000' height='720' fill='%23FAFAF8'/>"
-       "<path d='" + mapa["contorno"] + "' fill='%23D4541F' stroke='%23D4541F' stroke-width='10'/></svg>")
+# Bandera oficial de China para el favicon: fondo rojo y cinco estrellas doradas
+p_big = "M 5.00,2.00 L 5.67,4.07 L 7.85,4.07 L 6.09,5.35 L 6.76,7.43 L 5.00,6.15 L 3.24,7.43 L 3.91,5.35 L 2.15,4.07 L 4.33,4.07 Z"
+p_s1 = "M 9.14,2.51 L 9.62,1.97 L 9.25,1.34 L 9.91,1.63 L 10.39,1.08 L 10.33,1.80 L 11.00,2.09 L 10.29,2.25 L 10.22,2.97 L 9.85,2.35 Z"
+p_s2 = "M 11.01,4.14 L 11.66,3.82 L 11.56,3.10 L 12.07,3.62 L 12.72,3.30 L 12.38,3.95 L 12.88,4.47 L 12.17,4.34 L 11.83,4.99 L 11.73,4.27 Z"
+p_s3 = "M 11.04,6.73 L 11.76,6.70 L 11.96,6.00 L 12.21,6.68 L 12.94,6.66 L 12.37,7.10 L 12.62,7.79 L 12.01,7.38 L 11.44,7.83 L 11.64,7.13 Z"
+p_s4 = "M 9.22,8.38 L 9.90,8.63 L 10.35,8.06 L 10.32,8.79 L 11.00,9.05 L 10.30,9.24 L 10.26,9.96 L 9.87,9.36 L 9.16,9.55 L 9.62,8.98 Z"
+flag_svg = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'>"
+            "<rect width='30' height='20' fill='#DE2910' rx='3'/>"
+            f"<path d='{p_big} {p_s1} {p_s2} {p_s3} {p_s4}' fill='#FFDE00'/></svg>")
 tpl = tpl.replace("/*__FAVICON__*/",
-                  '<link rel="icon" href="data:image/svg+xml,%s">' % urllib.parse.quote(svg))
+                  '<link rel="icon" href="data:image/svg+xml,%s">' % urllib.parse.quote(flag_svg))
 
 imgs = json.load(open(os.path.join(BASE, "imgs.json")))
 blob = "var IMG=" + json.dumps({k: {"b64": v["b64"]} for k, v in imgs.items()},

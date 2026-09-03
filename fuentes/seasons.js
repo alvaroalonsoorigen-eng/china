@@ -3,14 +3,14 @@ may:{
  label:"MAYO", rango:"dom 2 → mar 11 de mayo de 2027", dias:10, vac:8,
  hero:"jinshanling_2", heroAlt:"Gran Muralla de Jinshanling recorriendo la cresta de la montaña",
  title:"China, del desierto al futuro",
- pills:["30 abril → 12 mayo 2027","10 días en tierra","8 días de vacaciones","7 rutas a elegir"],
+ pills:["30 abril → 12 mayo 2027","10 días en tierra","8 días de vacaciones","8 rutas a elegir"],
  condTitle:"Lo que condiciona todo el viaje",
  condLede:"Tres hechos que hay que aceptar antes de elegir ruta. Ninguno se negocia, los tres se gestionan. El orden en que se visitan los sitios importa más que qué sitios se visitan.",
  cards:[
   {n:"7",col:"var(--r1)",h:"días de Golden Week",p:"Del <b>30 de abril al 6 de mayo</b> China entera se mueve. El comparable de 2026 registró 325 millones de viajes internos en cinco días. Cae justo en la primera mitad del viaje."},
   {n:"3",col:"var(--r3)",h:"días tarde para el Hyrox",p:"Hyrox Shanghái 2027 es el <b>14, 15 y 16 de mayo</b>. Con vuelta el 12 no entra. Alargando al 17 entra la carrera y cinco días más de viaje."},
   {n:"01:45",h:"hora de todos los regresos",p:"Los vuelos de China a España salen de madrugada. El último día completo en China es siempre <b>el día anterior</b> a aterrizar en Zaragoza."}],
- alertT:"La regla que ordena las siete rutas",
+ alertT:"La regla que ordena las ocho rutas",
  alertP:"Terracota, Zhangjiajie y la Gran Muralla van <b>siempre después del 6 de mayo</b>. El Golden Week se pasa en Shenzhen, que es ciudad de origen y se vacía cuando sus trabajadores se van a sus provincias, y en el desierto de Gansu, donde hay sitio de sobra. Por eso las rutas entran por el sur y terminan en el norte.",
  winTitle:"Vuelos: la ida decide cuántos días tenéis",
  winLede:"Con la restricción de no salir el viernes antes de las 20:00, la salida del viernes pierde su ventaja. Los dos escenarios posibles dan los mismos días útiles, pero uno dura siete horas más.",
@@ -35,38 +35,32 @@ may:{
   ["Al llegar","Reservar los pandas de Qinling por WeChat","Solo rutas 4 y 7. No tiene taquilla física y cierra los lunes."]]
 },
 ago:{
- label:"AGOSTO", rango:"dom 15 → sáb 28 de agosto de 2027", dias:14, vac:9,
+ label:"AGOSTO", rango:"sáb 7 → dom 22 de agosto de 2027", dias:14, vac:9,
  hero:"qinghai_2", heroAlt:"Campos de colza en flor a orillas del lago Qinghai",
- title:"China en verano, a 3.000 metros del calor",
- pills:["13 → 29 agosto 2027","14 días en tierra","9 días de vacaciones","El lunes 16 es festivo"],
- condTitle:"Agosto cambia las reglas",
- condLede:"En agosto no hay un Golden Week que esquivar: la masificación dura el mes entero. A cambio, el festivo del lunes 16 regala un día, se ganan cuatro días de viaje y se abre el altiplano de Qinghai, que en mayo no funciona.",
+ title:"China en verano: Taiwán, Hunan, la Terracota y el futuro",
+ pills:["Volar sáb 7 agosto","14 días en tierra (8 al 21)","Vuelta dom 22 agosto","El domingo 15 en pleno viaje","Festivo lunes 16"],
+ condTitle:"Agosto: 14 días en China por 9 de vacaciones",
+ condLede:"Volar el sábado 7 de agosto, aterrizar el domingo 8 y aprovechar el puente del 16 de agosto (Zaragoza): 14 días completos en tierra con el domingo 15 en pleno viaje y regreso aterrizando el domingo 22 de agosto.",
  cards:[
-  {n:"9",col:"var(--r4)",h:"días de vacaciones para 14 en China",p:"Saliendo el <b>viernes 13</b> después de trabajar y volviendo el <b>domingo 29</b>. El lunes 16 es festivo en Zaragoza, así que solo se piden nueve días: martes 17, miércoles 18, jueves 19 y viernes 20, y luego de lunes 23 a viernes 27. Es el mejor rendimiento de todo el año."},
-  {n:"4-6",col:"var(--r1)",h:"tifones de media en agosto",p:"Agosto es el pico de la temporada de tifones en Guangdong. Afecta directamente a <b>Shenzhen</b>: cancelaciones de vuelos y trenes son habituales. Hay que dejar colchón y no poner Shenzhen el último día."},
-  {n:"22°",col:"var(--r3)",h:"en Xining mientras el resto arde",p:"El altiplano de Qinghai se queda en <b>22 a 25 grados</b> en agosto mientras Xi'an pasa de 38. Es el único momento del año en que ese tramo tiene sentido, y en mayo aún está pelado y frío."}],
- alertT:"En agosto no hay ventana limpia, se asume",
- alertP:"Las vacaciones escolares chinas duran julio y agosto enteros, así que no se puede ordenar la ruta para esquivar la multitud como en mayo. Lo que sí se puede es <b>elegir dónde estar</b>: el desierto de Gansu y el altiplano de Qinghai tienen espacio de sobra y temperaturas buenas, mientras que Zhangjiajie suma 18 días de lluvia de media y Xi'an llega a 40 grados. Eso reordena qué ruta conviene: en agosto ganan las del noroeste.",
- winTitle:"Tres ventanas posibles en agosto",
- winLede:"Vuestro margen va del 1 al 29 de agosto, con salida posible desde el último viernes de julio. El festivo del lunes 16 es la pieza que decide cuál rinde más.",
- winTable:'<table><thead><tr><th>Ventana</th><th>Salida</th><th>Vuelta a Zaragoza</th><th>Días en China</th><th>Vacaciones</th><th>Rinde</th></tr></thead><tbody>'+
-  '<tr class="best"><td><b>A · Corta y eficiente</b><br><span class="sm mute">Aprovecha el puente del 16 al principio</span></td><td class="n">Vie 13 ago noche<br>o sáb 14 directo</td><td class="n">Dom 29 ago</td><td class="n"><b>14</b></td><td class="n"><b>9</b></td><td><span class="badge">1,56 ★</span></td></tr>'+
-  '<tr><td><b>B · Primera quincena</b><br><span class="sm mute">Vuelta en el propio festivo</span></td><td class="n">Vie 30 jul noche<br>o sáb 31 directo</td><td class="n">Lun 16 ago<br><span class="sm mute">festivo</span></td><td class="n"><b>15</b></td><td class="n">10</td><td><span class="badge dim">1,50</span></td></tr>'+
-  '<tr><td><b>C · El mes entero</b><br><span class="sm mute">Roza el límite de 30 días del visado</span></td><td class="n">Vie 30 jul noche</td><td class="n">Dom 29 ago</td><td class="n"><b>28</b></td><td class="n">19</td><td><span class="badge dim">1,47</span></td></tr>'+
+  {n:"9",col:"var(--r4)",h:"días de vacaciones para 14 en China",p:"Volando el <b>sábado 7 de agosto</b> (o viernes 6 noche) y volviendo el <b>domingo 22</b>. El 15 cae en domingo y en Aragón se traslada al lunes 16 como festivo, así que solo se piden nueve días laborables: del 9 al 13, y del 17 al 20 de agosto. Rendimiento récord: 1,56 días de viaje por día pedido."},
+  {n:"15",col:"var(--r2)",h:"de agosto en pleno corazón del viaje",p:"El <b>domingo 15 de agosto</b> está incluido sí o sí en el viaje, disfrutando del Parque Nacional de Zhangjiajie (las montañas de Avatar) en el ecuador exacto de la ruta antes de enlazar con el festivo del lunes 16."},
+  {n:"100 %",col:"var(--r1)",h:"tren de alta velocidad en el interior",p:"Al hacer los trayectos de China continental en <b>tren de alta velocidad</b> se evitan los retrasos veraniegos por tormentas en aeropuertos del sur y se viaja directo de centro a centro a 350 km/h."}],
+ alertT:"El rendimiento óptimo de agosto",
+ alertP:"En agosto el festivo del 16 regala un día en Aragón. La ventana del <b>sábado 7 al domingo 22 de agosto</b> permite 14 días completos en tierra consumiendo solo 9 días de vacaciones laborales.",
+ winTitle:"La ventana cerrada de agosto",
+ winLede:"Vuestro margen va del 1 al 22 de agosto. Volar el sábado 7 y aterrizar el domingo 22 es la fórmula matemática que más estira los días libres con el día 15 en el corazón del itinerario.",
+ winTable:'<table><thead><tr><th>Plan</th><th>Salida</th><th>Día 15 de agosto</th><th>Vuelta a España</th><th>Días en tierra</th><th>Vacaciones</th><th>Rendimiento</th></tr></thead><tbody>'+
+  '<tr class="best"><td><b>Ventana elegida</b><br><span class="sm mute">14 días en tierra, el 15 en el centro del viaje y festivo del lunes 16</span></td><td class="n">Sáb 7 ago<br><span class="sm mute">o vie 6 noche</span></td><td class="n">En pleno viaje<br><span class="sm mute">Zhangjiajie (Avatar)</span></td><td class="n">Dom 22 ago</td><td class="n"><b>14</b></td><td class="n"><b>9</b></td><td><span class="badge">1,56 ★</span></td></tr>'+
   '</tbody></table>',
- winNote:"Los itinerarios de abajo están calculados sobre la ventana A, la recomendada. El 15 de agosto de 2027 cae en domingo, y en Aragón el festivo se traslada al lunes 16: eso es lo que ahorra el día.",
- winCards:'<div class="card"><div class="eyebrow">Vuelos</div><h3 style="margin:10px 0 8px">Mismo patrón que en mayo</h3><p>Los directos España-China salen a mediodía, así que el <b>viernes después de las 20:00 solo hay opciones con escala</b> (Qatar, Turkish, Emirates) que aterrizan el sábado por la noche. El directo del sábado da los mismos días y dura siete horas menos.<br><br>La vuelta sigue siendo de madrugada: Pekín a Madrid con Air China a las 01:55, Chengdú a Madrid con Sichuan a las 01:40 o Shanghái a Madrid con China Eastern a las 00:45.<br><br><b>Aviso de tifones:</b> si salís por Shenzhen o Cantón en agosto, dejad un día de colchón antes del internacional.</p></div>'+
-  '<div class="card"><div class="eyebrow">Por qué la ventana A</div><h3 style="margin:10px 0 8px">Mejor rendimiento y mejor tiempo</h3><p>Además de ser la que menos vacaciones consume, la segunda quincena tiene <b>menos lluvia en Zhangjiajie</b> que la primera y ya ha pasado el pico de calor.<br><br>La contrapartida: la <b>colza en flor del lago Qinghai</b> va de finales de junio a principios de agosto, así que en la ventana A ya se ha pasado. Si esa foto os importa, la ventana B es la vuestra.</p></div>',
+ winNote:"Itinerario calculado para volar el sábado 7 de agosto y aterrizar el domingo 8. El domingo 15 de agosto queda en pleno viaje, y el festivo de Aragón del lunes 16 permite 14 días en tierra con solo 9 días pedidos de vacaciones.",
+ winCards:'<div class="card"><div class="eyebrow">Vuelos</div><h3 style="margin:10px 0 8px">Patrón de vuelos confirmado</h3><p>Volar el <b>sábado 7 de agosto</b> permite salir con opciones directas o escala corta diurna, o bien salir el viernes 6 noche con escala (Qatar, Emirates, Cathay) para aterrizar el domingo 8 por la mañana en Taipéi.<br><br>La vuelta es en vuelo directo nocturno desde Shanghái a Madrid con China Eastern (MU709, sale a las 00:45) o a Barcelona con Air China: aterrizaje en España el domingo 22 de agosto por la mañana.</p></div>'+
+  '<div class="card"><div class="eyebrow">Aprovechamiento</div><h3 style="margin:10px 0 8px">Mejor rendimiento del año</h3><p>Esta ventana es la que menos vacaciones consume de todo el calendario (9 días pedidos para 14 en destino). Además, el <b>domingo 15 de agosto</b> se vive en el Parque Nacional de Zhangjiajie, y el lunes 16 festivo se aprovecha en Xi\'an recorriendo la muralla Ming en bicicleta.</p></div>',
  check:[
-  ["Ahora","Elegir ventana (A, B o C) y comprar los vuelos","La ventana cambia la longitud de la ruta. La A da 14 días por 9 de vacaciones; la C da 28 días pero se come 19."],
-  ["Ahora","Confirmar el festivo del lunes 16 en vuestra empresa","El 15 cae en domingo y en Aragón se traslada al lunes 16. Si vuestro convenio no lo traslada, se pierde un día."],
+  ["Ahora","Comprar los vuelos para volar el sábado 7 de agosto","Salida el sábado 7 de agosto (o viernes 6 noche) hacia Taipéi y regreso desde Shanghái de madrugada el sábado 21 aterrizando el domingo 22."],
+  ["Ahora","Confirmar el festivo del lunes 16 en vuestra empresa","El 15 cae en domingo y en Aragón se traslada al lunes 16. Si vuestro convenio no lo traslada, se pide un día más."],
   ["Cuando salgan","Vigilar el calendario Hyrox 2027 de China","En 2026 hubo Chengdú el 1-2 y Shenzhen el 15-16 de agosto. Si repiten patrón, entra en el viaje."],
-  ["6 meses antes","Registrarse en la app 12306 con pasaporte","La verificación tarda. Agosto es temporada altísima de tren: sin cuenta lista no hay billetes."],
-  ["30 días antes","Reservar las Grutas de Mogao","En verano la reserva anticipada es obligatoria y el cupo diario se agota. Los extranjeros no pueden reservar online solos: hay que ir por agencia."],
-  ["7 días antes","Reservar la Ciudad Prohibida a las 20:00 hora de Pekín","Rutas 1, 2 y 3. Cupo de 40.000 al día y sin taquilla. En agosto se agota en minutos."],
-  ["7 días antes","Reservar la plaza de Tiananmen si toca","Rutas 1, 2 y 3: reserva propia, gratuita pero obligatoria, en un mini programa de WeChat y con franjas. La bajada de bandera es una franja concreta."],
-  ["15 días antes","Comprar TODOS los trenes el día que se abren","Se abren exactamente 15 días antes. En agosto, con las vacaciones escolares chinas, es todavía más crítico que en Golden Week."],
-  ["Antes de salir","Seguro con cobertura de cancelación por tifón","Agosto es el pico en Guangdong. Un tifón puede tumbar dos días de itinerario."],
-  ["Antes de salir","Alipay o WeChat Pay, eSIM y VPN","Todo se contrata desde España. Dentro ya no se puede."],
-  ["Al llegar","Reservar los pandas de Qinling por WeChat","Solo rutas 4 y 7. Sin taquilla física y cierra los lunes."]]
+  ["6 meses antes","Registrarse en la app 12306 con pasaporte","La verificación tarda. Agosto es temporada altísima de tren: con la cuenta lista se compran los billetes en segundos."],
+  ["15 días antes","Comprar los billetes de tren el día que abren","Los billetes se abren exactamente 15 días antes a la hora indicada por la app 12306."],
+  ["Antes de salir","Alipay o WeChat Pay con tarjeta europea vinculada","En China el efectivo es casi folclore. Vincular y probar la tarjeta desde España."],
+  ["Antes de salir","eSIM y VPN contratadas desde España","Para WhatsApp, Google Maps e Instagram. Dentro de China ya no se puede contratar."]]
 }};

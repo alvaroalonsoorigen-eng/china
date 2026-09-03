@@ -105,6 +105,7 @@ LUGAR_DE_FOTO = {
     "panda_3": "qinling", "panda_1": "chengdu", "panda_2": "chengdu", "panda": None,
     "shanghai": "shanghai", "bund": "shanghai", "suzhou": "suzhou", "hangzhou": "hangzhou",
     "huangshan": "huangshan", "crh": None,
+    "taipei": "taipei", "jiufen": "taipei",
 }
 
 

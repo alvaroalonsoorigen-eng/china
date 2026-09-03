@@ -104,22 +104,55 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge.no{background:#FAE9E6;color:#A03327}
 .badge.dim{background:#EFEEEA;color:var(--mute)}
 
-.chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
-.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 17px;
+.chips{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 18px;
   font-size:.87rem;font-weight:620;color:var(--ink2);cursor:pointer;font-family:inherit;
-  display:inline-flex;align-items:center;gap:8px;transition:border-color .16s,color .16s,transform .1s}
+  display:inline-flex;align-items:center;gap:8px;transition:border-color .16s,color .16s,transform .12s cubic-bezier(.16,1,.3,1),background .16s,box-shadow .16s;
+  -webkit-tap-highlight-color:transparent}
 .chip:hover{border-color:#C9C7C0}
-.chip:active{transform:translateY(1px)}
+.chip:active{transform:scale(0.97)}
 .chip .sw{width:11px;height:11px;border-radius:50%;flex:none}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
-.chipsep.first{padding-left:0;margin-left:0;border-left:0}
-.chipsep{align-self:center;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;
-  font-weight:640;color:var(--mute);padding-left:12px;margin-left:4px;border-left:1px solid var(--line)}
+
+.chip.chip-main{border-color:#2563EB;color:#1D4ED8;background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%);
+  font-weight:700;box-shadow:0 2px 8px rgba(37,99,235,.12)}
+.chip.chip-main:hover{border-color:#1D4ED8;background:linear-gradient(135deg,#DBEAFE 0%,#BFDBFE 100%);
+  box-shadow:0 4px 14px rgba(37,99,235,.2)}
+.chip.chip-main[aria-pressed="true"]{background:linear-gradient(135deg,#2563EB 0%,#1D4ED8 100%);
+  border-color:#1D4ED8;color:#fff;box-shadow:0 4px 18px rgba(37,99,235,.36),inset 0 1px 0 rgba(255,255,255,.25)}
+.chip-star{display:inline-flex;align-items:center;justify-content:center;color:#F59E0B;font-size:.95rem;line-height:1;
+  filter:drop-shadow(0 1px 2px rgba(245,158,11,.3))}
+.chip.chip-main[aria-pressed="true"] .chip-star{color:#FDE047;filter:drop-shadow(0 1px 4px rgba(253,224,71,.5))}
+
+.route-dropdown{position:relative;display:inline-block}
+.chip.chip-dropdown{display:inline-flex;align-items:center;gap:8px}
+.chip.chip-dropdown[aria-expanded="true"]{border-color:var(--ink2);box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.dd-chevron{transition:transform .24s cubic-bezier(.16,1,.3,1);flex:none}
+.chip.chip-dropdown[aria-expanded="true"] .dd-chevron{transform:rotate(180deg)}
+.dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;min-width:320px;max-width:92vw;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1.5px solid var(--line);border-radius:18px;
+  box-shadow:0 20px 48px rgba(22,27,38,0.16),0 6px 16px rgba(22,27,38,0.08);
+  padding:8px 0;z-index:120;opacity:0;pointer-events:none;transform:translateY(-8px) scale(0.98);
+  transition:opacity .2s cubic-bezier(.16,1,.3,1),transform .2s cubic-bezier(.16,1,.3,1)}
+.dropdown-menu.open{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+.dd-group{padding:9px 18px 4px;font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;
+  font-weight:720;color:var(--mute);border-top:1px solid #F0EEEA;margin-top:4px}
+.dd-group:first-child{border-top:0;margin-top:0}
+.dd-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px 18px;text-align:left;
+  background:none;border:0;font-family:inherit;font-size:.87rem;font-weight:600;
+  color:var(--ink2);cursor:pointer;transition:background .12s ease,color .12s ease;
+  -webkit-tap-highlight-color:transparent}
+.dd-item:hover,.dd-item:focus-visible{background:#F7F5F2;color:var(--ink)}
+.dd-item.selected{background:#F0EDE6;color:var(--ink);font-weight:700}
+.dd-item .sw{width:10px;height:10px;border-radius:50%;flex:none}
+.dd-item .dd-rec{font-size:.72rem;font-weight:500;opacity:.65;margin-left:auto}
+
 @media(max-width:720px){
-  .chips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;
-    margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px;scrollbar-width:none}
-  .chips::-webkit-scrollbar{display:none}
-  .chip,.chipsep{flex:none;white-space:nowrap}
+  .chips{gap:8px}
+  .chip{padding:8px 14px;font-size:.82rem}
+  .dropdown-menu{left:0;right:auto;min-width:min(320px,calc(100vw - 32px));max-width:calc(100vw - 32px)}
+  .dd-item{padding:12px 16px;min-height:44px}
 }
 
 #map{height:min(70dvh,600px);border:1px solid var(--line);border-radius:var(--rad);
@@ -140,9 +173,11 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
   font-weight:680;line-height:1.1}
 .day h4{margin-bottom:6px}
 .day p{font-size:.94rem;color:var(--ink2);max-width:60ch}
-.day figure{margin:0}
-.day img{border-radius:var(--radsm);aspect-ratio:4/2.7;object-fit:cover;width:100%;cursor:zoom-in}
-.day figcaption{font-size:.75rem;color:var(--mute);margin-top:6px}
+.day figure{margin:0;border-radius:var(--radsm);overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);transition:transform .24s cubic-bezier(.16,1,.3,1),box-shadow .24s ease}
+.day figure:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.11)}
+.day img{border-radius:var(--radsm);aspect-ratio:4/2.7;object-fit:cover;width:100%;cursor:zoom-in;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.day figure:hover img{transform:scale(1.02)}
+.day figcaption{font-size:.75rem;color:var(--mute);margin-top:6px;padding:0 2px}
 .move{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:.8rem;color:var(--mute);font-weight:600}
 .move svg{flex:none}
 
@@ -186,15 +221,19 @@ footer{padding:56px 0 76px;border-top:1px solid var(--line);color:var(--mute);fo
 .bottomnav{display:none}
 @media(max-width:999px){
   .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:960;display:flex;
-    background:rgba(255,255,255,.94);backdrop-filter:blur(16px) saturate(160%);
-    -webkit-backdrop-filter:blur(16px) saturate(160%);
-    border-top:1px solid var(--line);
+    background:rgba(255,255,255,.92);backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border-top:1px solid rgba(0,0,0,.08);
+    box-shadow:0 -4px 20px rgba(0,0,0,.05);
     padding:7px 6px calc(7px + env(safe-area-inset-bottom,0px))}
   .bottomnav .bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
     font-size:.62rem;font-weight:700;letter-spacing:.04em;color:var(--mute);
-    text-decoration:none;-webkit-tap-highlight-color:transparent}
-  .bottomnav .bn svg{width:22px;height:22px}
+    text-decoration:none;-webkit-tap-highlight-color:transparent;
+    transition:color .2s cubic-bezier(.16,1,.3,1),transform .15s ease}
+  .bottomnav .bn:active{transform:scale(0.92)}
+  .bottomnav .bn svg{width:22px;height:22px;transition:transform .2s ease}
   .bottomnav .bn.on{color:var(--brand)}
+  .bottomnav .bn.on svg{filter:drop-shadow(0 2px 5px rgba(197,48,38,.28));transform:scale(1.06)}
   body{padding-bottom:76px}
   footer{padding-bottom:40px}
 }
@@ -214,13 +253,13 @@ html.js .rv.in{opacity:1;transform:none;
 :root{--mapH:min(46dvh,400px)}
 /* En móvil el mapa es una tira fija arriba. En ordenador pasa a columna lateral
    y se queda quieto mientras el itinerario se desplaza al lado. */
-.routegrid{display:grid;gap:28px}
+.routegrid{display:flex;flex-direction:column;gap:18px}
 .routegrid>#routebox{order:2;min-width:0;margin-top:0}
 .routegrid>.route-map{order:1}
 @media(min-width:1000px){
   :root{--mapH:min(64dvh,580px)}
   .wrap.wide{max-width:1340px}
-  .routegrid{grid-template-columns:minmax(0,1fr) 430px;gap:46px;align-items:start}
+  .routegrid{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:46px;align-items:start}
   .routegrid>#routebox{order:1}
   .routegrid>.route-map{order:2;position:sticky;top:calc(var(--barH,54px) + 20px);
     margin-top:0;padding-bottom:0}
@@ -290,21 +329,24 @@ html.js .rv.in{opacity:1;transform:none;
   background:linear-gradient(90deg,color-mix(in srgb,currentColor 7%,transparent),transparent 55%)}
 
 /* ---------- móvil ---------- */
+@media (max-width:999px){
+  :root{--mapH:155px}
+  .route-map{margin:10px -16px 0;padding:0 16px 6px;border-bottom:1px solid transparent}
+  .route-map[data-state=mini]{border-bottom-color:var(--line)}
+  .mapbar{padding:6px 0 7px}
+  .mapbar .mb-prog{left:16px;right:16px}
+  .mapbar .mb-txt{font-size:.84rem}
+  .maplegend{gap:12px;font-size:.70rem;margin-top:5px;
+    transition:max-height .35s ease,opacity .3s ease,margin-top .35s ease;overflow:hidden}
+  .maplegend .mute{display:none}
+  .route-map[data-state=mini] .maplegend{max-height:0;opacity:0;margin-top:0}
+  #mapsvg .leg.tren{stroke-width:4.6}
+  #mapsvg .leg.avion{stroke-width:3.8;stroke-dasharray:9 7}
+  #mapsvg .leg.bus{stroke-width:2.8;stroke-dasharray:1.5 6}
+}
 @media (max-width:760px){
   body{font-size:16px}
   .wrap{padding:0 16px}
-  .route-map{margin:26px -16px 0;padding:0 16px 8px;border-bottom:1px solid transparent}
-  .route-map[data-state=mini]{border-bottom-color:var(--line)}
-  :root{--mapH:min(40dvh,330px)}
-  .mapbar{padding:9px 0 11px}
-  .mapbar .mb-prog{left:16px;right:16px}
-  .mapbar .mb-txt{font-size:.88rem}
-  .maplegend{gap:12px;font-size:.74rem;margin-top:10px;
-    transition:max-height .35s ease,opacity .3s ease,margin-top .35s ease;overflow:hidden}
-  .route-map[data-state=mini] .maplegend{max-height:0;opacity:0;margin-top:0}
-  #mapsvg .leg.tren{stroke-width:5}
-  #mapsvg .leg.avion{stroke-width:4;stroke-dasharray:10 8}
-  #mapsvg .leg.bus{stroke-width:3;stroke-dasharray:1.5 7}
   .chips{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;
     margin:0 -16px;padding:0 16px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .chips::-webkit-scrollbar{display:none}
@@ -331,9 +373,9 @@ html.js .rv.in{opacity:1;transform:none;
 
 <div class="seasonbar">
   <div class="in">
-    <div class="seg" role="group" aria-label="Elegir temporada">
-      <button id="bt-may" aria-pressed="true">MAYO</button>
-      <button id="bt-ago" aria-pressed="false">AGOSTO</button>
+    <div class="seg" role="group" aria-label="Elegir temporada" style="display:none">
+      <button id="bt-may" aria-pressed="false" style="display:none">MAYO</button>
+      <button id="bt-ago" aria-pressed="true">AGOSTO</button>
     </div>
     <div class="now" id="seasonNow"></div>
   </div>
@@ -377,15 +419,9 @@ html.js .rv.in{opacity:1;transform:none;
 <section id="rutas">
   <div class="wrap wide">
     <div class="narrow stack">
-      <h2>Las siete rutas</h2>
-      <p class="lede">Los siete deseos (Muralla, Terracota, minorías, Shenzhen, Ruta de la Seda,
-      Zhangjiajie y pandas) no caben todos. Cada ruta renuncia a algo distinto. Elegid por lo que
-      estáis dispuestos a soltar.</p>
-      <p>La <b>ruta 1</b> está calcada de un viaje real de 22 noches por China, con sus avisos,
-      sus trucos y sus hoteles ya probados, comprimida a vuestras fechas. Las <b>rutas 2 y 3</b>
-      son los circuitos clásicos de agencia, puestos como referencia. Y las <b>rutas 4 a 7</b>
-      nacen de vuestra lista de deseos. Cada una cambia de longitud según la temporada que
-      tengáis seleccionada arriba.</p>
+      <h2>Las rutas</h2>
+      <p class="lede">Una ruta principal diseñada a vuestra medida con Taiwán, Shenzhen, Fenghuang, Furong, Zhangjiajie, Xi'an y Shanghái, junto a siete rutas comparativas para contrastar ritmos y destinos.</p>
+      <p>La <b>ruta principal</b> está calculada para volar el sábado 7 de agosto y regresar el domingo 22 (14 días en tierra con el domingo 15 en pleno corazón del viaje y aprovechando el festivo del lunes 16 de agosto). Combina la isla de Taiwán, la meca tecnológica de Shenzhen, las dos joyas sobre el agua de Hunan (la ciudad fénix de Fenghuang y el pueblo milenario suspendido sobre la cascada de Furong), las agujas de Avatar en Zhangjiajie, los Guerreros de Terracota en Xi'an y Shanghái. En el desplegable podéis explorar las otras siete alternativas: la <b>ruta probada de un viaje real</b> (ruta 1), los <b>circuitos clásicos</b> (rutas 2 y 3) y las <b>rutas temáticas</b> (4 a 7).</p>
     </div>
     <div class="chips rv" id="chips" style="margin-top:32px"></div>
     <div class="routegrid">
@@ -393,7 +429,7 @@ html.js .rv.in{opacity:1;transform:none;
     <div class="route-map" id="routemap" data-state="open">
       <button class="mapbar" type="button" id="mapbar" aria-expanded="true"
               aria-controls="mapbox" aria-label="Mostrar u ocultar el mapa">
-        <span class="mb-day" id="mbDay">Ruta 1</span>
+        <span class="mb-day" id="mbDay">Ruta principal</span>
         <span class="mb-txt" id="mbTxt">Mapa del itinerario</span>
         <span class="mb-prog"><i id="mbProg"></i></span>
         <span class="mb-ico" aria-hidden="true"></span>
@@ -413,11 +449,11 @@ html.js .rv.in{opacity:1;transform:none;
   </div>
 </section>
 
-<section>
+<section id="sec-mayo-vs-ago" style="display:none">
   <div class="wrap">
     <div class="narrow stack">
       <h2>Mayo contra agosto</h2>
-      <p class="lede">No es solo cuestión de días. Las mismas siete rutas se comportan de forma
+      <p class="lede">No es solo cuestión de días. Las rutas se comportan de forma
       muy distinta según la temporada, y algunos sitios cambian por completo.</p>
     </div>
     <div class="tw rv" style="margin-top:34px">
@@ -629,7 +665,8 @@ function marcaMapa(dia,titulo){
       if(c)c.setAttribute('r',(id===aqui?mapaActual.rad*1.55:mapaActual.rad).toFixed(1));
     });
   }
-  mbDay.textContent=dia>0?('Día '+(dia<10?'0':'')+dia):('Ruta '+current);
+  var curR=ROUTES.filter(function(r){return r.id===current})[0];
+  mbDay.textContent=dia>0?('Día '+(dia<10?'0':'')+dia):(curR&&curR.main?'Ruta principal':('Ruta '+current));
   mbTxt.textContent=dia>0&&titulo?titulo:(SEASONS[SEASON].label.toLowerCase()==='mayo'?
     'Itinerario de mayo, '+total+' días':'Itinerario de agosto, '+total+' días');
   mbProg.style.width=(dia>0?(dia/total*100):0)+'%';
@@ -678,8 +715,14 @@ function sincroniza(){
   dias.forEach(function(d,i){d.classList.toggle('on',i+1===act)});
   marcaMapa(act,titulo);
   var box=$('#routebox').getBoundingClientRect();
-  if(box.bottom<0||box.top>vh())manual=false;
-  if(!manual&&estrecho())estadoMapa(dias.length&&dias[0].getBoundingClientRect().top<130?'mini':'open');
+  if(estrecho()){
+    if(box.bottom < 50 || box.top > vh()){
+      manual = false;
+      estadoMapa('mini');
+    } else if(!manual){
+      estadoMapa('open');
+    }
+  }
 }
 function alScroll(){if(!pendiente){pendiente=true;requestAnimationFrame(sincroniza)}}
 addEventListener('scroll',alScroll,{passive:true});
@@ -691,24 +734,103 @@ addEventListener('beforeprint',function(){
 });
 
 /* ---------- render ---------- */
-var SEASON='may', current=1;
+var SEASON='ago', current=8;
 var chips=$('#chips'), box=$('#routebox');
 
-var sepPuesto=false,sepReal=false,sepMedida=false;
-ROUTES.forEach(function(R){
-  if(R.real && !sepReal){sepReal=true;chips.appendChild(el('span','chipsep first','De un viaje real'));}
-  if(R.classic && !sepPuesto){sepPuesto=true;chips.appendChild(el('span','chipsep','Clásicos'));}
-  if(!R.real && !R.classic && !sepMedida){sepMedida=true;chips.appendChild(el('span','chipsep','A vuestra medida'));}
-  var b=el('button','chip','<span class="sw" style="background:'+R.hex+'"></span>Ruta '+R.id+' · '+R.name+
-    (R.rec?' <span style="opacity:.62;font-weight:500">recomendada</span>':''));
-  b.setAttribute('aria-pressed', R.id===current?'true':'false');
-  b.onclick=function(){showRoute(R.id)};
-  chips.appendChild(b);
+var mainRoute = ROUTES.filter(function(r){return r.main})[0] || ROUTES[ROUTES.length-1];
+var otherRoutes = ROUTES.filter(function(r){return !r.main});
+
+// Botón de la ruta principal
+var btnMain = el('button', 'chip chip-main',
+  '<span class="sw" style="background:'+mainRoute.hex+'"></span>'+
+  '<span class="chip-star">★</span>'+
+  '<span><b>Ruta principal</b> · '+mainRoute.name+'</span>');
+btnMain.id = 'btnMainRoute';
+btnMain.setAttribute('aria-pressed', current===mainRoute.id ? 'true' : 'false');
+btnMain.onclick = function(){
+  showRoute(mainRoute.id);
+  closeDropdown();
+};
+chips.appendChild(btnMain);
+
+// Contenedor del desplegable
+var ddWrap = el('div', 'route-dropdown');
+ddWrap.id = 'routeDropdown';
+
+var btnDD = el('button', 'chip chip-dropdown',
+  '<span class="sw" id="ddSw" style="display:none"></span>'+
+  '<span id="ddLabel">Otras 7 rutas alternativas</span>'+
+  '<svg class="dd-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>');
+btnDD.id = 'btnDropdown';
+btnDD.setAttribute('aria-haspopup', 'true');
+btnDD.setAttribute('aria-expanded', 'false');
+btnDD.setAttribute('aria-pressed', current!==mainRoute.id ? 'true' : 'false');
+ddWrap.appendChild(btnDD);
+
+var ddMenu = el('div', 'dropdown-menu');
+ddMenu.id = 'dropdownMenu';
+ddMenu.setAttribute('role', 'menu');
+
+var sepPuesto=false, sepReal=false, sepMedida=false;
+otherRoutes.forEach(function(R){
+  if(R.real && !sepReal){sepReal=true; ddMenu.appendChild(el('div','dd-group','De un viaje real'));}
+  if(R.classic && !sepPuesto){sepPuesto=true; ddMenu.appendChild(el('div','dd-group','Clásicos'));}
+  if(!R.real && !R.classic && !sepMedida){sepMedida=true; ddMenu.appendChild(el('div','dd-group','A vuestra medida'));}
+  var it = el('button', 'dd-item',
+    '<span class="sw" style="background:'+R.hex+'"></span>'+
+    '<span>Ruta '+R.id+' · '+R.name+'</span>'+
+    (R.rec ? '<span class="dd-rec">recomendada</span>' : ''));
+  it.setAttribute('role', 'menuitem');
+  it.setAttribute('data-id', R.id);
+  it.onclick = function(e){
+    e.stopPropagation();
+    showRoute(R.id);
+    closeDropdown();
+  };
+  ddMenu.appendChild(it);
+});
+ddWrap.appendChild(ddMenu);
+chips.appendChild(ddWrap);
+
+function toggleDropdown(e){
+  if(e) e.stopPropagation();
+  var open = ddMenu.classList.toggle('open');
+  btnDD.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeDropdown(){
+  ddMenu.classList.remove('open');
+  btnDD.setAttribute('aria-expanded', 'false');
+}
+btnDD.onclick = toggleDropdown;
+document.addEventListener('click', function(e){
+  if(!ddWrap.contains(e.target)) closeDropdown();
+});
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeDropdown();
 });
 
 function showRoute(id){
-  current=id;
-  $$('.chip',chips).forEach(function(b,i){b.setAttribute('aria-pressed',ROUTES[i].id===id?'true':'false')});
+  current = id;
+  var isMain = (id === mainRoute.id);
+  btnMain.setAttribute('aria-pressed', isMain ? 'true' : 'false');
+  btnDD.setAttribute('aria-pressed', !isMain ? 'true' : 'false');
+  
+  var activeOther = otherRoutes.filter(function(r){return r.id === id})[0];
+  var ddSw = document.getElementById('ddSw');
+  var ddLabel = document.getElementById('ddLabel');
+  if(activeOther){
+    ddSw.style.display = 'inline-block';
+    ddSw.style.background = activeOther.hex;
+    ddLabel.textContent = 'Ruta ' + activeOther.id + ' · ' + activeOther.name;
+  } else {
+    ddSw.style.display = 'none';
+    ddLabel.textContent = 'Otras 7 rutas alternativas';
+  }
+  
+  $$('.dd-item', ddMenu).forEach(function(it){
+    it.classList.toggle('selected', it.getAttribute('data-id') == id);
+  });
+
   var R=ROUTES.filter(function(r){return r.id===id})[0];
   var S=R[SEASON];
   pintaMapa(R.id+SEASON);
@@ -716,7 +838,8 @@ function showRoute(id){
   var head=el('div','routehead');
   head.appendChild(el('div','rbar','')).style.background=R.hex;
   var ht=el('div');
-  ht.appendChild(el('div','eyebrow','Ruta '+R.id+' · '+SEASONS[SEASON].label+' · '+S.days.length+' días'));
+  var routeTitle = R.main ? 'Ruta principal' : ('Ruta ' + R.id);
+  ht.appendChild(el('div','eyebrow',routeTitle + ' · ' + SEASONS[SEASON].label + ' · ' + S.days.length + ' días'));
   ht.appendChild(el('h2',null,R.name)).style.marginTop='4px';
   ht.appendChild(el('p','sm mute',S.sub||R.sub)).style.marginTop='6px';
   head.appendChild(ht); box.appendChild(head);
@@ -724,7 +847,7 @@ function showRoute(id){
 
   if(S.warn||R.classic){
     var w=el('div','alert'); w.style.marginTop='20px';
-    var txt=S.warn||('Las rutas 4 a 7 esquivan la masificación cambiando el orden de las paradas. El circuito clásico no tiene esa salida, porque todas sus paradas son justo los sitios donde va todo el mundo. Aquí ya está ordenado lo mejor posible, pero vais a ver más colas que en cualquiera de las hechas a medida.');
+    var txt=S.warn||('Las rutas alternativas esquivan la masificación cambiando el orden de las paradas. El circuito clásico no tiene esa salida, porque todas sus paradas son justo los sitios donde va todo el mundo. Aquí ya está ordenado lo mejor posible, pero vais a ver más colas que en cualquiera de las hechas a medida.');
     var tit=S.warnTitle||'Por qué el clásico es el que peor encaja con estas fechas';
     w.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>'+
       '<div><h3>'+tit+'</h3><p>'+txt+'</p></div>';
@@ -772,7 +895,8 @@ PLACES.forEach(function(P){
   if(P.only){var o=el('span','badge',P.only);rt.appendChild(o);}
   P.r.forEach(function(id){
     var R=ROUTES.filter(function(r){return r.id===id})[0];
-    var b=el('span','badge dim','Ruta '+id);
+    if(!R)return;
+    var b=el('span','badge dim',R.main ? 'Ruta principal' : ('Ruta '+id));
     b.style.background='transparent'; b.style.border='1px solid '+R.hex; b.style.color=R.hex;
     rt.appendChild(b);
   });
@@ -834,7 +958,7 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
   setTimeout(revealAll,2500);
 }else{revealAll()}
 
-setSeason('may');
+setSeason('ago');
 </script>
 <nav class="bottomnav" aria-label="Ir a una sección">
   <a href="#top" class="bn on" data-sec="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Inicio</a>
