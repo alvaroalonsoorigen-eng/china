@@ -40,7 +40,7 @@ ago:{
  title:"China en verano: de Pekín a Shanghái en quince días",
  pills:["Vuelos comprados con Air China","Madrid a Pekín, sáb 31 julio","15 días en tierra (1 al 15)","Shanghái a Barcelona, lun 16 agosto 00:40","Festivo lunes 16 en Aragón"],
  condTitle:"Agosto: 15 días en China por 10 de vacaciones",
- condLede:"Los vuelos ya están comprados: se entra por Pekín el sábado 31 de julio por la noche y se sale de Shanghái en la madrugada del lunes 16 de agosto, que en Aragón es festivo. Todas las rutas van, por tanto, de Pekín a Shanghái.",
+ condLede:"Los vuelos ya están comprados: se entra por Pekín el sábado 31 de julio por la noche y se sale de Shanghái en la madrugada del lunes 16 de agosto, que en Aragón es festivo. La ruta va, por tanto, de Pekín a Shanghái.",
  cards:[
   {n:"10",col:"var(--r4)",h:"días de vacaciones para 15 en China",p:"Se piden del <b>2 al 6</b> y del <b>9 al 13 de agosto</b>. El vuelo de ida sale de Barajas a la 01:50 del sábado 31, así que basta con salir de Zaragoza el viernes 30 por la tarde. El 15 cae en domingo y Aragón traslada el festivo al <b>lunes 16</b>, el día en que aterrizáis en Barcelona a las 07:55."},
   {n:"2",col:"var(--r2)",h:"ciudades fijas: entrar por Pekín y salir por Shanghái",p:"Es un billete de ida y vuelta abierto: llegada a <b>Pekín Capital (PEK), terminal 3</b>, a las 18:50, y salida desde <b>Shanghái Pudong (PVG), terminal 2</b>, a las 00:40. El último día completo es el domingo 15: a las 21:30 hay que estar ya en Pudong."},

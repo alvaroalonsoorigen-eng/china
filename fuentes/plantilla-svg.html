@@ -17,6 +17,8 @@
   --mapbg:#161B26; --mapland:#222937; --mapedge:#333D4E; --maptext:#8B95A5;
   --warn:#8F4E0E; --warnbg:#FDF3E2; --warnbd:#F1DFC0;
   --ok:#1B7A4E; --okbg:#E4F3EA;
+  /* estados, como en el planner de referencia: hecho, pendiente, importante */
+  --st-ok:#279A63; --st-okbg:#EAF7F0; --st-pend:#F59E0B; --st-pendbg:#FFF6E5; --st-imp:#DC3A2C; --st-impbg:#FDECEA;
   --r1:#C53026; --r2:#B8195C; --r3:#33608E; --r4:#B45309; --r5:#05684D; --r6:#6541D6; --r7:#0E7490;
   --rad:14px; --radsm:10px;
   --shadow:0 1px 2px rgba(20,24,31,.04), 0 10px 30px -14px rgba(20,24,31,.18);
@@ -269,6 +271,78 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 footer{padding:56px 0 76px;border-top:1px solid var(--line);color:var(--mute);font-size:.83rem}
 /* barra inferior tipo app, solo en movil (heredada del planner de referencia) */
 .bottomnav{display:none}
+/* inicio tipo app */
+.panel{padding-top:28px;padding-bottom:10px}
+.prox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.prox h4{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--brand);margin:0 0 8px;font-weight:760}
+.prox ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.prox li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.prox .cd{min-width:62px;text-align:center;border-radius:12px;padding:6px 8px;font-weight:800;font-size:.95rem;line-height:1.1;background:var(--st-pendbg);color:#9A5B00}
+.prox .cd small{display:block;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.prox .cd.hoy{background:var(--st-impbg);color:var(--st-imp)}
+.prox .cd.ya{background:var(--st-impbg);color:var(--st-imp)}
+.prox b{display:block;font-size:.95rem;line-height:1.3}
+.prox span{font-size:.8rem;color:var(--mute)}
+.prox .vacio{color:var(--mute);font-size:.92rem}
+.rutacard{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.rclabel{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);font-weight:700;margin-bottom:8px}
+.rutaChips{display:flex;flex-wrap:wrap;gap:6px 4px;align-items:center}
+.rutaChips a{text-decoration:none;color:var(--ink);font-weight:680;font-size:.95rem;padding:2px 4px;border-radius:8px}
+.rutaChips a small{display:block;font-size:.68rem;color:var(--mute);font-weight:600}
+.rutaChips .sep{color:var(--mute)}
+.atajos{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:900px){.atajos{grid-template-columns:repeat(3,1fr)}.atajos a.wide{grid-column:span 1}}
+.atajos a{position:relative;display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:16px;transition:transform .2s ease,box-shadow .2s ease}
+.atajos a:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.atajos a.wide{grid-column:span 2}
+.atajos b{display:block;font-size:1.02rem;margin-bottom:3px}
+.atajos span{display:block;font-size:.8rem;color:var(--mute);line-height:1.35}
+.badge-n{position:absolute;top:10px;right:10px;min-width:22px;height:22px;border-radius:11px;background:var(--brand);color:#fff;
+  font-style:normal;font-size:.75rem;font-weight:800;display:grid;place-items:center;padding:0 6px}
+@media(max-width:999px){
+  .hero{min-height:0}
+}
+/* checks */
+.ck{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;padding:0;margin-top:2px}
+.ck svg{opacity:0}
+.ck.on{background:var(--st-ok);border-color:var(--st-ok)}
+.ck.on svg{opacity:1}
+.check li.hecho strong,.check li.hecho p{color:var(--mute)}
+.check li.hecho strong{text-decoration:line-through}
+.dhecho{display:inline-flex;align-items:center;gap:8px;margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:999px;
+  padding:5px 12px 5px 6px;font:inherit;font-size:.8rem;font-weight:650;color:var(--ink2);cursor:pointer}
+.dhecho .ck{width:20px;height:20px;border-radius:6px;margin:0}
+.day.hecho .daynum b::after{content:" ✓";color:var(--st-ok)}
+/* vídeos y formularios */
+.vfiltro{display:flex;flex-wrap:wrap;gap:6px;margin-top:26px}
+.vfiltro button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:.84rem;font-weight:650;cursor:pointer;color:var(--ink2)}
+.vfiltro button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.vlista{display:grid;gap:12px;margin-top:16px}
+@media(min-width:760px){.vlista{grid-template-columns:1fr 1fr}}
+.vgrupo{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.vgrupo h4{margin:0 0 8px;font-size:1rem}
+.vgrupo ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.vgrupo li{font-size:.88rem;color:var(--ink2);line-height:1.45}
+.vgrupo li a{color:var(--brand);font-weight:650}
+.vgrupo li .del{border:0;background:none;color:var(--mute);cursor:pointer;font-size:.8rem;margin-left:6px}
+.vform,.pform{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;gap:10px}
+.pform{grid-template-columns:1fr auto;align-items:center}
+.vform h4{margin:0}
+.vrow{display:flex;gap:8px;flex-wrap:wrap}
+.vrow>*{flex:1 1 180px}
+.vform select,.vform input,.vform textarea,.pform input,.sync input{font:inherit;font-size:.92rem;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--paper);color:var(--ink);width:100%}
+.btn{font:inherit;font-weight:700;font-size:.9rem;border:0;border-radius:10px;padding:10px 16px;background:var(--brand);color:#fff;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--ink2);border:1px solid var(--line)}
+.plist li{align-items:center}
+.plist .del{margin-left:auto;border:0;background:none;color:var(--mute);cursor:pointer;font-size:.8rem}
+.sync{margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.syncst{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:650}
+.syncst i{width:10px;height:10px;border-radius:50%;background:var(--st-pend)}
+.syncst i.ok{background:var(--st-ok)} .syncst i.err{background:var(--st-imp)}
+.sync summary{cursor:pointer;margin-top:8px;font-size:.88rem;color:var(--brand);font-weight:650}
+.sync ol{margin:10px 0 10px 18px;font-size:.86rem;color:var(--ink2);display:grid;gap:4px}
+.sync .vrow{margin-top:8px}
 /* los trenes del viaje */
 .trmapa{max-width:760px;margin-left:auto;margin-right:auto;margin-top:30px;border-radius:var(--rad);overflow:hidden;border:1px solid var(--line);background:#7FAFD6}
 #trsvg{display:block;width:100%;height:auto;aspect-ratio:4/3}
@@ -511,6 +585,20 @@ html.mapafs,html.mapafs body{overflow:hidden}
   </div>
 </header>
 
+<section id="inicio" class="panel">
+  <div class="wrap">
+    <div class="prox" id="prox"></div>
+    <div class="rutacard rv"><div class="rclabel">La ruta</div><div class="rutaChips" id="rutaChips"></div></div>
+    <div class="atajos rv" id="atajos">
+      <a href="#rutas"><b>Día a día</b><span>Horarios, hoteles, spas y fotos de cada día</span></a>
+      <a href="#trenes"><b>Trenes</b><span>Todos los trayectos y cuándo se compran</span></a>
+      <a href="#sitios"><b>Sitios</b><span>Qué se ve en cada parada</span></a>
+      <a href="#videos"><b>Vídeos</b><span>Consejos de vídeos por ciudad</span></a>
+      <a href="#plan" class="wide"><b>Plan y por hacer</b><span>Billetes, entradas, apps, dinero y vuestra lista</span><em class="badge-n" id="badgePend" hidden></em></a>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="narrow stack">
@@ -629,6 +717,23 @@ html.mapafs,html.mapafs body{overflow:hidden}
   </div>
 </section>
 
+<section id="videos">
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2>Consejos de vídeos</h2>
+      <p class="lede">Lo que enseñan los vídeos de TikTok, Instagram o YouTube, ordenado por ciudad. Pegad el enlace y apuntad el consejo: se guarda para los dos. Y si me pasáis un vídeo, lo analizo y lo añado.</p>
+    </div>
+    <div class="vfiltro rv" id="vfiltro"></div>
+    <div class="vlista rv" id="vlista"></div>
+    <form class="vform rv" id="vform">
+      <h4>Añadir un consejo</h4>
+      <div class="vrow"><select id="vciudad" aria-label="Ciudad"></select><input id="vurl" type="url" placeholder="Enlace del vídeo (opcional)"></div>
+      <textarea id="vtexto" rows="3" placeholder="El consejo, en una o dos frases" required></textarea>
+      <button type="submit" class="btn">Guardar consejo</button>
+    </form>
+  </div>
+</section>
+
 <section id="plan">
   <div class="wrap">
     <div class="narrow stack">
@@ -637,6 +742,46 @@ html.mapafs,html.mapafs body{overflow:hidden}
       más viajes ha arruinado en temporada alta china.</p>
     </div>
     <ul class="check rv" id="checklist" style="margin-top:32px"></ul>
+
+    <div class="narrow stack" style="margin-top:56px"><h2>Vuestra lista</h2>
+      <p class="lede">Lo que se os ocurra y no esté arriba. Se guarda en GitHub y lo veis los dos.</p></div>
+    <form class="pform rv" id="pform"><input id="ptexto" placeholder="Añadir algo por hacer" required><button type="submit" class="btn">Añadir</button></form>
+    <ul class="check plist rv" id="plist"></ul>
+
+    <div class="narrow stack" style="margin-top:56px"><h2>Antes de volar: apps y dinero</h2>
+      <p class="lede">Todo esto se configura desde España: dentro de China no se puede contratar una VPN ni descargar muchas apps.</p></div>
+    <div class="grid g2 rv" style="margin-top:28px">
+      <div class="card"><div class="eyebrow">Instalarla como app</div><h3 style="margin:8px 0 6px">Esta guía, sin conexión</h3><p>En cada iPhone: abrid la web en Safari, botón Compartir, «Añadir a pantalla de inicio». Abridla una vez desde el icono y pasad por todas las secciones. Funciona sin internet y sin VPN; lo único que necesita conexión es guardar los checks y el detalle de OpenStreetMap.</p></div>
+      <div class="card"><div class="eyebrow">WeChat</div><h3 style="margin:8px 0 6px">Con tiempo, y con avalista</h3><p>Cada uno con su número español. Al registrarse pide que un avalista escanee un QR: alguien con WeChat desde hace más de seis meses, identidad verificada y que no haya avalado a nadie en el último mes, uno distinto para cada uno. Usadla unas semanas antes de vincular la tarjeta: las cuentas nuevas sin actividad son las que se bloquean. Hace falta para la reserva de Tiananmen y para los miniprogramas de entradas.</p></div>
+      <div class="card"><div class="eyebrow">Alipay</div><h3 style="margin:8px 0 6px">El pago de todo, y Didi y metro dentro</h3><p>Verificación con la foto del pasaporte (sin reflejos, el nombre en el mismo orden) y una Visa o Mastercard a nombre de cada uno, la virtual normal, nunca una de un solo uso. Comisión de un 3 % en pagos de más de 200 yuanes con tarjeta extranjera: mejor pagar por debajo cuando se pueda. Localizad antes los miniprogramas de Didi, metro y traductor.</p></div>
+      <div class="card"><div class="eyebrow">Tarjetas</div><h3 style="margin:8px 0 6px">Una principal y otra de emergencia</h3><p>Una tarjeta sin comisión de cambio (tipo Revolut) como principal en Alipay, cada uno la suya, y la del banco de siempre solo de emergencia, avisando de fechas y destino. En Revolut Standard, el cambio de divisa en fin de semana lleva un 1 % más: convertid entre semana. Comprobad el límite diario de compra online.</p></div>
+      <div class="card"><div class="eyebrow">VPN y móvil</div><h3 style="margin:8px 0 6px">Plan B contratado en España</h3><p>La eSIM con VPN incluida, y además una VPN de pago que funcione en China (Astrill, LetsVPN o NordVPN con servidores ofuscados), instalada y probada en los dos móviles, con usuario y contraseña apuntados en papel. Confirmad con vuestro operador el roaming para recibir los SMS del banco.</p></div>
+      <div class="card"><div class="eyebrow">Hoteles</div><h3 style="margin:8px 0 6px">Depósitos y desayunos</h3><p>Algunos hoteles piden un depósito al llegar (500 yuanes en Pekín, 200 en Chengdú): con Alipay o en efectivo os lo devuelven al momento; con tarjeta queda retenido días. Los días de madrugón, pedid la noche antes el desayuno para llevar: 打包早餐 (da bao zao can).</p></div>
+    </div>
+
+    <div class="narrow stack" style="margin-top:56px"><h2>Plan antijetlag</h2>
+      <p class="lede">China va 6 horas por delante de España en agosto. La ida es la dura.</p></div>
+    <ul class="check rv" style="margin-top:24px">
+      <li><span class="when">Días antes</span><div><strong>Adelantar el reloj</strong><p>Cama y despertador una hora antes cada día. Farmacia: melatonina de 1 mg, antifaz y tapones.</p></div></li>
+      <li><span class="when">Al embarcar</span><div><strong>Reloj y móvil en hora china</strong><p>El vuelo sale a la 01:50 de Madrid, las 07:50 en China: dormid lo que podáis al principio y estad despiertos la segunda mitad, que en China es de día.</p></div></li>
+      <li><span class="when">Sáb 31, noche</span><div><strong>Melatonina a las 21:30, cama a las 22:00</strong><p>Aunque no tengáis sueño. Nada de siesta al llegar.</p></div></li>
+      <li><span class="when">Dom 1 y lun 2</span><div><strong>Despertador fijo y luz de mañana</strong><p>A las 06:30 pase lo que pase y a la calle con luz. El martes el cuerpo ya va en hora china.</p></div></li>
+      <li><span class="when">La vuelta</span><div><strong>Dormir en el avión y luz de tarde</strong><p>Aterrizáis el lunes 16 a las 07:55: a la calle por la tarde y a la cama no antes de las 23:00.</p></div></li>
+    </ul>
+
+    <div class="sync rv" id="sync">
+      <div class="syncst"><i id="syncDot"></i><span id="syncTxt">Comprobando…</span></div>
+      <details><summary>Guardar los checks para los dos (configurar una vez en cada móvil)</summary>
+        <ol>
+          <li>En GitHub: Settings, Developer settings, Personal access tokens, Fine-grained tokens, Generate new token.</li>
+          <li>Repository access: Only select repositories, y elegid <b>china</b>. Permissions: Contents, <b>Read and write</b>. Caducidad: hasta después del viaje.</li>
+          <li>Copiad la clave y pegadla aquí. Se queda solo en este móvil: no se publica ni se manda a nadie más que a GitHub.</li>
+        </ol>
+        <div class="vrow"><input id="tokIn" type="password" placeholder="Clave de GitHub (github_pat_…)" autocomplete="off"><input id="quienIn" placeholder="Vuestro nombre (opcional)"></div>
+        <div class="vrow"><button type="button" class="btn" id="tokSave">Guardar clave</button><button type="button" class="btn ghost" id="tokDel">Olvidar clave</button></div>
+        <p class="sm mute">Sin clave, la guía funciona igual y los checks se guardan solo en este móvil hasta que la pongáis.</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -694,6 +839,8 @@ var N={shenzhen:"Shenzhen",beijing:"Pekín",jinshanling:"Muralla de Jinshanling"
 /*__ROUTES__*/
 /* las rutas con oculta:true se guardan en los datos pero no salen en la web */
 var ROUTES_TODAS=ROUTES; ROUTES=ROUTES.filter(function(r){return !r.oculta});
+function slug(t){return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)}
+var ICOCK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
 /*__SEASONS__*/
 /*__PLACES__*/
 
@@ -1245,6 +1392,7 @@ function showRoute(id){
     }
     mid.appendChild(el('h4',null,D.t));
     mid.appendChild(el('p',null,D.x));
+    if(D.c)mid.appendChild(el('button','dhecho','<span class="ck" data-k="d:'+D.d+'">'+ICOCK+'</span>Día hecho')).setAttribute('data-k','d:'+D.d);
     if(D.m&&!(D.c&&mid.querySelector('.dchange .via')))mid.appendChild(el('div','move','<span style="color:'+R.hex+'">'+ICO[D.m[0]]+'</span>'+D.m[1]));
     if(D.h||D.s||D.r){
       var inf=el('div','dinfo');
@@ -1365,7 +1513,9 @@ function setSeason(s){
   $('#winNote').textContent=S.winNote;
   $('#winCards').innerHTML=S.winCards;
   $('#checklist').innerHTML=S.check.map(function(c){
-    return '<li><span class="when">'+c[0]+'</span><div><strong>'+c[1]+'</strong><p>'+c[2]+'</p></div></li>';}).join('');
+    var k='c:'+slug(c[1]);
+    return '<li data-k="'+k+'"><button type="button" class="ck" data-k="'+k+'" aria-label="Marcar como hecho">'+ICOCK+'</button><span class="when">'+c[0]+'</span><div><strong>'+c[1]+'</strong><p>'+c[2]+'</p></div></li>';}).join('');
+  if(window.DBV)DBV.pinta();
   showRoute(current);
 }
 $('#bt-may').onclick=function(){setSeason('may')};
@@ -1383,6 +1533,156 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
 }else{revealAll()}
 
 setSeason('ago');
+</script>
+<script>
+/* ---------- base de datos en GitHub: checks, lista propia y consejos de vídeos ----------
+   estado.json vive en la rama "datos" del repositorio (así guardar no republica la web).
+   Leer no necesita clave. Escribir usa una clave de GitHub limitada a este repositorio que
+   cada uno pega en su móvil y se queda en su navegador. Sin clave o sin conexión, los
+   cambios se guardan en una cola local y se suben cuando se pueda. */
+(function(){
+  var REPO='alvaroalonsoorigen-eng/china', RAMA='datos', API='https://api.github.com/repos/'+REPO+'/contents/estado.json';
+  var LS={est:'china27-estado',cola:'china27-cola',tok:'china27-token',quien:'china27-quien'};
+  function lee(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+  function pon(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  function tok(){try{return localStorage.getItem(LS.tok)||''}catch(e){return ''}}
+  function dec(b){return decodeURIComponent(escape(atob(b.replace(/\n/g,''))))}
+  function enc(t){return btoa(unescape(encodeURIComponent(t)))}
+  var vacio={version:1,checks:{},pendientes:[],tips:[]};
+  var base=lee(LS.est,vacio), cola=lee(LS.cola,[]), ocupado=false, ultimo=null;
+  function aplica(e,op){
+    e=JSON.parse(JSON.stringify(e||vacio)); e.checks=e.checks||{}; e.pendientes=e.pendientes||[]; e.tips=e.tips||[];
+    if(op.t==='check'){if(op.v)e.checks[op.k]=op.quando||1;else delete e.checks[op.k]}
+    else if(op.t==='p+'){if(!e.pendientes.some(function(x){return x.id===op.x.id}))e.pendientes.push(op.x)}
+    else if(op.t==='p-'){e.pendientes=e.pendientes.filter(function(x){return x.id!==op.id})}
+    else if(op.t==='t+'){if(!e.tips.some(function(x){return x.id===op.x.id}))e.tips.push(op.x)}
+    else if(op.t==='t-'){e.tips=e.tips.filter(function(x){return x.id!==op.id})}
+    return e;
+  }
+  function estado(){return cola.reduce(aplica,base)}
+  function estadoTxt(t,cl){var d=document.getElementById('syncDot'),x=document.getElementById('syncTxt');if(d)d.className=cl||'';if(x)x.textContent=t}
+  function resumen(){
+    if(!tok()){estadoTxt(cola.length?'Sin clave: '+cola.length+' cambios guardados solo en este móvil':'Sin clave: los checks se guardan solo en este móvil','');return}
+    if(cola.length){estadoTxt('Pendiente de subir: '+cola.length+' cambios','');return}
+    estadoTxt('Sincronizado con GitHub'+(ultimo?' a las '+ultimo:''),'ok');
+  }
+  function hora(){var d=new Date();return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+  function cabeceras(){var h={'Accept':'application/vnd.github+json'};if(tok())h.Authorization='Bearer '+tok();return h}
+  function carga(){
+    return fetch(API+'?ref='+RAMA+'&t='+Date.now(),{headers:cabeceras(),cache:'no-store'})
+      .then(function(r){if(!r.ok)throw r.status;return r.json()})
+      .then(function(j){base=JSON.parse(dec(j.content));pon(LS.est,base);ultimo=hora();pinta();resumen();return j.sha})
+      .catch(function(){resumen()});
+  }
+  function sube(reintento){
+    if(ocupado||!cola.length||!tok())return resumen();
+    ocupado=true; estadoTxt('Guardando…','');
+    var enviada=cola.slice();
+    fetch(API+'?ref='+RAMA+'&t='+Date.now(),{headers:cabeceras(),cache:'no-store'})
+      .then(function(r){if(!r.ok)throw r.status;return r.json()})
+      .then(function(j){
+        var remoto=JSON.parse(dec(j.content)), nuevo=enviada.reduce(aplica,remoto);
+        var quien=''; try{quien=localStorage.getItem(LS.quien)||''}catch(e){}
+        return fetch(API,{method:'PUT',headers:Object.assign({'Content-Type':'application/json'},cabeceras()),
+          body:JSON.stringify({message:'Viaje: '+enviada.length+' cambios'+(quien?' de '+quien:''),content:enc(JSON.stringify(nuevo,null,1)),sha:j.sha,branch:RAMA})})
+          .then(function(r){if(!r.ok)throw r.status;base=nuevo;cola=cola.slice(enviada.length);pon(LS.est,base);pon(LS.cola,cola);ultimo=hora()});
+      })
+      .then(function(){ocupado=false;pinta();resumen();if(cola.length)setTimeout(sube,800)})
+      .catch(function(e){ocupado=false;
+        if((e===409||e===422)&&!reintento){setTimeout(function(){sube(true)},700);return}
+        estadoTxt(e===401||e===403?'La clave no vale o no tiene permiso de escritura':'Sin conexión con GitHub: se subirá luego','err');
+        setTimeout(sube,30000)});
+  }
+  function op(o){cola.push(o);pon(LS.cola,cola);pinta();sube()}
+  /* ---------- pintar ---------- */
+  function pintaChecks(){
+    var e=estado();
+    document.querySelectorAll('.ck[data-k]').forEach(function(b){
+      var on=!!e.checks[b.getAttribute('data-k')]; b.classList.toggle('on',on);
+      var li=b.closest('li'); if(li)li.classList.toggle('hecho',on);
+      var dia=b.closest('.day'); if(dia)dia.classList.toggle('hecho',on);
+    });
+  }
+  function fechaDe(c){
+    var M={marzo:2,abril:3,mayo:4,junio:5,julio:6,agosto:7}, t=c[0].toLowerCase();
+    if(/^(ya|ahora)/.test(t))return new Date(2000,0,1);
+    if(/finales de marzo/.test(t))return new Date(2027,2,25);
+    if(/antes de salir/.test(t))return new Date(2027,6,29);
+    var m=t.match(/(\d+) de (marzo|abril|mayo|junio|julio|agosto)/); if(m)return new Date(2027,M[m[2]],+m[1]);
+    return null;
+  }
+  function pintaProx(){
+    var caja=document.getElementById('prox'); if(!caja)return;
+    var e=estado(), hoy=new Date(); hoy.setHours(0,0,0,0);
+    var S=SEASONS.ago, items=S.check.map(function(c){return {c:c,f:fechaDe(c),k:'c:'+slug(c[1])}})
+      .filter(function(x){return x.f&&!e.checks[x.k]}).sort(function(a,b){return a.f-b.f});
+    var ini=new Date(2027,6,31), fin=new Date(2027,7,15), html='';
+    if(hoy>=ini&&hoy<=fin){
+      var n=Math.round((hoy-ini)/864e5), R=ROUTES.filter(function(r){return r.main})[0], D=R&&R.ago.days[n];
+      if(D)html+='<h4>Hoy, día '+(n+1)+'</h4><ul><li><div class="cd hoy">'+D.d+'</div><a href="#dia'+(n+1)+'" style="text-decoration:none;color:inherit"><b>'+D.t+'</b><span>'+(D.c||'')+'</span></a></li></ul>';
+    }
+    html+='<h4'+(html?' style="margin-top:14px"':'')+'>Lo siguiente que te toca</h4>';
+    if(!items.length)html+='<p class="vacio">No queda nada con fecha pendiente.</p>';
+    else html+='<ul>'+items.slice(0,3).map(function(x){
+      var d=Math.round((x.f-hoy)/864e5), cl='cd', et;
+      if(x.f.getFullYear()<2001){et='Ya';cl+=' ya'}else if(d<0){et='Atrasado';cl+=' ya'}else if(d===0){et='Hoy';cl+=' hoy'}else{et=d+'<small>'+(d===1?'día':'días')+'</small>'}
+      return '<li><div class="'+cl+'">'+et+'</div><a href="#plan" style="text-decoration:none;color:inherit"><b>'+x.c[1]+'</b><span>'+x.c[0]+'</span></a></li>';
+    }).join('')+'</ul>';
+    caja.innerHTML=html;
+    var pend=items.length+(e.pendientes||[]).length, b=document.getElementById('badgePend');
+    if(b){b.hidden=!pend;b.textContent=pend}
+  }
+  function pintaRuta(){
+    var caja=document.getElementById('rutaChips'); if(!caja)return;
+    var R=ROUTES.filter(function(r){return r.main})[0]; if(!R)return;
+    var g=[]; R.ago.days.forEach(function(D,i){if(!D.c)return;var u=g[g.length-1];if(u&&u.c===D.c)u.n++;else g.push({c:D.c,n:1,i:i})});
+    var MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    function f(i){var d=new Date(2027,6,31+i);return d.getDate()+' '+MES[d.getMonth()]}
+    caja.innerHTML=g.map(function(x,k){return (k?'<span class="sep">›</span>':'')+'<a href="#dia'+(x.i+1)+'">'+x.c+'<small>'+f(x.i)+(x.n>1?' a '+f(x.i+x.n-1):'')+'</small></a>'}).join('');
+  }
+  function pintaPend(){
+    var ul=document.getElementById('plist'); if(!ul)return;
+    var e=estado();
+    ul.innerHTML=(e.pendientes||[]).map(function(x){var k='p:'+x.id;
+      return '<li data-k="'+k+'"><button type="button" class="ck" data-k="'+k+'" aria-label="Marcar como hecho">'+ICOCK+'</button><div><strong>'+esc(x.txt)+'</strong></div><button type="button" class="del" data-p="'+x.id+'">Quitar</button></li>'}).join('')
+      || '<li><div><p>Aún no hay nada en vuestra lista.</p></div></li>';
+  }
+  var filtro='Todas';
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function pintaTips(){
+    var lista=document.getElementById('vlista'), fil=document.getElementById('vfiltro'), sel=document.getElementById('vciudad'); if(!lista)return;
+    var e=estado(), todos=(window.TIPS||[]).map(function(t){return {c:t[0],txt:t[1],url:t[2]||'',fijo:true}}).concat((e.tips||[]).map(function(t){return {c:t.c,txt:t.txt,url:t.url,id:t.id}}));
+    var R=ROUTES.filter(function(r){return r.main})[0], ciudades=[];
+    R.ago.days.forEach(function(D){if(D.c&&ciudades.indexOf(D.c)<0)ciudades.push(D.c)});
+    todos.forEach(function(t){if(ciudades.indexOf(t.c)<0)ciudades.push(t.c)});
+    if(sel&&!sel.options.length)sel.innerHTML=ciudades.map(function(c){return '<option>'+c+'</option>'}).join('');
+    fil.innerHTML=['Todas'].concat(ciudades).map(function(c){var n=c==='Todas'?todos.length:todos.filter(function(t){return t.c===c}).length;
+      return '<button type="button" data-f="'+c+'" class="'+(c===filtro?'on':'')+'">'+c+' · '+n+'</button>'}).join('');
+    lista.innerHTML=ciudades.filter(function(c){return filtro==='Todas'||c===filtro}).map(function(c){
+      var ts=todos.filter(function(t){return t.c===c}); if(!ts.length)return '';
+      return '<div class="vgrupo"><h4>'+c+'</h4><ul>'+ts.map(function(t){
+        return '<li>'+esc(t.txt)+(t.url?' <a href="'+esc(t.url)+'" target="_blank" rel="noopener">Ver vídeo</a>':'')+(t.id?'<button type="button" class="del" data-t="'+t.id+'">Quitar</button>':'')+'</li>'}).join('')+'</ul></div>';
+    }).join('');
+  }
+  function pinta(){pintaChecks();pintaProx();pintaRuta();pintaPend();pintaTips()}
+  window.DBV={pinta:pinta};
+  /* ---------- eventos ---------- */
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.ck[data-k], .dhecho[data-k]');
+    if(b){ev.preventDefault();var k=b.getAttribute('data-k'),on=!!estado().checks[k];op({t:'check',k:k,v:!on,quando:new Date().toISOString().slice(0,10)});return}
+    var p=ev.target.closest('[data-p]'); if(p){op({t:'p-',id:p.getAttribute('data-p')});return}
+    var t=ev.target.closest('[data-t]'); if(t){op({t:'t-',id:t.getAttribute('data-t')});return}
+    var f=ev.target.closest('[data-f]'); if(f){filtro=f.getAttribute('data-f');pintaTips()}
+  });
+  var pf=document.getElementById('pform'); if(pf)pf.addEventListener('submit',function(ev){ev.preventDefault();var i=document.getElementById('ptexto');if(!i.value.trim())return;op({t:'p+',x:{id:Date.now().toString(36),txt:i.value.trim()}});i.value=''});
+  var vf=document.getElementById('vform'); if(vf)vf.addEventListener('submit',function(ev){ev.preventDefault();var tx=document.getElementById('vtexto'),u=document.getElementById('vurl'),c=document.getElementById('vciudad');
+    if(!tx.value.trim())return;op({t:'t+',x:{id:Date.now().toString(36),c:c.value,txt:tx.value.trim(),url:u.value.trim()}});tx.value='';u.value=''});
+  var ts=document.getElementById('tokSave'); if(ts)ts.onclick=function(){var v=document.getElementById('tokIn').value.trim(),q=document.getElementById('quienIn').value.trim();
+    try{if(v)localStorage.setItem(LS.tok,v);if(q)localStorage.setItem(LS.quien,q)}catch(e){}document.getElementById('tokIn').value='';carga().then(sube)};
+  var td=document.getElementById('tokDel'); if(td)td.onclick=function(){try{localStorage.removeItem(LS.tok)}catch(e){}resumen()};
+  addEventListener('online',function(){sube()});
+  pinta(); resumen(); carga().then(function(){sube()});
+})();
 </script>
 <script>
 /* ---------- los trenes del viaje: mapa numerado y fichas ---------- */
@@ -1429,7 +1729,7 @@ setSeason('ago');
   <a href="#top" class="bn on" data-sec="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Inicio</a>
   <a href="#rutas" class="bn" data-sec="rutas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/></svg>Rutas</a>
   <a href="#trenes" class="bn" data-sec="trenes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="13" rx="3"/><path d="M5 10h14M8 16l-1 4M16 16l1 4"/><circle cx="9" cy="13" r=".6"/><circle cx="15" cy="13" r=".6"/></svg>Trenes</a>
-  <a href="#sitios" class="bn" data-sec="sitios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg>Sitios</a>
+  <a href="#videos" class="bn" data-sec="videos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>Vídeos</a>
   <a href="#plan" class="bn" data-sec="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m4 5 1 1 2-2M4 11l1 1 2-2M4 17l1 1 2-2"/></svg>Plan</a>
 </nav>
 <script>

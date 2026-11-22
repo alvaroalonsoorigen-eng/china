@@ -74,3 +74,9 @@ OpenStreetMap.
 Horarios de tren y frecuencias de vuelos interiores son los patrones cargados a día de hoy;
 las programaciones de 2027 se van confirmando. Los trenes chinos se compran en la app 12306
 exactamente 15 días antes: ese es el cuello de botella real del viaje.
+
+## Datos compartidos
+
+Los checks, la lista de cosas por hacer y los consejos de vídeos se guardan en `estado.json`,
+en la rama `datos` de este repositorio. La web los lee sin clave; para guardar, cada móvil usa
+una clave de GitHub limitada a este repositorio.
