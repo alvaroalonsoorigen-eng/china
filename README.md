@@ -1,51 +1,49 @@
 # China 2027, del desierto al futuro
 
-Documento de **decisión** de viaje: compara **8 rutas por 2 ventanas de fechas** (mayo y
-agosto de 2027) para elegir antes de comprar los vuelos. Un solo archivo HTML que funciona
-sin conexión: **[index.html](index.html)** (18 MB, 63 fotos, tipografía y vídeo de portada en Full HD
+Documento de viaje que compara **4 rutas** para quince días en China en agosto de 2027,
+encajadas en los vuelos ya comprados: **Madrid a Pekín el sábado 31 de julio** y
+**Shanghái a Barcelona el lunes 16 de agosto** (salida a las 00:40). Un solo archivo HTML:
+**[index.html](index.html)** (19 MB, 63 fotos, tipografía y vídeo de portada en Full HD
 incrustados en base64).
 
 Publicado con GitHub Pages: `https://alvaroalonsoorigen-eng.github.io/china/`
 
-No es una guía cerrada. Cuando se elija ruta, ese itinerario se puede pasar a formato de
-guía de viaje.
+## Las rutas
 
-## Lo que compara
+Todas entran por Pekín y salen por Shanghái, con 16 jornadas del sábado 31 al domingo 15:
 
-- **Mayo** (dom 2 a mar 11, 10 días en tierra, 8 de vacaciones) contra **agosto** (vuelo el
-  sábado 7, aterrizaje el domingo 8 y vuelta el domingo 22: 14 días, 9 de vacaciones).
-  Agosto rinde más porque el 15 de agosto de 2027 cae en domingo y en Aragón el festivo se
-  traslada al lunes 16.
-- **Ocho rutas**, cada una con itinerario propio en cada temporada: la ruta probada (calcada
-  de un viaje real), el triángulo clásico, el clásico ampliado, la Ruta de la Seda, la China
-  del sur, el gran zigzag, Seda y panda, y Taiwán, Avatar y el futuro.
-- Los condicionantes que ordenan todo: Golden Week del 1 al 5 de mayo (calendario oficial
-  publicado en noviembre de 2026), vuelos de vuelta de madrugada, trenes que salen a la
-  venta 15 días antes, la Ciudad Prohibida sin taquilla desde 2026 y las Grutas de Mogao
-  sin reserva online para extranjeros.
+- **Ruta principal, Taiwán, Avatar y el futuro**: Pekín, Taipéi y Jiufen, Shenzhen,
+  Fenghuang, Furong, Zhangjiajie, Xi'an, Shanghái y Suzhou.
+- **Ruta 1, la ruta probada**: los diez destinos de un viaje real, de Pekín a Shanghái por
+  Xi'an, Chengdú, Chongqing, Hunan y el valle de Wangxian.
+- **Ruta 2, el triángulo clásico**: Pekín, Datong, Xi'an, Huangshan, Hangzhou, Suzhou y
+  Shanghái.
+- **Ruta 3, el clásico ampliado**: Pekín, Xi'an, Chengdú, Leshan, Longji, Yangshuo,
+  Shenzhen y Shanghái.
+
+Los condicionantes que ordenan todo: diez días de vacaciones para quince en China (el
+lunes 16 es festivo en Aragón), vacaciones escolares chinas todo agosto, calor húmedo en
+las grandes ciudades, trenes que salen a la venta 15 días antes y la Ciudad Prohibida sin
+taquilla, con reserva siete días antes y cerrada los lunes.
 
 ## El mapa
 
-Cada itinerario lleva su mapa en **SVG generado en el build**, sin librerías, sin teselas y
-sin conexión.
+Cada itinerario lleva su mapa en **SVG generado en el build** sobre un **relieve de
+Natural Earth** incrustado en la propia guía, que funciona siempre, también sin conexión.
+Al acercar en la web publicada se añade el detalle de **OpenStreetMap**.
 
-- El contorno sale de Natural Earth (`fuentes/china-natural-earth.geojson`), proyectado en
-  cónica de Albers con paralelos 25 y 47, la habitual para China.
-- Cada trayecto es un tramo con su forma según el medio: línea continua el tren, discontinua
-  el avión y punteada el bus. Al pasar el ratón, sus kilómetros y su duración.
-- **El trazado se enciende según el día que estás leyendo.** Cada día del itinerario sabe en
-  qué tramo está, así que el mapa avanza contigo, marca la ciudad en la que estás y deja en
-  gris lo que aún no has visto.
-- Las ciudades son pulsables: llevan al día en el que llegáis a ellas.
-- Los nombres se colocan en el build evitando solaparse entre ellos y con los círculos.
+- Proyección Mercator web, la misma de las teselas, para que cada ciudad caiga en su sitio.
+- Cada trayecto tiene su forma según el medio: línea continua el tren, discontinua el avión
+  y punteada el bus. Al pasar el ratón, sus kilómetros y su duración.
+- **El trazado se enciende según el día que estás leyendo** y marca la ciudad en la que
+  estás. Las ciudades son pulsables: llevan al día en el que llegáis a ellas.
+- **Pantalla completa** con zoom (rueda, pellizco o botones) y arrastre.
 
 ## Ordenador y móvil
 
 - En ordenador (desde 1000 px), dos columnas: el itinerario se desplaza y el mapa queda fijo
   al lado.
-- En móvil, barra inferior fija tipo app (Inicio, Rutas, Sitios y Plan) y mapa compacto
-  para que no se coma la pantalla mientras se lee.
-- Las pastillas de ruta y las galerías de fotos pasan a carrusel horizontal con anclaje.
+- En móvil, barra inferior fija tipo app (Inicio, Rutas, Sitios y Plan) y mapa compacto.
 
 ## Regenerar
 
@@ -57,21 +55,22 @@ python3 mapa.py     # solo si se tocan rutas, tramos o coordenadas
 python3 build.py    # escribe ../index.html
 ```
 
-- `routes.js`: las 8 rutas en sus dos temporadas (16 itinerarios), con tramos (`legs`) y días.
-- `places.js`: la galería de sitios. `seasons.js`: las dos ventanas y sus tablas.
-- `plantilla-svg.html`: estructura, estilos y motor de la página.
+- `routes.js`: las 4 rutas, con tramos (`legs`) y días.
+- `places.js`: la galería de sitios. `seasons.js`: fechas, vuelos y lista de tareas.
+- `plantilla-svg.html`: estructura, estilos y motor de la página y del mapa.
 - `imgs.json`: las 63 fotos ya recortadas y comprimidas, en base64.
-- `notas-del-proyecto.md`: el contexto del viaje y los hallazgos que lo condicionan.
+- `hero_video.swift`: genera el vídeo de portada con las herramientas de vídeo de macOS.
+- `fondo_mapa.swift`: genera `fondo_mapa.jpg`, el relieve del mapa, desde Natural Earth.
 
 ## Fotografías
 
 63 imágenes de **Wikimedia Commons**, todas verificadas a ojo con hojas de contactos antes
 de entrar. Aviso aprendido aquí: la búsqueda por texto de Commons devuelve resultados falsos
-a menudo (salió una foto de Chile etiquetada como Dunhuang y gimnasia olímpica como aldea
-miao). Hay que mirarlas una a una. El vídeo de portada es de Pexels.
+a menudo. El vídeo de portada es de Pexels. Mapa: relieve de Natural Earth y © colaboradores de
+OpenStreetMap.
 
 ## Aviso
 
-Precios, horarios de vuelo y fechas de apertura son los patrones cargados a día de hoy; las
-programaciones de 2027 se van confirmando. Los trenes chinos se compran en la app 12306
+Horarios de tren y frecuencias de vuelos interiores son los patrones cargados a día de hoy;
+las programaciones de 2027 se van confirmando. Los trenes chinos se compran en la app 12306
 exactamente 15 días antes: ese es el cuello de botella real del viaje.

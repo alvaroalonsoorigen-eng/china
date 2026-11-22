@@ -179,6 +179,38 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 .day figure:hover img{transform:scale(1.02)}
 .day figcaption{font-size:.75rem;color:var(--mute);margin-top:6px;padding:0 2px}
 .move{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:.8rem;color:var(--mute);font-weight:600}
+/* ciudad del día, cambio de ciudad, alojamiento y spa */
+.dcity{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:.7rem;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:720;color:var(--rc,var(--ink2))}
+.dcity i{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.dcity span{color:var(--mute);font-weight:600;letter-spacing:.08em}
+.dchange{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 12px;padding:11px 14px;
+  border-radius:12px;background:color-mix(in srgb,var(--rc,#C53026) 9%,#fff);
+  border:1px solid color-mix(in srgb,var(--rc,#C53026) 32%,transparent)}
+.dchange .cc{display:flex;align-items:center;gap:9px;font-weight:760;font-size:1.02rem;color:var(--ink)}
+.dchange .cc .de{color:var(--mute);font-weight:620}
+.dchange .cc svg.fl{color:var(--rc,#C53026)}
+.dchange .via{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:620;color:var(--ink2);
+  background:#fff;border-radius:999px;padding:3px 10px;border:1px solid var(--line)}
+.dchange .via svg{color:var(--rc,#C53026)}
+.dinfo{display:grid;gap:8px;margin-top:12px}
+.dinfo>div{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--ink2);line-height:1.45;
+  background:var(--paper2,#F2EFEA);border-radius:10px;padding:9px 12px}
+.dinfo svg{flex:none;margin-top:2px;color:var(--rc,#C53026)}
+.dinfo b{color:var(--ink)}
+.dinfo .spa{background:color-mix(in srgb,#2E8BC0 9%,#fff);border:1px solid color-mix(in srgb,#2E8BC0 25%,transparent)}
+.dinfo .spa svg{color:#2E8BC0}
+.dinfo .rep{background:color-mix(in srgb,#D97706 9%,#fff);border:1px solid color-mix(in srgb,#D97706 28%,transparent)}
+.dinfo .rep svg{color:#D97706}
+.dinfo a{color:var(--rc,#C53026);font-weight:640}
+.vistazo{margin-top:24px;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid var(--line)}
+.vistazo h5{margin:0 0 10px;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);font-weight:700}
+.vistazo ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.vistazo li{display:flex;align-items:center;gap:6px}
+.vistazo a{display:inline-flex;align-items:baseline;gap:5px;padding:5px 11px;border-radius:999px;text-decoration:none;
+  background:color-mix(in srgb,var(--rc,#C53026) 9%,#fff);color:var(--ink);font-weight:680;font-size:.86rem}
+.vistazo a small{color:var(--mute);font-weight:600;font-size:.74rem}
+.vistazo .fl{color:var(--rc,#C53026);display:inline-flex}
 .move svg{flex:none}
 
 .place{padding:34px 0;border-top:1px solid var(--line2)}
@@ -191,12 +223,30 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 .pgrid img:hover{transform:scale(1.014)}
 .pgrid figcaption{font-size:.76rem;color:var(--mute);margin-top:6px;line-height:1.4}
 
-.viewer{position:fixed;inset:0;background:rgba(14,15,18,.93);display:none;z-index:9999;
-  align-items:center;justify-content:center;padding:28px;cursor:zoom-out}
+.viewer{position:fixed;inset:0;background:rgba(10,11,14,.96);display:none;z-index:9999;
+  flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:56px 70px 22px;
+  touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .viewer.on{display:flex}
-.viewer img{max-width:100%;max-height:88vh;border-radius:8px;object-fit:contain}
-.viewer .cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#D8D6D0;
-  font-size:.82rem;padding:0 24px}
+.viewer img{max-width:100%;max-height:calc(100vh - 170px);max-height:calc(100dvh - 170px);border-radius:8px;
+  object-fit:contain;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.viewer .vbar{width:min(100%,980px);display:flex;align-items:baseline;gap:14px;color:#E8E6E0}
+.viewer .cap{flex:1;font-size:.98rem;line-height:1.45}
+.viewer .cnt{font-size:.8rem;color:#9A9890;white-space:nowrap;font-variant-numeric:tabular-nums}
+.viewer button{position:absolute;border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:999px;
+  width:46px;height:46px;display:grid;place-items:center;cursor:pointer;padding:0}
+.viewer button:hover{background:rgba(255,255,255,.2)}
+.viewer .vprev{left:14px;top:50%;transform:translateY(-50%)}
+.viewer .vnext{right:14px;top:50%;transform:translateY(-50%)}
+.viewer .vclose{right:14px;top:12px;width:40px;height:40px}
+.viewer.uno .vprev,.viewer.uno .vnext,.viewer.uno .cnt{display:none}
+@media(max-width:760px){.viewer{padding:52px 12px 18px}.viewer .vprev,.viewer .vnext{top:auto;bottom:16px;transform:none;width:40px;height:40px}
+  .viewer .vbar{padding:0 48px}.viewer .cap{font-size:.9rem}}
+/* miniaturas de la galería de cada día */
+.dthumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.dthumbs button{position:relative;padding:0;border:0;background:none;cursor:zoom-in;border-radius:8px;overflow:hidden}
+.dthumbs img{aspect-ratio:1;object-fit:cover;width:100%;display:block;border-radius:8px}
+.dthumbs .mas{position:absolute;inset:0;display:grid;place-items:center;background:rgba(15,16,20,.55);
+  color:#fff;font-weight:760;font-size:.95rem;border-radius:8px}
 
 .check{border:1px solid var(--line);border-radius:var(--rad);background:var(--card);overflow:hidden}
 .check li{list-style:none;display:flex;gap:14px;padding:17px 20px;align-items:flex-start}
@@ -295,6 +345,48 @@ html.js .rv.in{opacity:1;transform:none;
 .route-map[data-state=mini] .mapbox{max-height:0;opacity:0;margin-top:0}
 #mapsvg{width:100%;height:var(--mapH);display:block;border:1px solid var(--mapedge);
   border-radius:var(--rad);background:var(--mapbg)}
+#mapsvg .tiles{filter:saturate(.45) contrast(.88) brightness(1.06)}
+#mapsvg .node circle.hit{fill:transparent!important;stroke:none!important}
+#mapsvg.osm{background:#7FAFD6}
+#mapsvg.osm .land{fill:none;stroke:rgba(120,70,40,.55);stroke-width:1.3;stroke-dasharray:5 3}
+#mapsvg .fondo{filter:saturate(.8)}
+#mapsvg .leg{stroke:currentColor}
+#mapsvg.osm .leg{filter:drop-shadow(0 0 1.2px #fff) drop-shadow(0 0 1.2px #fff)}
+#mapsvg.osm .leg:not(.done){opacity:.55}
+#mapsvg.osm .leg.tren{stroke-width:5.2}
+#mapsvg.osm .leg.avion{stroke-width:4;stroke-dasharray:10 7}
+#mapsvg.osm .leg.bus{stroke-width:3.4;stroke-dasharray:2 6}
+#mapsvg.osm .leg.now{stroke-width:7.5}
+#mapsvg.osm .leg.now.avion{stroke-width:6}
+#mapsvg.osm .node circle:not(.hit){fill:#fff;stroke:currentColor;stroke-width:3}
+#mapsvg.osm .node text{fill:#14161C;stroke:#fff;font-weight:700}
+#mapsvg.osm .node.sat text{font-weight:600;fill:#3A3F4B}
+#mapsvg.osm .node.seen circle:not(.hit){stroke:currentColor}
+#mapsvg.osm .node.seen text{fill:#1D2028}
+#mapsvg.osm .node.here circle:not(.hit){fill:currentColor;stroke:#fff}
+#mapsvg.osm .node.here text{fill:#000}
+.mapbox{position:relative}
+.mapctl{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:6px;z-index:5}
+.mapctl button{width:36px;height:36px;border-radius:10px;border:1px solid rgba(0,0,0,.14);
+  background:rgba(255,255,255,.94);color:#1D2028;display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);padding:0;-webkit-tap-highlight-color:transparent}
+.mapctl button:hover{background:#fff}
+.mapctl button svg{width:18px;height:18px}
+.mapctl .zbtn{display:none}
+.mapbox.fs .mapctl .zbtn{display:grid}
+.mapattr{position:absolute;right:8px;bottom:6px;font-size:.66rem;color:#333;background:rgba(255,255,255,.82);
+  padding:1px 6px;border-radius:6px;text-decoration:none;display:none;z-index:5}
+#mapsvg.osm ~ .mapattr{display:block}
+.mapattr .osmc{display:none}
+#mapsvg.contiles ~ .mapattr .osmc{display:inline}
+@media (max-width:760px){.mapattr{font-size:.56rem;padding:0 5px;right:6px;bottom:4px}.mapctl{top:8px;right:8px}.mapctl button{width:32px;height:32px}}
+.mapbox.fs{position:fixed;inset:0;z-index:5000;max-height:none!important;opacity:1!important;
+  margin:0!important;background:var(--mapbg);overflow:hidden}
+.mapbox.fs #mapsvg{height:100%;height:100dvh;border:0;border-radius:0;touch-action:none;cursor:grab}
+.mapbox.fs #mapsvg:active{cursor:grabbing}
+.mapbox.fs .mapctl{top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right))}
+.mapbox.fs .mapattr{bottom:max(8px,env(safe-area-inset-bottom))}
+html.mapafs,html.mapafs body{overflow:hidden}
 #mapsvg .land{fill:var(--mapland);stroke:var(--mapedge);stroke-width:1;
   vector-effect:non-scaling-stroke}
 /* non-scaling-stroke: al acercar el encuadre de cada ruta, el grosor no se dispara */
@@ -420,8 +512,8 @@ html.js .rv.in{opacity:1;transform:none;
   <div class="wrap wide">
     <div class="narrow stack">
       <h2>Las rutas</h2>
-      <p class="lede">Una ruta principal diseñada a vuestra medida con Taiwán, Shenzhen, Fenghuang, Furong, Zhangjiajie, Xi'an y Shanghái, junto a siete rutas comparativas para contrastar ritmos y destinos.</p>
-      <p>La <b>ruta principal</b> está calculada para volar el sábado 7 de agosto y regresar el domingo 22 (14 días en tierra con el domingo 15 en pleno corazón del viaje y aprovechando el festivo del lunes 16 de agosto). Combina la isla de Taiwán, la meca tecnológica de Shenzhen, las dos joyas sobre el agua de Hunan (la ciudad fénix de Fenghuang y el pueblo milenario suspendido sobre la cascada de Furong), las agujas de Avatar en Zhangjiajie, los Guerreros de Terracota en Xi'an y Shanghái. En el desplegable podéis explorar las otras siete alternativas: la <b>ruta probada de un viaje real</b> (ruta 1), los <b>circuitos clásicos</b> (rutas 2 y 3) y las <b>rutas temáticas</b> (4 a 7).</p>
+      <p class="lede">La ruta del viaje: de Pekín a Shanghái en quince días, con tiempo de verdad para Pekín, Xi'an, Chongqing y Shanghái, dos trenes nocturnos que regalan días enteros y un spa de 24 horas señalado en cada ciudad.</p>
+      <p>Nace de un viaje real de 22 noches por estos mismos destinos, planificado tramo a tramo contra la venta real de billetes. Cada día lleva su horario, dónde dormís y, al cambiar de ciudad, cómo se llega. Al final de la ruta están los avisos heredados, los alojamientos y el calendario de compra de billetes y entradas.</p>
     </div>
     <div class="chips rv" id="chips" style="margin-top:32px"></div>
     <div class="routegrid">
@@ -429,7 +521,7 @@ html.js .rv.in{opacity:1;transform:none;
     <div class="route-map" id="routemap" data-state="open">
       <button class="mapbar" type="button" id="mapbar" aria-expanded="true"
               aria-controls="mapbox" aria-label="Mostrar u ocultar el mapa">
-        <span class="mb-day" id="mbDay">Ruta principal</span>
+        <span class="mb-day" id="mbDay">Ruta elegida</span>
         <span class="mb-txt" id="mbTxt">Mapa del itinerario</span>
         <span class="mb-prog"><i id="mbProg"></i></span>
         <span class="mb-ico" aria-hidden="true"></span>
@@ -437,6 +529,17 @@ html.js .rv.in{opacity:1;transform:none;
       <div class="mapbox" id="mapbox">
         <svg id="mapsvg" viewBox="0 0 1000 720" role="img"
              aria-label="Mapa del itinerario por China, día a día"></svg>
+        <a class="mapattr" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">Relieve: Natural Earth<span class="osmc"> · &copy; colaboradores de OpenStreetMap</span></a>
+        <div class="mapctl">
+          <button type="button" id="mapfs" aria-label="Ver el mapa a pantalla completa" title="Pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          <button type="button" class="zbtn" id="mapzin" aria-label="Acercar" title="Acercar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button type="button" class="zbtn" id="mapzout" aria-label="Alejar" title="Alejar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+          <button type="button" class="zbtn" id="mapzreset" aria-label="Volver al encuadre de la ruta" title="Encuadre de la ruta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></button>
+        </div>
       </div>
       <div class="maplegend">
         <span><i class="lgline" style="border-top:5px solid #3C3E46"></i> Tren</span>
@@ -507,7 +610,13 @@ html.js .rv.in{opacity:1;transform:none;
   </div>
 </footer>
 
-<div class="viewer" id="viewer"><img alt=""><div class="cap"></div></div>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Visor de fotos">
+  <button type="button" class="vclose" aria-label="Cerrar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <button type="button" class="vprev" aria-label="Foto anterior"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <img alt="">
+  <div class="vbar"><div class="cap"></div><div class="cnt"></div></div>
+  <button type="button" class="vnext" aria-label="Foto siguiente"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
 
 <script>
 /*__IMGDATA__*/
@@ -545,6 +654,8 @@ var N={shenzhen:"Shenzhen",beijing:"Pekín",jinshanling:"Muralla de Jinshanling"
  longji:"Terrazas de Longji",mutianyu:"Muralla de Mutianyu",datong:"Datong"};
 
 /*__ROUTES__*/
+/* las rutas con oculta:true se guardan en los datos pero no salen en la web */
+var ROUTES_TODAS=ROUTES; ROUTES=ROUTES.filter(function(r){return !r.oculta});
 /*__SEASONS__*/
 /*__PLACES__*/
 
@@ -600,10 +711,16 @@ function pintaMapa(clave){
   svg.innerHTML='';
   if(!M){mapaActual=null;return}
   // cada ruta trae su propio encuadre, así no se ve media China vacía
-  if(M.vista)svg.setAttribute('viewBox',M.vista.join(' '));
+  if(MAPA.fondo){
+    var fo=nodo('image',{'class':'fondo',x:MAPA.fondo.caja[0],y:MAPA.fondo.caja[1],
+      width:MAPA.fondo.caja[2],height:MAPA.fondo.caja[3],preserveAspectRatio:'none'});
+    fo.setAttribute('href',MAPA.fondo.src); svg.appendChild(fo);
+    svg.classList.add('osm');
+  }
+  gTiles=nodo('g',{'class':'tiles'}); svg.appendChild(gTiles); teselas={};
   svg.appendChild(nodo('path',{'class':'land',d:MAPA.contorno}));
   var COL=M.hexm||M.hex;                       // sobre el mapa oscuro manda el tono claro
-  svg.style.color=COL;
+  svg.style.color=MAPA.fondo||svg.classList.contains('osm')?M.hex:COL;
   var movil=window.matchMedia('(max-width:760px)').matches;
   var fs=(M.fuente||20)*(movil?1.34:1), rad=(M.r||9)*(movil?1.22:1), toque=M.toque||30;
   var gl=nodo('g',{'class':'legs'}); svg.appendChild(gl);
@@ -618,15 +735,17 @@ function pintaMapa(clave){
   });
   var gn=nodo('g',{'class':'nodes'}); svg.appendChild(gn);
   M.nodos.forEach(function(n){
-    var g=nodo('g',{'class':'node','data-id':n.id,tabindex:'0',role:'button',
+    var g=nodo('g',{'class':'node'+(n.sat?' sat':''),'data-id':n.id,tabindex:'0',role:'button',
                     'aria-label':'Ir al día en el que llegáis a '+n.n});
     g.appendChild(nodo('circle',{'class':'hit',cx:n.x,cy:n.y,r:toque,fill:'transparent'}));
     g.appendChild(nodo('circle',{cx:n.x,cy:n.y,r:rad}));
-    var t=nodo('text',{x:n.x+(n.dx||16),y:n.y+(n.dy===undefined?7:n.dy),
+    var t=nodo('text',{'class':'lbl',x:n.x+(n.dx||16),y:n.y+(n.dy===undefined?7:n.dy),
                        'text-anchor':n.lado||'start','font-size':fs,
                        'stroke-width':fs*0.30});
     t.textContent=n.n; g.appendChild(t);
     function ir(){
+      if(arrastrado)return;
+      if(mapaFS)saleFS();
       var d=diaDeNodo(M,n.id);
       var e=d?document.getElementById('dia'+d):null;
       if(!e)return;
@@ -639,9 +758,188 @@ function pintaMapa(clave){
     });
     gn.appendChild(g);
   });
-  mapaActual={clave:clave,M:M,rad:rad,legs:[].slice.call(gl.children),nodes:[].slice.call(gn.children),estado:-2};
+  mapaActual={clave:clave,M:M,rad:rad,fs:fs,toque:toque,k:1,legs:[].slice.call(gl.children),nodes:[].slice.call(gn.children),estado:-2};
+  encuadra();
   marcaMapa(0,'');
 }
+
+/* ---------- OpenStreetMap debajo, encuadre, zoom y pantalla completa ----------
+   mapa.json va en Mercator web, la proyección de las teselas, y "merc" dice cómo
+   pasar de la fracción del mundo a unidades del SVG. Si no hay conexión o las
+   teselas fallan, se queda el contorno propio sobre fondo oscuro, como siempre. */
+var MERC=MAPA.merc, gTiles=null, teselas={}, osmOk=false, osmBien=0, osmMal=0;
+/* OpenStreetMap bloquea a quien no viene de una web (archivo abierto con doble clic, apps
+   como WhatsApp o Archivos) y lo hace devolviendo una imagen de aviso, no un error. Por eso
+   se pide antes una tesela con fetch y solo se usan si la respuesta es un 200 de verdad. */
+if(MERC&&navigator.onLine!==false&&window.fetch&&/^https?:$/.test(location.protocol)){
+  fetch('https://tile.openstreetmap.org/4/12/6.png',{mode:'cors',cache:'force-cache'})
+    .then(function(r){if(r.ok){osmOk=true;pideTeselas()}}).catch(function(){});
+}
+var vista=null, vistaBase=null, anchoBase=0, mapaFS=false, arrastrado=false;
+function cajaAspecto(b){
+  var r=svg.getBoundingClientRect();
+  if(r.width<40||r.height<40)return b.slice();   // todavía sin tamaño: se recoloca al tenerlo
+  var a=r.width/r.height, x=b[0], y=b[1], w=b[2], h=b[3];
+  if(a>w/h){var nw=h*a; x-=(nw-w)/2; w=nw}else{var nh=w/a; y-=(nh-h)/2; h=nh}
+  return [x,y,w,h];
+}
+function encuadra(){
+  if(!mapaActual)return;
+  var M=mapaActual.M;
+  vistaBase=cajaAspecto(M.vista||[0,0,1000,720]);
+  if(!mapaFS)anchoBase=svg.getBoundingClientRect().width||anchoBase;
+  ponVista(vistaBase.slice());
+}
+function ponVista(b){
+  vista=b;
+  svg.setAttribute('viewBox',b.map(function(v){return v.toFixed(2)}).join(' '));
+  escalaEtiquetas();
+  pideTeselas();
+}
+/* los nombres y los círculos mantienen su tamaño en pantalla al acercar o al
+   abrir la pantalla completa */
+function escalaEtiquetas(){
+  if(!mapaActual||!vistaBase)return;
+  var r=svg.getBoundingClientRect(), A=mapaActual;
+  if(r.width<40)r={width:0};
+  var k=(r.width&&anchoBase)?(vista[2]/r.width)/(vistaBase[2]/anchoBase):1;
+  if(!isFinite(k)||k<=0)k=1;
+  if(mapaFS)k*=1.6;                             // a pantalla completa, nombres algo mayores
+  A.k=k;
+  A.M.nodos.forEach(function(n,i){
+    var g=A.nodes[i]; if(!g)return;
+    var cs=g.querySelectorAll('circle'), t=g.querySelector('text');
+    cs[0].setAttribute('r',(A.toque*k).toFixed(2));
+    var f=n.sat?0.72:1;                          // excursiones de un día, más pequeñas
+    cs[1].setAttribute('r',((g.classList.contains('here')?1.55:1)*A.rad*k*f).toFixed(2));
+    t.setAttribute('x',(n.x+(n.dx||16)*k*f).toFixed(2));
+    t.setAttribute('y',(n.y+(n.dy===undefined?7:n.dy)*k*f).toFixed(2));
+    t.setAttribute('font-size',(A.fs*k*(n.sat?0.82:1)).toFixed(2));
+    t.setAttribute('stroke-width',(A.fs*0.34*k).toFixed(2));
+  });
+}
+var tTesela=0;
+function pideTeselas(){clearTimeout(tTesela);tTesela=setTimeout(pintaTeselas,40)}
+function pintaTeselas(){
+  if(!gTiles||!vista||!osmOk)return;
+  var r=svg.getBoundingClientRect(); if(!r.width)return;
+  var X0=MERC[0],Y0=MERC[1],S=MERC[2],DX=MERC[3],DY=MERC[4];
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  var z=Math.round(Math.log(S*(r.width/vista[2])*dpr/256)/Math.LN2);
+  // hasta el nivel 6 el relieve propio tiene más detalle que las teselas y es más limpio
+  if(z<7){gTiles.innerHTML='';teselas={};return}
+  z=Math.max(3,Math.min(14,z));
+  var n=Math.pow(2,z), lado=S/n;
+  var tx0=Math.floor(((vista[0]-DX)/S+X0)*n), tx1=Math.floor(((vista[0]+vista[2]-DX)/S+X0)*n);
+  var ty0=Math.max(0,Math.floor(((vista[1]-DY)/S+Y0)*n)), ty1=Math.min(n-1,Math.floor(((vista[1]+vista[3]-DY)/S+Y0)*n));
+  if((tx1-tx0+1)*(ty1-ty0+1)>180)return;
+  var nuevas={};
+  for(var ty=ty0;ty<=ty1;ty++)for(var tx=tx0;tx<=tx1;tx++){
+    var x=((tx%n)+n)%n, clave=z+'/'+x+'/'+ty;
+    var im=teselas[clave];
+    if(!im){
+      im=nodo('image',{x:((tx/n-X0)*S+DX).toFixed(3),y:((ty/n-Y0)*S+DY).toFixed(3),
+        width:(lado*1.002).toFixed(3),height:(lado*1.002).toFixed(3),preserveAspectRatio:'none'});
+      im.addEventListener('load',function(){
+        osmBien++;
+        if(!svg.classList.contains('osm')&&mapaActual){svg.classList.add('osm');svg.style.color=mapaActual.M.hex}
+        svg.classList.add('contiles');
+      });
+      im.addEventListener('error',function(){
+        osmMal++;
+        if(!osmBien&&osmMal>=3){osmOk=false;gTiles.innerHTML='';teselas={};svg.classList.remove('contiles')}
+      });
+      im.setAttribute('href','https://tile.openstreetmap.org/'+clave+'.png');
+    }
+    nuevas[clave]=im;
+  }
+  // las de otro nivel de zoom se quedan debajo un momento para que no parpadee
+  var viejas=[].slice.call(gTiles.children).filter(function(e){return !nuevas[e.__k]});
+  for(var c in nuevas){nuevas[c].__k=c;gTiles.appendChild(nuevas[c])}
+  teselas=nuevas;
+  setTimeout(function(){viejas.forEach(function(e){if(!teselas[e.__k]&&e.parentNode)e.parentNode.removeChild(e)})},700);
+}
+/* el mapa se recoloca cuando cambia de tamaño (panel plegado, pestaña que vuelve, giro) */
+var anchoVisto=0, altoVisto=0;
+if(window.ResizeObserver){
+  new ResizeObserver(function(){
+    var r=svg.getBoundingClientRect();
+    if(r.width<40||r.height<40||(Math.abs(r.width-anchoVisto)<1&&Math.abs(r.height-altoVisto)<1))return;
+    anchoVisto=r.width; altoVisto=r.height;
+    if(!mapaActual)return;
+    if(mapaFS){var c=[vista[0]+vista[2]/2,vista[1]+vista[3]/2];ponVista(cajaAspecto([c[0]-vista[2]/2,c[1]-vista[3]/2,vista[2],vista[3]]))}
+    else encuadra();
+  }).observe(svg);
+}
+addEventListener('resize',function(){
+  if(!mapaActual)return;
+  if(mapaFS){var c=[vista[0]+vista[2]/2,vista[1]+vista[3]/2], b=cajaAspecto([c[0]-vista[2]/2,c[1]-vista[3]/2,vista[2],vista[3]]);ponVista(b)}
+  else encuadra();
+});
+
+function zoomEn(f,px,py){
+  if(!vista)return;
+  var r=svg.getBoundingClientRect();
+  var w=Math.max(vistaBase[2]/40,Math.min(vistaBase[2]*2.5,vista[2]*f)), g=w/vista[2];
+  var ux=px===undefined?0.5:(px-r.left)/r.width, uy=py===undefined?0.5:(py-r.top)/r.height;
+  var cx=vista[0]+vista[2]*ux, cy=vista[1]+vista[3]*uy;
+  ponVista([cx-vista[2]*g*ux,cy-vista[3]*g*uy,vista[2]*g,vista[3]*g]);
+}
+var boxMapa=$('#mapbox'), hueco=null;
+function entraFS(){
+  if(mapaFS)return;
+  mapaFS=true;
+  hueco=document.createComment('mapa'); boxMapa.parentNode.insertBefore(hueco,boxMapa);
+  document.body.appendChild(boxMapa);
+  boxMapa.classList.add('fs'); document.documentElement.classList.add('mapafs');
+  $('#mapfs').setAttribute('aria-label','Salir de la pantalla completa');
+  if(boxMapa.requestFullscreen){boxMapa.requestFullscreen().catch(function(){})}
+  requestAnimationFrame(function(){if(mapaActual){var b=cajaAspecto(mapaActual.M.vista);vistaBase=b;ponVista(b.slice())}});
+}
+function saleFS(){
+  if(!mapaFS)return;
+  mapaFS=false;
+  if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){});
+  boxMapa.classList.remove('fs'); document.documentElement.classList.remove('mapafs');
+  if(hueco){hueco.parentNode.insertBefore(boxMapa,hueco);hueco.parentNode.removeChild(hueco);hueco=null}
+  $('#mapfs').setAttribute('aria-label','Ver el mapa a pantalla completa');
+  requestAnimationFrame(encuadra);
+}
+document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement&&mapaFS)saleFS()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mapaFS)saleFS()});
+$('#mapfs').addEventListener('click',function(){mapaFS?saleFS():entraFS()});
+$('#mapzin').addEventListener('click',function(){zoomEn(1/1.6)});
+$('#mapzout').addEventListener('click',function(){zoomEn(1.6)});
+$('#mapzreset').addEventListener('click',function(){if(mapaActual)ponVista(cajaAspecto(mapaActual.M.vista))});
+svg.addEventListener('wheel',function(e){
+  if(!mapaFS)return;
+  e.preventDefault();
+  zoomEn(Math.exp(e.deltaY*(e.deltaMode===1?0.05:0.0018)),e.clientX,e.clientY);
+},{passive:false});
+/* arrastrar con un dedo o el ratón; pellizcar con dos */
+var punteros={}, ultimo=null, recorrido=0;
+svg.addEventListener('pointerdown',function(e){
+  if(!mapaFS)return;
+  punteros[e.pointerId]={x:e.clientX,y:e.clientY}; recorrido=0; arrastrado=false;
+  try{svg.setPointerCapture(e.pointerId)}catch(_){}
+});
+svg.addEventListener('pointermove',function(e){
+  if(!mapaFS||!punteros[e.pointerId])return;
+  var ids=Object.keys(punteros), r=svg.getBoundingClientRect(), p=punteros[e.pointerId];
+  if(ids.length===1){
+    var dx=e.clientX-p.x, dy=e.clientY-p.y; recorrido+=Math.abs(dx)+Math.abs(dy);
+    if(recorrido>6)arrastrado=true;
+    ponVista([vista[0]-dx*vista[2]/r.width,vista[1]-dy*vista[3]/r.height,vista[2],vista[3]]);
+  }else if(ids.length===2){
+    var o=punteros[ids[0]===String(e.pointerId)?ids[1]:ids[0]];
+    var d0=Math.hypot(p.x-o.x,p.y-o.y), d1=Math.hypot(e.clientX-o.x,e.clientY-o.y);
+    if(d0>0&&d1>0){arrastrado=true;zoomEn(d0/d1,(e.clientX+o.x)/2,(e.clientY+o.y)/2)}
+  }
+  p.x=e.clientX; p.y=e.clientY;
+});
+function sueltaPuntero(e){delete punteros[e.pointerId];if(!Object.keys(punteros).length)setTimeout(function(){arrastrado=false},30)}
+svg.addEventListener('pointerup',sueltaPuntero);
+svg.addEventListener('pointercancel',sueltaPuntero);
 
 function marcaMapa(dia,titulo){
   if(!mapaActual)return;
@@ -662,11 +960,11 @@ function marcaMapa(dia,titulo){
       g.classList.toggle('seen',!!vistos[id]);
       g.classList.toggle('here',id===aqui);
       var c=g.querySelector('circle:not(.hit)');
-      if(c)c.setAttribute('r',(id===aqui?mapaActual.rad*1.55:mapaActual.rad).toFixed(1));
+      if(c)c.setAttribute('r',((id===aqui?1.55:1)*mapaActual.rad*(mapaActual.k||1)*(g.classList.contains('sat')?0.72:1)).toFixed(2));
     });
   }
   var curR=ROUTES.filter(function(r){return r.id===current})[0];
-  mbDay.textContent=dia>0?('Día '+(dia<10?'0':'')+dia):(curR&&curR.main?'Ruta principal':('Ruta '+current));
+  mbDay.textContent=dia>0?('Día '+(dia<10?'0':'')+dia):(curR&&curR.main?'Ruta elegida':('Ruta '+current));
   mbTxt.textContent=dia>0&&titulo?titulo:(SEASONS[SEASON].label.toLowerCase()==='mayo'?
     'Itinerario de mayo, '+total+' días':'Itinerario de agosto, '+total+' días');
   mbProg.style.width=(dia>0?(dia/total*100):0)+'%';
@@ -734,17 +1032,17 @@ addEventListener('beforeprint',function(){
 });
 
 /* ---------- render ---------- */
-var SEASON='ago', current=8;
+var SEASON='ago', current=(ROUTES.filter(function(r){return r.main})[0]||ROUTES[0]).id;
 var chips=$('#chips'), box=$('#routebox');
 
 var mainRoute = ROUTES.filter(function(r){return r.main})[0] || ROUTES[ROUTES.length-1];
 var otherRoutes = ROUTES.filter(function(r){return !r.main});
 
-// Botón de la ruta principal
+// Botón de la ruta elegida
 var btnMain = el('button', 'chip chip-main',
   '<span class="sw" style="background:'+mainRoute.hex+'"></span>'+
   '<span class="chip-star">★</span>'+
-  '<span><b>Ruta principal</b> · '+mainRoute.name+'</span>');
+  '<span><b>Ruta elegida</b> · '+mainRoute.name+'</span>');
 btnMain.id = 'btnMainRoute';
 btnMain.setAttribute('aria-pressed', current===mainRoute.id ? 'true' : 'false');
 btnMain.onclick = function(){
@@ -759,7 +1057,7 @@ ddWrap.id = 'routeDropdown';
 
 var btnDD = el('button', 'chip chip-dropdown',
   '<span class="sw" id="ddSw" style="display:none"></span>'+
-  '<span id="ddLabel">Otras 7 rutas alternativas</span>'+
+  '<span id="ddLabel">Otras '+otherRoutes.length+' rutas alternativas</span>'+
   '<svg class="dd-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>');
 btnDD.id = 'btnDropdown';
 btnDD.setAttribute('aria-haspopup', 'true');
@@ -791,6 +1089,7 @@ otherRoutes.forEach(function(R){
 });
 ddWrap.appendChild(ddMenu);
 chips.appendChild(ddWrap);
+if(!otherRoutes.length)ddWrap.style.display='none';   // con una sola ruta visible, sin desplegable
 
 function toggleDropdown(e){
   if(e) e.stopPropagation();
@@ -824,7 +1123,7 @@ function showRoute(id){
     ddLabel.textContent = 'Ruta ' + activeOther.id + ' · ' + activeOther.name;
   } else {
     ddSw.style.display = 'none';
-    ddLabel.textContent = 'Otras 7 rutas alternativas';
+    ddLabel.textContent = 'Otras '+otherRoutes.length+' rutas alternativas';
   }
   
   $$('.dd-item', ddMenu).forEach(function(it){
@@ -838,7 +1137,7 @@ function showRoute(id){
   var head=el('div','routehead');
   head.appendChild(el('div','rbar','')).style.background=R.hex;
   var ht=el('div');
-  var routeTitle = R.main ? 'Ruta principal' : ('Ruta ' + R.id);
+  var routeTitle = R.main ? 'Ruta elegida' : ('Ruta ' + R.id);
   ht.appendChild(el('div','eyebrow',routeTitle + ' · ' + SEASONS[SEASON].label + ' · ' + S.days.length + ' días'));
   ht.appendChild(el('h2',null,R.name)).style.marginTop='4px';
   ht.appendChild(el('p','sm mute',S.sub||R.sub)).style.marginTop='6px';
@@ -859,6 +1158,32 @@ function showRoute(id){
   (S.no||R.no).forEach(function(t){tg.appendChild(el('span','badge no',t))});
   box.appendChild(tg);
 
+  box.style.setProperty('--rc',R.hex);
+  /* el viaje de un vistazo: ciudades en orden con sus noches (campo c de cada día) */
+  var tramosC=[];
+  S.days.forEach(function(D,i){
+    if(!D.c)return;
+    var ult=tramosC[tramosC.length-1];
+    if(ult&&ult.c===D.c){ult.n++}else{tramosC.push({c:D.c,n:1,dia:i+1})}
+  });
+  if(tramosC.length>1){
+    var vz=el('div','vistazo'); vz.appendChild(el('h5',null,'El viaje de un vistazo'));
+    var ol=el('ol');
+    tramosC.forEach(function(T,k){
+      var li=el('li');
+      if(k)li.appendChild(el('span','fl','<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'));
+      var a=el('a',null,T.c+' <small>'+T.n+(T.n===1?' día':' días')+'</small>');
+      a.href='#dia'+T.dia;
+      li.appendChild(a); ol.appendChild(li);
+    });
+    vz.appendChild(ol); box.appendChild(vz);
+  }
+  var ICOCAMA='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="2"/></svg>';
+  var ICOSPA='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c-1 2 1 3 0 5M12 3c-1 2 1 3 0 5M16 3c-1 2 1 3 0 5"/><path d="M3 12h18v2a7 7 0 0 1-7 7h-4a7 7 0 0 1-7-7z"/></svg>';
+  var ICOFL='<svg class="fl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var cuenta={};
+  S.days.forEach(function(D){if(D.c)cuenta[D.c]=(cuenta[D.c]||0)+1});
+  var visto={}, cPrev=null;
   var list=el('div'); list.style.marginTop='26px';
   S.days.forEach(function(D,i){
     var d=el('div','day');
@@ -867,14 +1192,46 @@ function showRoute(id){
     d.id='dia'+(i+1);
     d.appendChild(el('div','daynum','Día '+(i+1)+'<b>'+D.d+'</b>'));
     var mid=el('div');
+    if(D.c){
+      visto[D.c]=(visto[D.c]||0)+1;
+      if(cPrev&&cPrev!==D.c){
+        // cambio de ciudad: banda destacada con el medio y la duración
+        var ch=el('div','dchange');
+        ch.appendChild(el('div','cc','<span class="de">'+cPrev+'</span>'+ICOFL+'<span>'+D.c+'</span>'));
+        if(D.m&&D.m[2]!=='stay')ch.appendChild(el('span','via',ICO[D.m[0]]+D.m[1]));
+        mid.appendChild(ch);
+      }else{
+        mid.appendChild(el('div','dcity','<i></i>'+D.c+(cuenta[D.c]>1?' <span>· día '+visto[D.c]+' de '+cuenta[D.c]+'</span>':'')));
+      }
+      cPrev=D.c;
+    }
     mid.appendChild(el('h4',null,D.t));
     mid.appendChild(el('p',null,D.x));
-    if(D.m)mid.appendChild(el('div','move','<span style="color:'+R.hex+'">'+ICO[D.m[0]]+'</span>'+D.m[1]));
+    if(D.m&&!(D.c&&mid.querySelector('.dchange .via')))mid.appendChild(el('div','move','<span style="color:'+R.hex+'">'+ICO[D.m[0]]+'</span>'+D.m[1]));
+    if(D.h||D.s||D.r){
+      var inf=el('div','dinfo');
+      if(D.r)inf.appendChild(el('div','rep','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><div><b>Mercados de réplicas.</b> '+D.r+'</div>'));
+      if(D.s)inf.appendChild(el('div','spa',ICOSPA+'<div><b>Spa de 24 horas en '+(D.c||'la ciudad')+'.</b> '+D.s+'</div>'));
+      if(D.h)inf.appendChild(el('div',null,ICOCAMA+'<div><b>Dormís en:</b> '+D.h+'</div>'));
+      mid.appendChild(inf);
+    }
     d.appendChild(mid);
     var f=el('figure');
+    var album=[[D.img,D.cap]].concat((D.f||[]).filter(function(p){return IMG[p[0]]}));
     var im=el('img'); im.src=src(D.img); im.alt=D.cap; im.loading='lazy';
-    im.onclick=function(){openV(D.img,D.cap)};
-    f.appendChild(im); f.appendChild(el('figcaption',null,D.cap));
+    im.onclick=function(){openV(album,0)};
+    f.appendChild(im); f.appendChild(el('figcaption',null,D.cap+(album.length>1?' · '+album.length+' fotos':'')));
+    if(album.length>1){
+      var th=el('div','dthumbs');
+      album.slice(1,5).forEach(function(p,j){
+        var b=el('button'); b.type='button'; b.setAttribute('aria-label','Ver foto: '+p[1]);
+        var t=el('img'); t.src=src(p[0]); t.alt=''; t.loading='lazy'; b.appendChild(t);
+        if(j===3&&album.length>5)b.appendChild(el('span','mas','+'+(album.length-5)));
+        b.onclick=function(){openV(album,j+1)};
+        th.appendChild(b);
+      });
+      f.appendChild(th);
+    }
     d.appendChild(f); list.appendChild(d);
   });
   box.appendChild(list);
@@ -887,6 +1244,8 @@ function showRoute(id){
 /* ---------- galería ---------- */
 var pl=$('#places');
 PLACES.forEach(function(P){
+  // solo los sitios de las rutas visibles
+  if(!P.r.some(function(id){return ROUTES.some(function(r){return r.id===id})}))return;
   var s=el('div','place');
   s.appendChild(el('h3',null,P.t));
   s.appendChild(el('p','sm mute',P.s)).style.marginTop='2px';
@@ -896,17 +1255,17 @@ PLACES.forEach(function(P){
   P.r.forEach(function(id){
     var R=ROUTES.filter(function(r){return r.id===id})[0];
     if(!R)return;
-    var b=el('span','badge dim',R.main ? 'Ruta principal' : ('Ruta '+id));
+    var b=el('span','badge dim',R.main ? 'Ruta elegida' : ('Ruta '+id));
     b.style.background='transparent'; b.style.border='1px solid '+R.hex; b.style.color=R.hex;
     rt.appendChild(b);
   });
   s.appendChild(rt);
   var g=el('div','pgrid');
-  P.i.forEach(function(pair){
-    if(!IMG[pair[0]])return;
+  var albumP=P.i.filter(function(p){return IMG[p[0]]});
+  albumP.forEach(function(pair,j){
     var f=el('figure');
     var im=el('img'); im.src=src(pair[0]); im.alt=pair[1]; im.loading='lazy';
-    im.onclick=function(){openV(pair[0],pair[1])};
+    im.onclick=function(){openV(albumP,j)};
     f.appendChild(im); f.appendChild(el('figcaption',null,pair[1]));
     g.appendChild(f);
   });
@@ -914,10 +1273,37 @@ PLACES.forEach(function(P){
 });
 
 /* ---------- visor ---------- */
-var vw=$('#viewer');
-function openV(k,cap){vw.querySelector('img').src=src(k);vw.querySelector('.cap').textContent=cap;vw.classList.add('on');}
-vw.onclick=function(){vw.classList.remove('on')};
-document.addEventListener('keydown',function(e){if(e.key==='Escape')vw.classList.remove('on')});
+/* galería a pantalla completa: descripción debajo, flechas del teclado y deslizar en el móvil */
+var vw=$('#viewer'), vImg=vw.querySelector('img'), vAlbum=[], vIdx=0;
+function pintaV(){
+  var p=vAlbum[vIdx]; if(!p)return;
+  vImg.src=src(p[0]); vImg.alt=p[1];
+  vw.querySelector('.cap').textContent=p[1];
+  vw.querySelector('.cnt').textContent=(vIdx+1)+' / '+vAlbum.length;
+  vw.classList.toggle('uno',vAlbum.length<2);
+}
+function openV(album,i){
+  if(typeof album==='string')album=[[album,i||'']],i=0;   // compatibilidad: openV(clave, pie)
+  vAlbum=album; vIdx=i||0; pintaV(); vw.classList.add('on');
+}
+function pasaV(n){if(vAlbum.length<2)return;vIdx=(vIdx+n+vAlbum.length)%vAlbum.length;pintaV()}
+function cierraV(){vw.classList.remove('on')}
+vw.querySelector('.vprev').onclick=function(e){e.stopPropagation();pasaV(-1)};
+vw.querySelector('.vnext').onclick=function(e){e.stopPropagation();pasaV(1)};
+vw.querySelector('.vclose').onclick=function(e){e.stopPropagation();cierraV()};
+vw.addEventListener('click',function(e){if(e.target===vw)cierraV()});
+document.addEventListener('keydown',function(e){
+  if(!vw.classList.contains('on'))return;
+  if(e.key==='Escape')cierraV();
+  else if(e.key==='ArrowRight'){e.preventDefault();pasaV(1)}
+  else if(e.key==='ArrowLeft'){e.preventDefault();pasaV(-1)}
+});
+var vX=null;
+vw.addEventListener('touchstart',function(e){vX=e.touches[0].clientX},{passive:true});
+vw.addEventListener('touchend',function(e){
+  if(vX===null)return; var dx=e.changedTouches[0].clientX-vX; vX=null;
+  if(Math.abs(dx)>45)pasaV(dx<0?1:-1);
+});
 
 /* ---------- temporada ---------- */
 function setSeason(s){

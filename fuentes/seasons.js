@@ -35,32 +35,48 @@ may:{
   ["Al llegar","Reservar los pandas de Qinling por WeChat","Solo rutas 4 y 7. No tiene taquilla física y cierra los lunes."]]
 },
 ago:{
- label:"AGOSTO", rango:"sáb 7 → dom 22 de agosto de 2027", dias:14, vac:9,
- hero:"qinghai_2", heroAlt:"Campos de colza en flor a orillas del lago Qinghai",
- title:"China en verano: Taiwán, Hunan, la Terracota y el futuro",
- pills:["Volar sáb 7 agosto","14 días en tierra (8 al 21)","Vuelta dom 22 agosto","El domingo 15 en pleno viaje","Festivo lunes 16"],
- condTitle:"Agosto: 14 días en China por 9 de vacaciones",
- condLede:"Volar el sábado 7 de agosto, aterrizar el domingo 8 y aprovechar el puente del 16 de agosto (Zaragoza): 14 días completos en tierra con el domingo 15 en pleno viaje y regreso aterrizando el domingo 22 de agosto.",
+ label:"AGOSTO", rango:"sáb 31 jul → dom 15 ago de 2027", dias:15, vac:10,
+ hero:"jinshanling_1", heroAlt:"La Gran Muralla en Jinshanling al amanecer",
+ title:"China en verano: de Pekín a Shanghái en quince días",
+ pills:["Vuelos comprados con Air China","Madrid a Pekín, sáb 31 julio","15 días en tierra (1 al 15)","Shanghái a Barcelona, lun 16 agosto 00:40","Festivo lunes 16 en Aragón"],
+ condTitle:"Agosto: 15 días en China por 10 de vacaciones",
+ condLede:"Los vuelos ya están comprados: se entra por Pekín el sábado 31 de julio por la noche y se sale de Shanghái en la madrugada del lunes 16 de agosto, que en Aragón es festivo. Todas las rutas van, por tanto, de Pekín a Shanghái.",
  cards:[
-  {n:"9",col:"var(--r4)",h:"días de vacaciones para 14 en China",p:"Volando el <b>sábado 7 de agosto</b> (o viernes 6 noche) y volviendo el <b>domingo 22</b>. El 15 cae en domingo y en Aragón se traslada al lunes 16 como festivo, así que solo se piden nueve días laborables: del 9 al 13, y del 17 al 20 de agosto. Rendimiento récord: 1,56 días de viaje por día pedido."},
-  {n:"15",col:"var(--r2)",h:"de agosto en pleno corazón del viaje",p:"El <b>domingo 15 de agosto</b> está incluido sí o sí en el viaje, disfrutando del Parque Nacional de Zhangjiajie (las montañas de Avatar) en el ecuador exacto de la ruta antes de enlazar con el festivo del lunes 16."},
-  {n:"100 %",col:"var(--r1)",h:"tren de alta velocidad en el interior",p:"Al hacer los trayectos de China continental en <b>tren de alta velocidad</b> se evitan los retrasos veraniegos por tormentas en aeropuertos del sur y se viaja directo de centro a centro a 350 km/h."}],
- alertT:"El rendimiento óptimo de agosto",
- alertP:"En agosto el festivo del 16 regala un día en Aragón. La ventana del <b>sábado 7 al domingo 22 de agosto</b> permite 14 días completos en tierra consumiendo solo 9 días de vacaciones laborales.",
- winTitle:"La ventana cerrada de agosto",
- winLede:"Vuestro margen va del 1 al 22 de agosto. Volar el sábado 7 y aterrizar el domingo 22 es la fórmula matemática que más estira los días libres con el día 15 en el corazón del itinerario.",
- winTable:'<table><thead><tr><th>Plan</th><th>Salida</th><th>Día 15 de agosto</th><th>Vuelta a España</th><th>Días en tierra</th><th>Vacaciones</th><th>Rendimiento</th></tr></thead><tbody>'+
-  '<tr class="best"><td><b>Ventana elegida</b><br><span class="sm mute">14 días en tierra, el 15 en el centro del viaje y festivo del lunes 16</span></td><td class="n">Sáb 7 ago<br><span class="sm mute">o vie 6 noche</span></td><td class="n">En pleno viaje<br><span class="sm mute">Zhangjiajie (Avatar)</span></td><td class="n">Dom 22 ago</td><td class="n"><b>14</b></td><td class="n"><b>9</b></td><td><span class="badge">1,56 ★</span></td></tr>'+
+  {n:"10",col:"var(--r4)",h:"días de vacaciones para 15 en China",p:"Se piden del <b>2 al 6</b> y del <b>9 al 13 de agosto</b>. El vuelo de ida sale de Barajas a la 01:50 del sábado 31, así que basta con salir de Zaragoza el viernes 30 por la tarde. El 15 cae en domingo y Aragón traslada el festivo al <b>lunes 16</b>, el día en que aterrizáis en Barcelona a las 07:55."},
+  {n:"2",col:"var(--r2)",h:"ciudades fijas: entrar por Pekín y salir por Shanghái",p:"Es un billete de ida y vuelta abierto: llegada a <b>Pekín Capital (PEK), terminal 3</b>, a las 18:50, y salida desde <b>Shanghái Pudong (PVG), terminal 2</b>, a las 00:40. El último día completo es el domingo 15: a las 21:30 hay que estar ya en Pudong."},
+  {n:"35 °C",col:"var(--r1)",h:"y humedad en las grandes ciudades",p:"Pekín, Xi'an, Chengdú y Shanghái pasan de 33 grados con mucha humedad, y en Pekín coincide el final de la temporada de lluvias. Monumentos a primera hora, museos a mediodía y paseos al caer la tarde. El altiplano de Qinghai y las montañas de Hunan dan respiro."}],
+ alertT:"Lo que manda en agosto",
+ alertP:"Las <b>vacaciones escolares chinas</b> duran todo el mes, así que no hay ventana limpia: las colas se esquivan madrugando y comprando cada entrada y cada tren en el minuto en que se abre la venta. Los trenes salen <b>15 días antes</b>: el primero del viaje, hacia el 2 de agosto, se compra hacia el 18 de julio.",
+ winTitle:"Los vuelos ya comprados",
+ winLede:"Air China en directo en los dos sentidos, Economy Standard. Este es el marco fijo de todas las rutas.",
+ winTable:'<table><thead><tr><th>Trayecto</th><th>Fecha</th><th>Salida</th><th>Llegada</th><th>Duración</th></tr></thead><tbody>'+
+  '<tr class="best"><td><b>Madrid a Pekín</b><br><span class="sm mute">Directo, operado por Air China. MAD T1 a PEK T3</span></td><td class="n">Sáb 31 jul</td><td class="n">01:50</td><td class="n">18:50<br><span class="sm mute">hora de Pekín</span></td><td class="n">11 h</td></tr>'+
+  '<tr class="best"><td><b>Shanghái a Barcelona</b><br><span class="sm mute">Directo, operado por Air China. PVG T2 a BCN T1</span></td><td class="n">Lun 16 ago</td><td class="n">00:40<br><span class="sm mute">la noche del domingo 15</span></td><td class="n">07:55<br><span class="sm mute">hora de España</span></td><td class="n">13 h 15</td></tr>'+
   '</tbody></table>',
- winNote:"Itinerario calculado para volar el sábado 7 de agosto y aterrizar el domingo 8. El domingo 15 de agosto queda en pleno viaje, y el festivo de Aragón del lunes 16 permite 14 días en tierra con solo 9 días pedidos de vacaciones.",
- winCards:'<div class="card"><div class="eyebrow">Vuelos</div><h3 style="margin:10px 0 8px">Patrón de vuelos confirmado</h3><p>Volar el <b>sábado 7 de agosto</b> permite salir con opciones directas o escala corta diurna, o bien salir el viernes 6 noche con escala (Qatar, Emirates, Cathay) para aterrizar el domingo 8 por la mañana en Taipéi.<br><br>La vuelta es en vuelo directo nocturno desde Shanghái a Madrid con China Eastern (MU709, sale a las 00:45) o a Barcelona con Air China: aterrizaje en España el domingo 22 de agosto por la mañana.</p></div>'+
-  '<div class="card"><div class="eyebrow">Aprovechamiento</div><h3 style="margin:10px 0 8px">Mejor rendimiento del año</h3><p>Esta ventana es la que menos vacaciones consume de todo el calendario (9 días pedidos para 14 en destino). Además, el <b>domingo 15 de agosto</b> se vive en el Parque Nacional de Zhangjiajie, y el lunes 16 festivo se aprovecha en Xi\'an recorriendo la muralla Ming en bicicleta.</p></div>',
+ winNote:"Precio total pagado: 1.045,71 euros, con impuestos y recargos. Ojo con la hora de ida: el horario publicado del vuelo Madrid a Pekín de Air China sale a mediodía y llega de madrugada al día siguiente. Confirmad en la reserva la hora exacta antes de reservar el primer hotel.",
+ winCards:'<div class="card"><div class="eyebrow">Llegada</div><h3 style="margin:10px 0 8px">Primera noche en Pekín</h3><p>Aterrizaje a las 18:50 en la terminal 3. El Airport Express lleva a Dongzhimen en unos 20 minutos y desde ahí metro o Didi al hotel. Primera noche solo para dormir: el viaje de verdad empieza el domingo 1 de agosto.</p></div>'+
+  '<div class="card"><div class="eyebrow">Salida</div><h3 style="margin:10px 0 8px">El domingo 15 cuenta entero</h3><p>El vuelo sale a las 00:40 del lunes 16, así que el domingo 15 es un día completo en Shanghái con check-out tardío o consigna. Pudong está a una hora larga en metro desde el centro, o a 8 minutos en Maglev desde Longyang Road (deja de circular hacia las 21:40): a las 21:30 conviene estar ya en el aeropuerto.</p></div>',
  check:[
-  ["Ahora","Comprar los vuelos para volar el sábado 7 de agosto","Salida el sábado 7 de agosto (o viernes 6 noche) hacia Taipéi y regreso desde Shanghái de madrugada el sábado 21 aterrizando el domingo 22."],
-  ["Ahora","Confirmar el festivo del lunes 16 en vuestra empresa","El 15 cae en domingo y en Aragón se traslada al lunes 16. Si vuestro convenio no lo traslada, se pide un día más."],
-  ["Cuando salgan","Vigilar el calendario Hyrox 2027 de China","En 2026 hubo Chengdú el 1-2 y Shenzhen el 15-16 de agosto. Si repiten patrón, entra en el viaje."],
-  ["6 meses antes","Registrarse en la app 12306 con pasaporte","La verificación tarda. Agosto es temporada altísima de tren: con la cuenta lista se compran los billetes en segundos."],
-  ["15 días antes","Comprar los billetes de tren el día que abren","Los billetes se abren exactamente 15 días antes a la hora indicada por la app 12306."],
+  ["Ya","Vuelos comprados","Madrid a Pekín el sábado 31 de julio y Shanghái a Barcelona el lunes 16 de agosto a las 00:40, con Air China. Confirmad en la reserva la hora de ida: el horario publicado de ese vuelo sale a mediodía."],
+  ["Ahora","Pedir vacaciones del 2 al 13 de agosto","Diez días laborables. El lunes 16 es festivo en Aragón (calendario laboral de 2027 ya publicado)."],
+  ["Ahora","Reservar los hoteles con cancelación gratuita","Doce noches, lista completa al final de la ruta. En agosto suben de precio y los de vistas en Fenghuang y Furong vuelan."],
+  ["Ahora","Cuenta en 12306 con pasaporte, y Trip.com de respaldo","La verificación de 12306 tarda. El nombre tiene que coincidir letra a letra con el del pasaporte."],
+  ["Finales de marzo","Vuelo Zhangjiajie a Pudong del viernes 13, 20:20","HO2200 de Juneyao, vuela todos los días menos los martes. Se compra cuando salga el horario de verano de 2027. Plan B: FM9344 de las 22:25."],
+  ["Desde el 12 de julio","Tianmen con hora fija (miércoles 11)","Abre 30 días antes y conviene tenerla antes del 28 de julio. 288 yuanes con teleférico, bus y escaleras. Si no llegáis a vuestra franja, no se entra."],
+  ["18 de julio","Mutianyu (lunes 2)","Hasta 15 días antes, un billete por pasaporte y día. El telesilla con tobogán (torre 6) se compra aparte del teleférico (torre 14)."],
+  ["19 de julio","Tren nocturno D19 Pekín a Xi'an (martes 3, 20:41)","Litera de primera: compartimento de cuatro con puerta. Si queréis ir solos, hay que comprar las cuatro plazas. Alternativa: D43 de las 20:29."],
+  ["21 de julio","Tren nocturno K385 Xi'an a Chengdú (jueves 5, 21:03)","Litera blanda, de cuatro con puerta. Confirmad la hora de salida, que alguna fuente da 21:40."],
+  ["23 de julio","Pandas (viernes 6) y tren Chengdú a Chongqing (sábado 7)","Los pandas abren la venta 14 días antes (55 yuanes) y el tren, 15. El de Chengdú a Chongqing tiene muchos al día."],
+  ["25 de julio, 20:00 de Pekín","Ciudad Prohibida (domingo 1)","Las 14:00 en España. Solo en el miniprograma oficial, con pasaporte. 60 yuanes más 10 por el Tesoro y 10 por los Relojes. Cierra los lunes."],
+  ["25 de julio","Tren Chongqing Este a Fenghuang (lunes 9)","El más crítico: solo tres directos al día. Primer minuto. Plan B, transbordo en Huaihua Sur. Ese mismo día, la reserva gratuita del Museo Nacional de China."],
+  ["26 de julio","Templo del Lama (lunes 2) y tren a Furongzhen (martes 10)","El Lama abre 7 días antes a medianoche de Pekín (las 18:00 del 25 en España). El tren de Fenghuang a Furongzhen tiene pocos de mañana."],
+  ["27 de julio","Templo del Cielo y Palacio de Verano (martes 3)","De 1 a 7 días antes, en sus miniprogramas oficiales, con pasaporte. Unos 34 y 60 yuanes con las entradas combinadas."],
+  ["29 de julio","Guerreros de Terracota (jueves 5, 08:30)","Hasta 7 días antes en la web o el WeChat oficiales. 120 yuanes, con el pasaporte en la puerta."],
+  ["31 de julio, 17:00 de Pekín","Museo de Historia de Shaanxi (jueves 5)","Gratis, pero con reserva 5 días antes en su miniprograma (sede principal). Ese día ya estaréis en Pekín. Los murales Tang se pagan aparte."],
+  ["29 de julio","Opcional: tren nocturno K1374 Zhangjiajie a Shanghái (viernes 13)","Solo si preferís el tren al vuelo de las 20:20: unas 20 horas en litera, llegada a Shanghai Songjiang hacia las 14:30 del sábado. Ahorra un hotel y cuesta la mañana del sábado."],
+  ["Hacia el 5 de agosto","Franjas del parque de Zhangjiajie (jueves 12 y viernes 13)","Una reserva por cada día que se entre, unos 7 días antes en el miniprograma oficial. Las de 07:00 a 10:00 se agotan. Entrada de 236 yuanes que vale cuatro días."],
+  ["Hacia el 8 de agosto","Museo de Shanghái Este (domingo 15)","Gratuito, pero en vacaciones de verano pide reserva con pasaporte. Cierra los martes."],
+  ["El mismo día","Lo que no hace falta reservar","Torre de Shanghái (mejor el mismo día por la niebla), Furong (108 yuanes), pase de Fenghuang (128), muralla de Xi'an (54 más la bici), museo de las Tres Gargantas (sin reserva desde 2025), teleférico del Yangtsé (o 2 días antes a las 07:45 por WeChat) y los spas."],
   ["Antes de salir","Alipay o WeChat Pay con tarjeta europea vinculada","En China el efectivo es casi folclore. Vincular y probar la tarjeta desde España."],
   ["Antes de salir","eSIM y VPN contratadas desde España","Para WhatsApp, Google Maps e Instagram. Dentro de China ya no se puede contratar."]]
 }};

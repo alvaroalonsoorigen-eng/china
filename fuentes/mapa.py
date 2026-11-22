@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Mapa de China en SVG, sin librerías ni teselas: contorno, tramos y días.
+"""Mapa de China en SVG: contorno, tramos y días, listo para ir sobre OpenStreetMap.
 
 Genera mapa.json, que la plantilla incrusta. Para cada ruta y temporada guarda:
   - un camino por tramo (avión, tren o bus), con sus kilómetros y duración
   - los nodos de las ciudades, con nombre
   - a qué tramo corresponde cada día, para poder encender el mapa al leer
 
-Proyección: cónica de Albers con paralelos 25 y 47 y meridiano central 105,
-la habitual para mapas de China.
+Proyección: Mercator web, la misma de las teselas de OpenStreetMap, para que la
+plantilla pueda poner el mapa real debajo y que cada ciudad caiga en su sitio.
+mapa.json guarda la transformación ("merc") que lleva de la fracción del mundo de
+Mercator a las unidades del SVG. Sin conexión, la plantilla dibuja el contorno
+propio de Natural Earth como antes. Hasta noviembre de 2026 se usaba Albers.
 """
 import json, math, os, re, subprocess
 
@@ -18,19 +21,22 @@ VENTANA = (92.0, 20.3, 123.5, 43.0)      # el trozo de China por el que pasan la
 PANEL_W, PANEL_H = 430.0, 576.0          # el panel lateral del ordenador, en píxeles
 LETRA_PX = 13.0                          # tamaño en pantalla al que debe quedar cada nombre
 RAD = math.pi / 180.0
+# excursiones de un día desde una ciudad: en el mapa van más pequeñas para no tapar su ciudad
+SATELITES = {"mutianyu", "jinshanling", "terracota"}
+# mapa base de relieve (fondo_mapa.jpg, de fondo_mapa.swift): tiene que coincidir con su recorte
+FONDO = (76.0, 10.0, 138.0, 52.0)
 
 
 def albers(lon, lat):
-    fi0, fi1 = LAT0 * RAD, LAT1 * RAD
-    n = 0.5 * (math.sin(fi0) + math.sin(fi1))
-    c = math.cos(fi0) ** 2 + 2 * n * math.sin(fi0)
-    ro0 = math.sqrt(c - 2 * n * math.sin(0)) / n
-    fi, lam = lat * RAD, (lon - LON0) * RAD
-    ro = math.sqrt(c - 2 * n * math.sin(fi)) / n
-    th = n * lam
-    # OJO: en Albers la Y crece hacia el norte y en SVG hacia abajo, así que se invierte.
-    # Sin este signo el mapa sale boca abajo (Pekín al sur de Shenzhen).
-    return ro * math.sin(th), -(ro0 - ro * math.cos(th))
+    """Mercator web en fracción del mundo (0 a 1), como las teselas de OpenStreetMap.
+
+    Se conserva el nombre de la función para no tocar el resto del guion. Aquí la Y
+    ya crece hacia el sur, igual que en SVG, así que NO hay que invertir el signo.
+    """
+    x = (lon + 180.0) / 360.0
+    s = math.sin(lat * RAD)
+    y = 0.5 - math.log((1 + s) / (1 - s)) / (4 * math.pi)
+    return x, y
 
 
 def _encaje():
@@ -186,7 +192,17 @@ def datos_js():
 def main():
     d = datos_js()
     ROUTES, C, N = d["ROUTES"], d["C"], d["N"]
-    salida = {"contorno": contorno(), "vista": [W, H], "rutas": {}}
+    salida = {"contorno": contorno(), "vista": [W, H], "rutas": {},
+              "merc": [X0, Y0, S, DX, DY]}
+    ruta_fondo = os.path.join(BASE, "fondo_mapa.jpg")
+    if os.path.exists(ruta_fondo):
+        import base64
+        lo0, la0, lo1, la1 = FONDO
+        ax, ay = proj(lo0, la1)
+        bx, by = proj(lo1, la0)
+        salida["fondo"] = {"caja": [ax, ay, round(bx - ax, 1), round(by - ay, 1)],
+                           "src": "data:image/jpeg;base64,"
+                                  + base64.b64encode(open(ruta_fondo, "rb").read()).decode()}
 
     for R in ROUTES:
         for temporada in ("may", "ago"):
@@ -209,6 +225,8 @@ def main():
                         orden.append(slug)
                         nodos.append({"id": slug, "x": p[0], "y": p[1],
                                       "n": N.get(slug, slug.title())})
+                        if slug in SATELITES:
+                            nodos[-1]["sat"] = 1
             # a qué tramo corresponde cada día, mirando siempre hacia delante
             def indice(lugar, actual):
                 if not lugar or not tramos:
