@@ -37,18 +37,18 @@ may:{
 ago:{
  label:"AGOSTO", rango:"sáb 31 jul → dom 15 ago de 2027", dias:15, vac:10,
  hero:"jinshanling_1", heroAlt:"La Gran Muralla en Jinshanling al amanecer",
- title:"China en verano: de Pekín a Shanghái en quince días",
- pills:["Vuelos comprados con Air China","Madrid a Pekín, sáb 31 julio","15 días en tierra (1 al 15)","Shanghái a Barcelona, lun 16 agosto 00:40","Festivo lunes 16 en Aragón"],
+ title:"China 2027: de Pekín a Shanghái",
+ pills:["31 jul a 16 ago","15 noches","8 ciudades","2 viajeros"],
  condTitle:"Agosto: 15 días en China por 10 de vacaciones",
  condLede:"Los vuelos ya están comprados: se entra por Pekín el sábado 31 de julio por la noche y se sale de Shanghái en la madrugada del lunes 16 de agosto, que en Aragón es festivo. La ruta va, por tanto, de Pekín a Shanghái.",
  cards:[
   {n:"10",col:"var(--r4)",h:"días de vacaciones para 15 en China",p:"Se piden del <b>2 al 6</b> y del <b>9 al 13 de agosto</b>. El vuelo de ida sale de Barajas a la 01:50 del sábado 31, así que basta con salir de Zaragoza el viernes 30 por la tarde. El 15 cae en domingo y Aragón traslada el festivo al <b>lunes 16</b>, el día en que aterrizáis en Barcelona a las 07:55."},
   {n:"2",col:"var(--r2)",h:"ciudades fijas: entrar por Pekín y salir por Shanghái",p:"Es un billete de ida y vuelta abierto: llegada a <b>Pekín Capital (PEK), terminal 3</b>, a las 18:50, y salida desde <b>Shanghái Pudong (PVG), terminal 2</b>, a las 00:40. El último día completo es el domingo 15: a las 21:30 hay que estar ya en Pudong."},
   {n:"35 °C",col:"var(--r1)",h:"y humedad en las grandes ciudades",p:"Pekín, Xi'an, Chengdú y Shanghái pasan de 33 grados con mucha humedad, y en Pekín coincide el final de la temporada de lluvias. Monumentos a primera hora, museos a mediodía y paseos al caer la tarde. El altiplano de Qinghai y las montañas de Hunan dan respiro."}],
- alertT:"Lo que manda en agosto",
+ alertT:"Agosto: todo lleno y los trenes a la venta 15 días antes",
  alertP:"Las <b>vacaciones escolares chinas</b> duran todo el mes, así que no hay ventana limpia: las colas se esquivan madrugando y comprando cada entrada y cada tren en el minuto en que se abre la venta. Los trenes salen <b>15 días antes</b>: el primero del viaje, hacia el 2 de agosto, se compra hacia el 18 de julio.",
  winTitle:"Los vuelos ya comprados",
- winLede:"Air China en directo en los dos sentidos, Economy Standard. Este es el marco fijo de todas las rutas.",
+ winLede:"Air China en directo en los dos sentidos, Economy Standard. Este es el marco fijo del viaje.",
  winTable:'<table><thead><tr><th>Trayecto</th><th>Fecha</th><th>Salida</th><th>Llegada</th><th>Duración</th></tr></thead><tbody>'+
   '<tr class="best"><td><b>Madrid a Pekín</b><br><span class="sm mute">Directo, operado por Air China. MAD T1 a PEK T3</span></td><td class="n">Sáb 31 jul</td><td class="n">01:50</td><td class="n">18:50<br><span class="sm mute">hora de Pekín</span></td><td class="n">11 h</td></tr>'+
   '<tr class="best"><td><b>Shanghái a Barcelona</b><br><span class="sm mute">Directo, operado por Air China. PVG T2 a BCN T1</span></td><td class="n">Lun 16 ago</td><td class="n">00:40<br><span class="sm mute">la noche del domingo 15</span></td><td class="n">07:55<br><span class="sm mute">hora de España</span></td><td class="n">13 h 15</td></tr>'+

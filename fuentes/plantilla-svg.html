@@ -100,6 +100,34 @@ thead th{font-size:.7rem;text-transform:uppercase;letter-spacing:.11em;color:var
   font-weight:640;border-bottom:1px solid var(--line);white-space:nowrap}
 tbody tr+tr td{border-top:1px solid var(--line2)}
 tbody tr.best td{background:#F4F8F4}
+/* avisos y consejos plegables: cerrados, solo el título */
+details.plegable>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;-webkit-tap-highlight-color:transparent}
+details.plegable>summary::-webkit-details-marker{display:none}
+details.plegable>summary h3,details.plegable>summary h4{margin:0;flex:1}
+details.plegable .plg{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid currentColor;opacity:.5;position:relative;transition:transform .25s ease}
+details.plegable .plg::before{content:"";position:absolute;left:50%;top:44%;width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translate(-50%,-50%) rotate(45deg)}
+details.plegable[open] .plg{transform:rotate(180deg)}
+details.plegable[open]>summary{margin-bottom:8px}
+details.alert.plegable{display:block}
+details.alert.plegable>summary svg{flex:none}
+details.alert.plegable>p{padding-left:32px}
+details.xcard.plegable>summary h4{font-size:1rem}
+/* en el móvil, cada fila de tabla pasa a ser una tarjeta con sus etiquetas */
+@media(max-width:760px){
+  .tw{overflow:visible;border:0;background:none;border-radius:0}
+  .tw table,.tw tbody,.tw tr,.tw td{display:block;width:100%;min-width:0}
+  .tw thead{display:none}
+  .tw tbody tr{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+  .tw tbody tr.best td{background:none}
+  .tw tbody tr.best{border-color:color-mix(in srgb,var(--st-ok) 35%,var(--line))}
+  .tw td{padding:4px 0!important;border:0!important;text-align:left!important;font-size:.9rem;line-height:1.45}
+  .tw td[data-l]{position:relative;padding-left:100px!important;min-height:1.6em}
+  .tw td[data-l]::before{content:attr(data-l);position:absolute;left:0;top:7px;width:92px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:700;line-height:1.2}
+  .tw td .sm{font-size:.8rem}
+  .tw td.tcab{display:block;font-size:1rem;padding-bottom:6px!important;margin-bottom:4px;border-bottom:1px solid var(--line2)!important}
+  .tw td.tcab::before{display:none}
+  .tw td:empty,.tw td.vacia{display:none}
+}
 td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;font-weight:640;
   background:var(--okbg);color:var(--ok)}
@@ -559,6 +587,65 @@ html.mapafs,html.mapafs body{overflow:hidden}
     min-width:0;flex:1 1 auto}
 }
 
+
+/* ===== estética tipo app (paleta del planner de referencia) ===== */
+.tl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}
+.tl li{display:grid;grid-template-columns:68px minmax(0,1fr);gap:12px;align-items:start}
+.tl .tlh{font-size:.72rem;font-weight:800;letter-spacing:.02em;color:var(--rc,var(--brand));
+  background:color-mix(in srgb,var(--rc,var(--brand)) 10%,#fff);border-radius:8px;padding:4px 6px;text-align:center;line-height:1.25;margin-top:1px}
+.tl li>div{font-size:.93rem;color:var(--ink2);line-height:1.55}
+.tl li.tlsin{grid-template-columns:1fr}
+.day h4{font-size:1.08rem;line-height:1.3}
+.card,.xcard,.vgrupo,.rutacard,.prox,.atajos a,.vform,.pform,.sync,.check{border-radius:16px}
+@media(max-width:999px){
+  body{font-size:16px}
+  section{padding:44px 0}
+  h2{font-size:1.55rem;line-height:1.2}
+  .lede{font-size:1rem}
+  .wrap{padding:0 16px}
+  /* cada día, una tarjeta: número y ciudad arriba, foto, y la línea de tiempo */
+  .day{background:var(--card);border:1px solid var(--line)!important;border-radius:18px;padding:14px 14px 16px!important;
+    margin:0 0 14px!important;box-shadow:0 1px 2px rgba(20,24,31,.04),0 8px 24px -18px rgba(20,24,31,.25);gap:12px!important}
+  .day.on{border-color:color-mix(in srgb,var(--rc,var(--brand)) 55%,var(--line))!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--rc,var(--brand)) 18%,transparent)}
+  .day .daynum{order:-2;padding:0;font-size:.68rem}
+  .day .daynum b{font-size:1.25rem}
+  .day figure{order:-1;margin:0 -14px;border-radius:0;box-shadow:none}
+  .day figure img{border-radius:0;aspect-ratio:16/9}
+  .day figure figcaption{padding:6px 14px 0}
+  .day .dthumbs{padding:6px 14px 0}
+  .dchange{margin:0 0 10px}
+  .dinfo>div{font-size:.84rem}
+  .tl li{grid-template-columns:58px minmax(0,1fr);gap:10px}
+  .tl li>div{font-size:.9rem}
+  .alert{padding:14px 16px}
+  .routeextra .xgrid{gap:10px}
+  details.xcard.plegable{padding:14px 16px}
+}
+
+@media(max-width:999px){
+  .hero{min-height:62svh}
+  .hero h1{font-size:2.1rem;line-height:1.05}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:6px}
+  .hero .pill{font-size:.78rem;padding:5px 10px}
+  .prox .cd{min-width:58px;font-size:.82rem}
+}
+
+@media(max-width:999px){
+  #routebox .tags{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-16px;margin-right:-16px;padding:0 16px 4px}
+  #routebox .tags::-webkit-scrollbar{display:none}
+  #routebox .tags .badge{flex:none}
+  .place .tags{flex-wrap:wrap}
+}
+
+@media(max-width:760px){
+  .check li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;padding:14px 16px}
+  .check li .ck{grid-row:1 / span 2}
+  .check li .when{grid-column:2;width:auto;min-width:0;margin:0;font-size:.64rem}
+  .check li>div{grid-column:2}
+  .check li .del{grid-column:2;justify-self:start;margin:4px 0 0}
+  .check strong{font-size:.98rem}
+  .check p{font-size:.86rem}
+}
 </style>
 </head>
 <body>
@@ -839,6 +926,19 @@ var N={shenzhen:"Shenzhen",beijing:"Pekín",jinshanling:"Muralla de Jinshanling"
 /*__ROUTES__*/
 /* las rutas con oculta:true se guardan en los datos pero no salen en la web */
 var ROUTES_TODAS=ROUTES; ROUTES=ROUTES.filter(function(r){return !r.oculta});
+/* el texto de cada día viene en tramos "<b>08:30.</b> qué se hace<br>": se pinta como línea de tiempo */
+function lineaTiempo(x){
+  var partes=String(x).split(/<br\s*\/?>/), filas=[], suelto=[];
+  partes.forEach(function(t){
+    var m=t.match(/^\s*<b>([^<]{1,40}?)\.?<\/b>\s*([\s\S]*)$/);
+    if(m)filas.push('<li><span class="tlh">'+m[1].replace(/\.$/,'')+'</span><div>'+m[2]+'</div></li>');
+    else if(t.trim())suelto.push(t);
+  });
+  if(!filas.length){var p=document.createElement('p');p.innerHTML=x;return p}
+  var ol=document.createElement('ol'); ol.className='tl';
+  ol.innerHTML=(suelto.length?'<li class="tlsin"><div>'+suelto.join('<br>')+'</div></li>':'')+filas.join('');
+  return ol;
+}
 function slug(t){return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)}
 var ICOCK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
 /*__SEASONS__*/
@@ -1203,7 +1303,7 @@ function sincroniza(){
       manual = false;
       estadoMapa('mini');
     } else if(!manual){
-      estadoMapa('open');
+      estadoMapa('mini');      // en el móvil el mapa va plegado; se abre tocando la barra
     }
   }
 }
@@ -1330,11 +1430,12 @@ function showRoute(id){
   var p=el('p','lede',S.pitch||R.pitch); p.style.margin='20px 0 0'; box.appendChild(p);
 
   if(S.warn||R.classic){
-    var w=el('div','alert'); w.style.marginTop='20px';
+    var w=el('details','alert plegable'); w.style.marginTop='20px';
     var txt=S.warn||('Las rutas alternativas esquivan la masificación cambiando el orden de las paradas. El circuito clásico no tiene esa salida, porque todas sus paradas son justo los sitios donde va todo el mundo. Aquí ya está ordenado lo mejor posible, pero vais a ver más colas que en cualquiera de las hechas a medida.');
     var tit=S.warnTitle||'Por qué el clásico es el que peor encaja con estas fechas';
     w.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>'+
-      '<div><h3>'+tit+'</h3><p>'+txt+'</p></div>';
+      '';
+    w.innerHTML='<summary>'+w.innerHTML+'<h3>'+tit+'</h3><span class="plg"></span></summary><p>'+txt+'</p>';
     box.appendChild(w);
   }
 
@@ -1391,7 +1492,7 @@ function showRoute(id){
       cPrev=D.c;
     }
     mid.appendChild(el('h4',null,D.t));
-    mid.appendChild(el('p',null,D.x));
+    mid.appendChild(lineaTiempo(D.x));
     if(D.c)mid.appendChild(el('button','dhecho','<span class="ck" data-k="d:'+D.d+'">'+ICOCK+'</span>Día hecho')).setAttribute('data-k','d:'+D.d);
     if(D.m&&!(D.c&&mid.querySelector('.dchange .via')))mid.appendChild(el('div','move','<span style="color:'+R.hex+'">'+ICO[D.m[0]]+'</span>'+D.m[1]));
     if(D.h||D.s||D.r){
@@ -1422,7 +1523,15 @@ function showRoute(id){
   });
   box.appendChild(list);
   var XT=S.extra||R.extra;
-  if(XT){var ex=el('div','routeextra');ex.innerHTML=XT;box.appendChild(ex);}
+  if(XT){var ex=el('div','routeextra');ex.innerHTML=XT;
+    ex.querySelectorAll('.xcard').forEach(function(c){
+      var h=c.querySelector('h4'); if(!h)return;
+      var d=document.createElement('details'); d.className='xcard plegable';
+      var sm=document.createElement('summary'); sm.appendChild(h); var pl=document.createElement('span'); pl.className='plg'; sm.appendChild(pl);
+      d.appendChild(sm); while(c.firstChild)d.appendChild(c.firstChild);
+      c.parentNode.replaceChild(d,c);
+    });
+    box.appendChild(ex);}
   manual=false;
   requestAnimationFrame(sincroniza);
 }
@@ -1506,7 +1615,7 @@ function setSeason(s){
   $('#condCards').innerHTML=S.cards.map(function(c){
     return '<div class="card"><div class="num" style="color:'+(c.col||'var(--ink)')+'">'+c.n+'</div>'+
       '<h3 style="margin-top:12px">'+c.h+'</h3><p>'+c.p+'</p></div>';}).join('');
-  $('#condAlert').innerHTML='<div class="alert"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><div><h3>'+S.alertT+'</h3><p>'+S.alertP+'</p></div></div>';
+  $('#condAlert').innerHTML='<details class="alert plegable"><summary><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><h3>'+S.alertT+'</h3><span class="plg"></span></summary><p>'+S.alertP+'</p></details>';
   $('#winTitle').textContent=S.winTitle;
   $('#winLede').textContent=S.winLede;
   $('#winTable').innerHTML=S.winTable;
@@ -1533,6 +1642,29 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
 }else{revealAll()}
 
 setSeason('ago');
+</script>
+<script>
+/* ---------- tablas: cada celda sabe su cabecera, para pintarse como tarjeta en el móvil ---------- */
+(function(){
+  function etiqueta(){
+    document.querySelectorAll('.tw table').forEach(function(t){
+      if(t.dataset.lab)return;
+      var cab=[].map.call(t.querySelectorAll('thead th'),function(th){return th.textContent.trim()});
+      if(!cab.length)return;
+      t.querySelectorAll('tbody tr').forEach(function(tr){
+        [].forEach.call(tr.children,function(td,i){
+          if(i===0){td.classList.add('tcab');return}
+          if(cab[i])td.setAttribute('data-l',cab[i]);
+          if(td.textContent.trim()==='·')td.classList.add('vacia');
+        });
+      });
+      t.dataset.lab='1';
+    });
+  }
+  etiqueta();
+  var pend=0;
+  new MutationObserver(function(){if(pend)return;pend=requestAnimationFrame(function(){pend=0;etiqueta()})}).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 <script>
 /* ---------- base de datos en GitHub: checks, lista propia y consejos de vídeos ----------
@@ -1625,7 +1757,7 @@ setSeason('ago');
     if(!items.length)html+='<p class="vacio">No queda nada con fecha pendiente.</p>';
     else html+='<ul>'+items.slice(0,3).map(function(x){
       var d=Math.round((x.f-hoy)/864e5), cl='cd', et;
-      if(x.f.getFullYear()<2001){et='Ya';cl+=' ya'}else if(d<0){et='Atrasado';cl+=' ya'}else if(d===0){et='Hoy';cl+=' hoy'}else{et=d+'<small>'+(d===1?'día':'días')+'</small>'}
+      if(x.f.getFullYear()<2001){et='Ahora';cl+=' ya'}else if(d<0){et='Atrasado';cl+=' ya'}else if(d===0){et='Hoy';cl+=' hoy'}else{et=d+'<small>'+(d===1?'día':'días')+'</small>'}
       return '<li><div class="'+cl+'">'+et+'</div><a href="#plan" style="text-decoration:none;color:inherit"><b>'+x.c[1]+'</b><span>'+x.c[0]+'</span></a></li>';
     }).join('')+'</ul>';
     caja.innerHTML=html;

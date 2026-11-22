@@ -100,6 +100,34 @@ thead th{font-size:.7rem;text-transform:uppercase;letter-spacing:.11em;color:var
   font-weight:640;border-bottom:1px solid var(--line);white-space:nowrap}
 tbody tr+tr td{border-top:1px solid var(--line2)}
 tbody tr.best td{background:#F4F8F4}
+/* avisos y consejos plegables: cerrados, solo el título */
+details.plegable>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;-webkit-tap-highlight-color:transparent}
+details.plegable>summary::-webkit-details-marker{display:none}
+details.plegable>summary h3,details.plegable>summary h4{margin:0;flex:1}
+details.plegable .plg{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid currentColor;opacity:.5;position:relative;transition:transform .25s ease}
+details.plegable .plg::before{content:"";position:absolute;left:50%;top:44%;width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translate(-50%,-50%) rotate(45deg)}
+details.plegable[open] .plg{transform:rotate(180deg)}
+details.plegable[open]>summary{margin-bottom:8px}
+details.alert.plegable{display:block}
+details.alert.plegable>summary svg{flex:none}
+details.alert.plegable>p{padding-left:32px}
+details.xcard.plegable>summary h4{font-size:1rem}
+/* en el móvil, cada fila de tabla pasa a ser una tarjeta con sus etiquetas */
+@media(max-width:760px){
+  .tw{overflow:visible;border:0;background:none;border-radius:0}
+  .tw table,.tw tbody,.tw tr,.tw td{display:block;width:100%;min-width:0}
+  .tw thead{display:none}
+  .tw tbody tr{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+  .tw tbody tr.best td{background:none}
+  .tw tbody tr.best{border-color:color-mix(in srgb,var(--st-ok) 35%,var(--line))}
+  .tw td{padding:4px 0!important;border:0!important;text-align:left!important;font-size:.9rem;line-height:1.45}
+  .tw td[data-l]{position:relative;padding-left:100px!important;min-height:1.6em}
+  .tw td[data-l]::before{content:attr(data-l);position:absolute;left:0;top:7px;width:92px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:700;line-height:1.2}
+  .tw td .sm{font-size:.8rem}
+  .tw td.tcab{display:block;font-size:1rem;padding-bottom:6px!important;margin-bottom:4px;border-bottom:1px solid var(--line2)!important}
+  .tw td.tcab::before{display:none}
+  .tw td:empty,.tw td.vacia{display:none}
+}
 td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;font-weight:640;
   background:var(--okbg);color:var(--ok)}
@@ -559,6 +587,65 @@ html.mapafs,html.mapafs body{overflow:hidden}
     min-width:0;flex:1 1 auto}
 }
 
+
+/* ===== estética tipo app (paleta del planner de referencia) ===== */
+.tl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}
+.tl li{display:grid;grid-template-columns:68px minmax(0,1fr);gap:12px;align-items:start}
+.tl .tlh{font-size:.72rem;font-weight:800;letter-spacing:.02em;color:var(--rc,var(--brand));
+  background:color-mix(in srgb,var(--rc,var(--brand)) 10%,#fff);border-radius:8px;padding:4px 6px;text-align:center;line-height:1.25;margin-top:1px}
+.tl li>div{font-size:.93rem;color:var(--ink2);line-height:1.55}
+.tl li.tlsin{grid-template-columns:1fr}
+.day h4{font-size:1.08rem;line-height:1.3}
+.card,.xcard,.vgrupo,.rutacard,.prox,.atajos a,.vform,.pform,.sync,.check{border-radius:16px}
+@media(max-width:999px){
+  body{font-size:16px}
+  section{padding:44px 0}
+  h2{font-size:1.55rem;line-height:1.2}
+  .lede{font-size:1rem}
+  .wrap{padding:0 16px}
+  /* cada día, una tarjeta: número y ciudad arriba, foto, y la línea de tiempo */
+  .day{background:var(--card);border:1px solid var(--line)!important;border-radius:18px;padding:14px 14px 16px!important;
+    margin:0 0 14px!important;box-shadow:0 1px 2px rgba(20,24,31,.04),0 8px 24px -18px rgba(20,24,31,.25);gap:12px!important}
+  .day.on{border-color:color-mix(in srgb,var(--rc,var(--brand)) 55%,var(--line))!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--rc,var(--brand)) 18%,transparent)}
+  .day .daynum{order:-2;padding:0;font-size:.68rem}
+  .day .daynum b{font-size:1.25rem}
+  .day figure{order:-1;margin:0 -14px;border-radius:0;box-shadow:none}
+  .day figure img{border-radius:0;aspect-ratio:16/9}
+  .day figure figcaption{padding:6px 14px 0}
+  .day .dthumbs{padding:6px 14px 0}
+  .dchange{margin:0 0 10px}
+  .dinfo>div{font-size:.84rem}
+  .tl li{grid-template-columns:58px minmax(0,1fr);gap:10px}
+  .tl li>div{font-size:.9rem}
+  .alert{padding:14px 16px}
+  .routeextra .xgrid{gap:10px}
+  details.xcard.plegable{padding:14px 16px}
+}
+
+@media(max-width:999px){
+  .hero{min-height:62svh}
+  .hero h1{font-size:2.1rem;line-height:1.05}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:6px}
+  .hero .pill{font-size:.78rem;padding:5px 10px}
+  .prox .cd{min-width:58px;font-size:.82rem}
+}
+
+@media(max-width:999px){
+  #routebox .tags{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-16px;margin-right:-16px;padding:0 16px 4px}
+  #routebox .tags::-webkit-scrollbar{display:none}
+  #routebox .tags .badge{flex:none}
+  .place .tags{flex-wrap:wrap}
+}
+
+@media(max-width:760px){
+  .check li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;padding:14px 16px}
+  .check li .ck{grid-row:1 / span 2}
+  .check li .when{grid-column:2;width:auto;min-width:0;margin:0;font-size:.64rem}
+  .check li>div{grid-column:2}
+  .check li .del{grid-column:2;justify-self:start;margin:4px 0 0}
+  .check strong{font-size:.98rem}
+  .check p{font-size:.86rem}
+}
 </style>
 </head>
 <body>
@@ -842,16 +929,15 @@ var ROUTES=[
  extra:'<h3 class="xh">Lo que este itinerario trae aprendido</h3>'+
   '<p class="xlede">La ruta nace de un viaje real de 22 noches por estos mismos destinos (de los diez originales se deja fuera Wangxian, para dar más días a las ciudades), planificado tramo a tramo contra la venta real de billetes durante meses. Estos avisos costaron horas descubrirlos y aquí vienen de serie.</p>'+
   '<div class="xgrid">'+
-  '<div class="xcard"><h4>Las estaciones trampa</h4><p>Chongqing tiene <b>cuatro</b> estaciones: se llega a Chongqing Norte y se sale hacia Fenghuang desde Chongqing Este, a 21 km. En Pekín los trenes buenos salen de Beijingxi (oeste), pero en la misma búsqueda aparecen otros desde Fengtai y Qinghe que no lo son. En Shanghái es Hongqiao, y salen a horas parecidas trenes a Shanghai Sur. Y la estación de Furong se escribe todo junto: Furongzhen.</p></div>'+
+  '<div class="xcard"><h4>Las estaciones trampa</h4><p>Chongqing tiene cuatro estaciones: se llega a Chongqing Norte y se sale hacia Fenghuang desde Chongqing Este, a 21 km. En Pekín el nocturno sale de Beijing West (北京西站): en la misma búsqueda aparecen trenes desde Fengtai y Qinghe que no son el vuestro. La estación de Fenghuang es Fenghuang Gucheng y la de Furong se escribe todo junto: Furongzhen.</p></div>'+
   '<div class="xcard"><h4>El horario general miente</h4><p>Un tren puede existir en el horario general y no circular vuestro día concreto: en el viaje original pasó dos veces. Solo vale el listado real de la fecha, que se abre 15 días antes. Y el buscador por ruta de Ctrip devuelve cero trenes hacia Fenghuang Gucheng por un fallo suyo, no porque no haya: se comprueba en Trip.com.</p></div>'+
-  '<div class="xcard"><h4>Los ramales sin mañanas</h4><p>Entre Fenghuang, Furong y Zhangjiajie hay fechas en que el primer tren del día sale a las 11:29 o directamente por la tarde. Si al buscar solo salen trenes tardíos, primero quitad los filtros (el botón lleva un globo naranja con el número de filtros activos), y si siguen sin salir es que no existen: se resuelve con coche con chófer, encargado en recepción la noche antes y con precio cerrado. En el Xiangxi rural Didi no es fiable.</p></div>'+
   '<div class="xcard"><h4>Los tramos críticos</h4><p>Chongqing Este a Fenghuang: solo tres directos al día, venta el 25 de julio. Los dos nocturnos, D19 de Pekín a Xi\'an (venta el 19 de julio) y K385 de Xi\'an a Chengdú (21 de julio), con pocas literas de primera o blandas. Se compran en el primer minuto; la hora exacta a la que abre cada estación la da la app 12306 (Me, guía de viaje, hora de salida a la venta). Plan B si se agotan: Chongqing a Fenghuang con transbordo en Huaihua Sur, y en los nocturnos, litera de segunda o el tren rápido de día.</p></div>'+
   '<div class="xcard"><h4>La regla de la hora</h4><p>En la estación una hora antes de la salida, siempre: las estaciones chinas son aeropuertos, con control de pasaporte, escáner y andenes a un cuarto de hora andando. El desayuno que no dé tiempo a tomar se pide para llevar la noche antes en recepción: 打包早餐 (da bao zao can). Funciona en todos los hoteles de esta lista.</p></div>'+
-  '<div class="xcard"><h4>Tianmen y su teleférico</h4><p>El tramo superior del teleférico está en obras desde finales de 2025 y no se espera hasta bien entrado 2027: se sube con el teleférico corto, bus por las 99 curvas y siete tramos de escaleras mecánicas. Confirmad el estado real antes de comprar. Los visitantes de día bajan antes de las 18:00: el espectáculo de luces (18:30 a 21:00) pide tour nocturno o dormir en el hotel de la montaña.</p></div>'+
+  '<div class="xcard"><h4>Tianmen: solo línea C</h4><p>Desde octubre de 2026 el teleférico grande que salía de la ciudad no funciona: solo se vende la línea C, con entrada por la Puerta de la Montaña (天门山山门, a 20 minutos en Didi) y subida y bajada en el teleférico exprés de la cueva. Ya no hay bus por las 99 curvas. La entrada tiene franja horaria fija y si no llegáis a la vuestra, no se entra. La pasarela de cristal del este está cerrada desde mayo de 2026; Panlong, la del oeste y Guigu Zhandao, abiertas.</p></div>'+
   '<div class="xcard"><h4>Reservas con nombre y ventana</h4><p>Ciudad Prohibida: sin taquilla, cupo de 40.000, la venta abre 7 días antes a las 20:00 de China (las 14:00 en España) y cierra los lunes. La plaza de Tiananmen tiene reserva propia, gratuita, en un mini programa de WeChat y con franjas: la bajada de bandera es una franja concreta. Sin ella no se cruza la plaza ni de paso. Todo se entra escaneando el pasaporte físico.</p></div>'+
   '<div class="xcard"><h4>Terracota a la apertura, en 1 h 15</h4><p>Las guías locales aconsejan entrar a partir de las 13:00 para ir a contracorriente de los grupos, pero a vuestro ritmo funciona mejor lo contrario: estar en la puerta a las 08:30, antes que los autobuses, y hacer los tres fosos a buen paso (1, 3 y 2) en hora y cuarto. El carrito eléctrico del jardín Lishan (15 yuanes) ahorra 2,5 km a pie. Entrada de 120 yuanes, a la venta 7 días antes con pasaporte.</p></div>'+
   '<div class="xcard"><h4>Zhangjiajie, dinero y colas</h4><p>La entrada del parque (236 yuanes) vale cuatro días e incluye los buses internos, pero no el ascensor Bailong (65) ni los teleféricos (72 a 76): el día completo sale por unos 373 yuanes, unos 48 euros. Si la cola del Bailong pasa de una hora, girad el día: arriba por el teleférico de Tianzi y el Bailong para bajar a partir de las 16:00.</p></div>'+
-  '<div class="xcard"><h4>Las luces tienen horario</h4><p>Casi todo lo bonito de esta ruta pasa de noche, y cada sitio apaga a su hora: la cascada de Furong y Hongyadong, hasta las 23:00; el espectáculo de Tianmen va de 18:30 a 21:00; y en Fenghuang los bares del río meten música hasta pasadas las 23:00, así que se pide habitación al río pero lejos del tramo de bares.</p></div>'+
+  '<div class="xcard"><h4>Las luces tienen horario</h4><p>Casi todo lo bonito de esta ruta pasa de noche, y cada sitio apaga a su hora: la cascada de Furong y Hongyadong, hasta las 23:00; en Tianmen, la cueva al anochecer desde la explanada de los 999 escalones (sin tour nocturno); los drones de Wulingyuan, hacia las 19:50 si no hay viento; y en Fenghuang los bares del río meten música hasta pasadas las 23:00, así que se pide habitación al río pero lejos del tramo de bares.</p></div>'+
   '<div class="xcard"><h4>Hongyadong se mira desde fuera</h4><p>El edificio de trece pisos apilados es gratis y se ve mejor desde el puente Qiansimen que desde dentro. Se enciende al anochecer y aguanta hasta las 23:00. En verano id después de cenar, que a las 20:00 la ciudad todavía es un horno.</p></div>'+
   '<div class="xcard"><h4>Mutianyu, torre 6</h4><p>El tobogán de 1.580 metros baja desde la torre 6, y a esa torre sube la telesilla: el combo correcto es telesilla más tobogán (140 yuanes). El teleférico de cabina sube a la torre 14 y ahí no hay tobogán. Con lluvia el tobogán no abre, así que si el cielo amenaza, cambiad el día de Muralla por el de ciudad.</p></div>'+
   '<div class="xcard"><h4>El desayuno importa más de lo que parece</h4><p>Al reservar hotel, mirad a qué hora abre el desayuno antes que el precio: un bufé que abre a las 07:30 choca con los pandas, con los parques y con la mitad de los trenes de la mañana. Los dos hoteles que mejor funcionaron del viaje original abrían a las 06:30.</p></div>'+
@@ -859,7 +945,7 @@ var ROUTES=[
   '<h3 class="xh" style="margin-top:34px">Los pueblos con entrada, y dónde dormir para las luces</h3>'+
   '<p class="xlede">Dos pueblos de esta ruta se viven de noche, y en uno de ellos se paga por entrar: por eso en el viaje original se dormía dentro. Así funciona cada uno, y debajo van los alojamientos con mejores vistas nocturnas que señalan los blogs de viajeros, con su ficha de Trip.com.</p>'+
   '<div class="xgrid xg3">'+
-  '<div class="xcard"><h4>Fenghuang: pasear es gratis</h4><p>El casco antiguo es de acceso libre las 24 horas desde 2016; lo que se paga es el combinado de atracciones (unos 148 yuanes, o 208 con el barco por el Tuojiang, válido 48 horas). Dormir dentro no ahorra nada: lo que compra es ver las casas sobre pilotes iluminadas desde el balcón y el pueblo vacío al amanecer.</p></div>'+
+  '<div class="xcard"><h4>Fenghuang: pasear es gratis</h4><p>El casco antiguo es de acceso libre las 24 horas; lo que se paga es el pase de nueve visitas (128 yuanes, válido tres días), que no compensa: no se amortiza sin convertir Fenghuang en una carrera. Lo que sí merece la pena es el paseo en barca por el Tuojiang (de 80 a 120 yuanes) y dormir dentro, por las casas sobre pilotes iluminadas desde el balcón y el pueblo vacío al amanecer.</p></div>'+
   '<div class="xcard"><h4>Furong: recinto de pago, unos 108 yuanes</h4><p>El pueblo entero es área escénica de pago: unos 108 yuanes en taquilla (menos comprándola online), válida 3 días con entradas y salidas, con registro facial y pasaporte. Dormir dentro NO exime de pagarla, pero es la única forma de quedarse con la cascada iluminada cuando se van los autobuses, y el hotel gestiona el registro. El espectáculo nocturno va incluido.</p></div>'+
   '</div>'+
   '<div class="tw" style="margin-top:20px"><table><thead><tr><th>Pueblo</th><th>Alojamiento</th><th class="n">Nota Trip.com</th><th>La baza nocturna</th></tr></thead><tbody>'+
@@ -941,7 +1027,7 @@ var ROUTES=[
   "Sin crucero de los dos ríos",
   "Sin pase de Fenghuang"
  ],
- "warnTitle": "Agosto horno y los billetes que deciden el viaje",
+ "warnTitle": "Calor, lluvias y los cinco billetes que deciden el viaje",
  "warn": "Chongqing pasa de 38 grados, Pekín está en su punta de lluvias, Zhangjiajie suma unos 18 días de lluvia al mes y Shanghái está en temporada de tifones. Los billetes clave: el nocturno Pekín a Xi'an (venta el 19 de julio), el nocturno Xi'an a Chengdú (21 de julio), Chongqing Este a Fenghuang (solo tres directos, 25 de julio), Tianmen con hora fija y el vuelo de Zhangjiajie del viernes a las 20:20. Todo el calendario de compra está en Plan.",
  "legs": [
   [
@@ -2154,6 +2240,19 @@ var TIPS=[
 
 /* las rutas con oculta:true se guardan en los datos pero no salen en la web */
 var ROUTES_TODAS=ROUTES; ROUTES=ROUTES.filter(function(r){return !r.oculta});
+/* el texto de cada día viene en tramos "<b>08:30.</b> qué se hace<br>": se pinta como línea de tiempo */
+function lineaTiempo(x){
+  var partes=String(x).split(/<br\s*\/?>/), filas=[], suelto=[];
+  partes.forEach(function(t){
+    var m=t.match(/^\s*<b>([^<]{1,40}?)\.?<\/b>\s*([\s\S]*)$/);
+    if(m)filas.push('<li><span class="tlh">'+m[1].replace(/\.$/,'')+'</span><div>'+m[2]+'</div></li>');
+    else if(t.trim())suelto.push(t);
+  });
+  if(!filas.length){var p=document.createElement('p');p.innerHTML=x;return p}
+  var ol=document.createElement('ol'); ol.className='tl';
+  ol.innerHTML=(suelto.length?'<li class="tlsin"><div>'+suelto.join('<br>')+'</div></li>':'')+filas.join('');
+  return ol;
+}
 function slug(t){return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)}
 var ICOCK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
 var SEASONS={
@@ -2195,18 +2294,18 @@ may:{
 ago:{
  label:"AGOSTO", rango:"sáb 31 jul → dom 15 ago de 2027", dias:15, vac:10,
  hero:"jinshanling_1", heroAlt:"La Gran Muralla en Jinshanling al amanecer",
- title:"China en verano: de Pekín a Shanghái en quince días",
- pills:["Vuelos comprados con Air China","Madrid a Pekín, sáb 31 julio","15 días en tierra (1 al 15)","Shanghái a Barcelona, lun 16 agosto 00:40","Festivo lunes 16 en Aragón"],
+ title:"China 2027: de Pekín a Shanghái",
+ pills:["31 jul a 16 ago","15 noches","8 ciudades","2 viajeros"],
  condTitle:"Agosto: 15 días en China por 10 de vacaciones",
  condLede:"Los vuelos ya están comprados: se entra por Pekín el sábado 31 de julio por la noche y se sale de Shanghái en la madrugada del lunes 16 de agosto, que en Aragón es festivo. La ruta va, por tanto, de Pekín a Shanghái.",
  cards:[
   {n:"10",col:"var(--r4)",h:"días de vacaciones para 15 en China",p:"Se piden del <b>2 al 6</b> y del <b>9 al 13 de agosto</b>. El vuelo de ida sale de Barajas a la 01:50 del sábado 31, así que basta con salir de Zaragoza el viernes 30 por la tarde. El 15 cae en domingo y Aragón traslada el festivo al <b>lunes 16</b>, el día en que aterrizáis en Barcelona a las 07:55."},
   {n:"2",col:"var(--r2)",h:"ciudades fijas: entrar por Pekín y salir por Shanghái",p:"Es un billete de ida y vuelta abierto: llegada a <b>Pekín Capital (PEK), terminal 3</b>, a las 18:50, y salida desde <b>Shanghái Pudong (PVG), terminal 2</b>, a las 00:40. El último día completo es el domingo 15: a las 21:30 hay que estar ya en Pudong."},
   {n:"35 °C",col:"var(--r1)",h:"y humedad en las grandes ciudades",p:"Pekín, Xi'an, Chengdú y Shanghái pasan de 33 grados con mucha humedad, y en Pekín coincide el final de la temporada de lluvias. Monumentos a primera hora, museos a mediodía y paseos al caer la tarde. El altiplano de Qinghai y las montañas de Hunan dan respiro."}],
- alertT:"Lo que manda en agosto",
+ alertT:"Agosto: todo lleno y los trenes a la venta 15 días antes",
  alertP:"Las <b>vacaciones escolares chinas</b> duran todo el mes, así que no hay ventana limpia: las colas se esquivan madrugando y comprando cada entrada y cada tren en el minuto en que se abre la venta. Los trenes salen <b>15 días antes</b>: el primero del viaje, hacia el 2 de agosto, se compra hacia el 18 de julio.",
  winTitle:"Los vuelos ya comprados",
- winLede:"Air China en directo en los dos sentidos, Economy Standard. Este es el marco fijo de todas las rutas.",
+ winLede:"Air China en directo en los dos sentidos, Economy Standard. Este es el marco fijo del viaje.",
  winTable:'<table><thead><tr><th>Trayecto</th><th>Fecha</th><th>Salida</th><th>Llegada</th><th>Duración</th></tr></thead><tbody>'+
   '<tr class="best"><td><b>Madrid a Pekín</b><br><span class="sm mute">Directo, operado por Air China. MAD T1 a PEK T3</span></td><td class="n">Sáb 31 jul</td><td class="n">01:50</td><td class="n">18:50<br><span class="sm mute">hora de Pekín</span></td><td class="n">11 h</td></tr>'+
   '<tr class="best"><td><b>Shanghái a Barcelona</b><br><span class="sm mute">Directo, operado por Air China. PVG T2 a BCN T1</span></td><td class="n">Lun 16 ago</td><td class="n">00:40<br><span class="sm mute">la noche del domingo 15</span></td><td class="n">07:55<br><span class="sm mute">hora de España</span></td><td class="n">13 h 15</td></tr>'+
@@ -2708,7 +2807,7 @@ function sincroniza(){
       manual = false;
       estadoMapa('mini');
     } else if(!manual){
-      estadoMapa('open');
+      estadoMapa('mini');      // en el móvil el mapa va plegado; se abre tocando la barra
     }
   }
 }
@@ -2835,11 +2934,12 @@ function showRoute(id){
   var p=el('p','lede',S.pitch||R.pitch); p.style.margin='20px 0 0'; box.appendChild(p);
 
   if(S.warn||R.classic){
-    var w=el('div','alert'); w.style.marginTop='20px';
+    var w=el('details','alert plegable'); w.style.marginTop='20px';
     var txt=S.warn||('Las rutas alternativas esquivan la masificación cambiando el orden de las paradas. El circuito clásico no tiene esa salida, porque todas sus paradas son justo los sitios donde va todo el mundo. Aquí ya está ordenado lo mejor posible, pero vais a ver más colas que en cualquiera de las hechas a medida.');
     var tit=S.warnTitle||'Por qué el clásico es el que peor encaja con estas fechas';
     w.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>'+
-      '<div><h3>'+tit+'</h3><p>'+txt+'</p></div>';
+      '';
+    w.innerHTML='<summary>'+w.innerHTML+'<h3>'+tit+'</h3><span class="plg"></span></summary><p>'+txt+'</p>';
     box.appendChild(w);
   }
 
@@ -2896,7 +2996,7 @@ function showRoute(id){
       cPrev=D.c;
     }
     mid.appendChild(el('h4',null,D.t));
-    mid.appendChild(el('p',null,D.x));
+    mid.appendChild(lineaTiempo(D.x));
     if(D.c)mid.appendChild(el('button','dhecho','<span class="ck" data-k="d:'+D.d+'">'+ICOCK+'</span>Día hecho')).setAttribute('data-k','d:'+D.d);
     if(D.m&&!(D.c&&mid.querySelector('.dchange .via')))mid.appendChild(el('div','move','<span style="color:'+R.hex+'">'+ICO[D.m[0]]+'</span>'+D.m[1]));
     if(D.h||D.s||D.r){
@@ -2927,7 +3027,15 @@ function showRoute(id){
   });
   box.appendChild(list);
   var XT=S.extra||R.extra;
-  if(XT){var ex=el('div','routeextra');ex.innerHTML=XT;box.appendChild(ex);}
+  if(XT){var ex=el('div','routeextra');ex.innerHTML=XT;
+    ex.querySelectorAll('.xcard').forEach(function(c){
+      var h=c.querySelector('h4'); if(!h)return;
+      var d=document.createElement('details'); d.className='xcard plegable';
+      var sm=document.createElement('summary'); sm.appendChild(h); var pl=document.createElement('span'); pl.className='plg'; sm.appendChild(pl);
+      d.appendChild(sm); while(c.firstChild)d.appendChild(c.firstChild);
+      c.parentNode.replaceChild(d,c);
+    });
+    box.appendChild(ex);}
   manual=false;
   requestAnimationFrame(sincroniza);
 }
@@ -3011,7 +3119,7 @@ function setSeason(s){
   $('#condCards').innerHTML=S.cards.map(function(c){
     return '<div class="card"><div class="num" style="color:'+(c.col||'var(--ink)')+'">'+c.n+'</div>'+
       '<h3 style="margin-top:12px">'+c.h+'</h3><p>'+c.p+'</p></div>';}).join('');
-  $('#condAlert').innerHTML='<div class="alert"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><div><h3>'+S.alertT+'</h3><p>'+S.alertP+'</p></div></div>';
+  $('#condAlert').innerHTML='<details class="alert plegable"><summary><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><h3>'+S.alertT+'</h3><span class="plg"></span></summary><p>'+S.alertP+'</p></details>';
   $('#winTitle').textContent=S.winTitle;
   $('#winLede').textContent=S.winLede;
   $('#winTable').innerHTML=S.winTable;
@@ -3038,6 +3146,29 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
 }else{revealAll()}
 
 setSeason('ago');
+</script>
+<script>
+/* ---------- tablas: cada celda sabe su cabecera, para pintarse como tarjeta en el móvil ---------- */
+(function(){
+  function etiqueta(){
+    document.querySelectorAll('.tw table').forEach(function(t){
+      if(t.dataset.lab)return;
+      var cab=[].map.call(t.querySelectorAll('thead th'),function(th){return th.textContent.trim()});
+      if(!cab.length)return;
+      t.querySelectorAll('tbody tr').forEach(function(tr){
+        [].forEach.call(tr.children,function(td,i){
+          if(i===0){td.classList.add('tcab');return}
+          if(cab[i])td.setAttribute('data-l',cab[i]);
+          if(td.textContent.trim()==='·')td.classList.add('vacia');
+        });
+      });
+      t.dataset.lab='1';
+    });
+  }
+  etiqueta();
+  var pend=0;
+  new MutationObserver(function(){if(pend)return;pend=requestAnimationFrame(function(){pend=0;etiqueta()})}).observe(document.body,{childList:true,subtree:true});
+})();
 </script>
 <script>
 /* ---------- base de datos en GitHub: checks, lista propia y consejos de vídeos ----------
@@ -3130,7 +3261,7 @@ setSeason('ago');
     if(!items.length)html+='<p class="vacio">No queda nada con fecha pendiente.</p>';
     else html+='<ul>'+items.slice(0,3).map(function(x){
       var d=Math.round((x.f-hoy)/864e5), cl='cd', et;
-      if(x.f.getFullYear()<2001){et='Ya';cl+=' ya'}else if(d<0){et='Atrasado';cl+=' ya'}else if(d===0){et='Hoy';cl+=' hoy'}else{et=d+'<small>'+(d===1?'día':'días')+'</small>'}
+      if(x.f.getFullYear()<2001){et='Ahora';cl+=' ya'}else if(d<0){et='Atrasado';cl+=' ya'}else if(d===0){et='Hoy';cl+=' hoy'}else{et=d+'<small>'+(d===1?'día':'días')+'</small>'}
       return '<li><div class="'+cl+'">'+et+'</div><a href="#plan" style="text-decoration:none;color:inherit"><b>'+x.c[1]+'</b><span>'+x.c[0]+'</span></a></li>';
     }).join('')+'</ul>';
     caja.innerHTML=html;
