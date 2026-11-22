@@ -1,1 +1,8 @@
-{"version":1,"checks":{},"pendientes":[],"tips":[]}
+{
+ "version": 1,
+ "checks": {
+  "c:vuelos-comprados": "2026-11-22"
+ },
+ "pendientes": [],
+ "tips": []
+}
