@@ -7,11 +7,11 @@ may:{
  condTitle:"Lo que condiciona todo el viaje",
  condLede:"Tres hechos que hay que aceptar antes de elegir ruta. Ninguno se negocia, los tres se gestionan. El orden en que se visitan los sitios importa más que qué sitios se visitan.",
  cards:[
-  {n:"7",col:"var(--r1)",h:"días de Golden Week",p:"Del <b>30 de abril al 6 de mayo</b> China entera se mueve. El comparable de 2026 registró 325 millones de viajes internos en cinco días. Cae justo en la primera mitad del viaje."},
+  {n:"5",col:"var(--r1)",h:"días de Golden Week",p:"Del <b>1 al 5 de mayo</b> China entera se mueve. Son las fechas oficiales que publicó el Consejo de Estado en noviembre de 2026, con el sábado 8 como laborable de recuperación. El comparable de 2026 registró 325 millones de viajes internos en cinco días. Cae justo en la primera mitad del viaje."},
   {n:"3",col:"var(--r3)",h:"días tarde para el Hyrox",p:"Hyrox Shanghái 2027 es el <b>14, 15 y 16 de mayo</b>. Con vuelta el 12 no entra. Alargando al 17 entra la carrera y cinco días más de viaje."},
   {n:"01:45",h:"hora de todos los regresos",p:"Los vuelos de China a España salen de madrugada. El último día completo en China es siempre <b>el día anterior</b> a aterrizar en Zaragoza."}],
  alertT:"La regla que ordena las ocho rutas",
- alertP:"Terracota, Zhangjiajie y la Gran Muralla van <b>siempre después del 6 de mayo</b>. El Golden Week se pasa en Shenzhen, que es ciudad de origen y se vacía cuando sus trabajadores se van a sus provincias, y en el desierto de Gansu, donde hay sitio de sobra. Por eso las rutas entran por el sur y terminan en el norte.",
+ alertP:"Terracota, Zhangjiajie y la Gran Muralla van <b>siempre a partir del 6 de mayo</b>, primer día laborable. El Golden Week se pasa en Shenzhen, que es ciudad de origen y se vacía cuando sus trabajadores se van a sus provincias, y en el desierto de Gansu, donde hay sitio de sobra. Por eso las rutas entran por el sur y terminan en el norte.",
  winTitle:"Vuelos: la ida decide cuántos días tenéis",
  winLede:"Con la restricción de no salir el viernes antes de las 20:00, la salida del viernes pierde su ventaja. Los dos escenarios posibles dan los mismos días útiles, pero uno dura siete horas más.",
  winTable:'<table><thead><tr><th>Opción de ida</th><th>Sale</th><th>Llega a China</th><th>Duración</th><th>Días en tierra</th><th></th></tr></thead><tbody>'+

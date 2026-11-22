@@ -463,7 +463,7 @@ html.js .rv.in{opacity:1;transform:none;
           <tr><td><b>Días en China</b></td><td class="n">10</td><td class="n">14 (o hasta 28)</td></tr>
           <tr><td><b>Días de vacaciones</b></td><td class="n">8</td><td class="n">9</td></tr>
           <tr><td><b>Días de viaje por cada día de vacaciones</b></td><td class="n">1,25</td><td class="n"><b>1,56</b></td></tr>
-          <tr><td><b>Problema de masificación</b></td><td>Golden Week, del 30 de abril al 6 de mayo. Concentrado y esquivable ordenando bien la ruta.</td><td>Vacaciones escolares chinas. <b>Todo el mes</b>, sin ventana limpia. No se esquiva, se asume.</td></tr>
+          <tr><td><b>Problema de masificación</b></td><td>Golden Week, del 1 al 5 de mayo (calendario oficial). Concentrado y esquivable ordenando bien la ruta.</td><td>Vacaciones escolares chinas. <b>Todo el mes</b>, sin ventana limpia. No se esquiva, se asume.</td></tr>
           <tr><td><b>Temperatura</b></td><td>Ideal casi en todo el país, 14 a 26 grados en el norte.</td><td>Brutal: 32 a 40 grados con humedad alta en el sur y el centro.</td></tr>
           <tr><td><b>Riesgo meteorológico</b></td><td>Bajo.</td><td><b>Tifones</b> en Guangdong, 4 a 6 de media en agosto. Afecta a Shenzhen.</td></tr>
           <tr><td><b>Desierto de Gansu</b></td><td>Perfecto, 28 grados y seco.</td><td>Muy bueno: 33 grados de día, 18 de noche, 6 mm de lluvia en todo el mes.</td></tr>
@@ -604,7 +604,7 @@ var ROUTES=[
   yes:["Terracota","Gran Muralla","Zhangjiajie","Valle de Wangxian","Fenghuang y Furong","Chongqing de noche"],
   no:["Sin pandas","Sin Shenzhen","Sin Ciudad Prohibida","Pekín y Shanghái exprés"],
   warnTitle:"La única ruta que pisa un parque nacional en pleno Golden Week",
-  warn:"Invertir el orden protege la Terracota y la Muralla, que caen el 10 y el 11 de mayo, pero deja el parque de Zhangjiajie en los días 5 y 6, dentro del Golden Week: la cola del ascensor Bailong puede pasar de dos horas. Se gestiona madrugando (primera franja de las 07:00, subir por Tianzi si el Bailong está imposible) y comprando las entradas en el minuto en que se abra la venta. Si no queréis veros ahí esos días, las rutas 4 a 7 esquivan el problema.",
+  warn:"Invertir el orden protege la Terracota y la Muralla, que caen el 10 y el 11 de mayo, pero deja el parque de Zhangjiajie el día 5, último del Golden Week, y Tianmen el 6, primer laborable pero aún con el regreso de la gente: la cola del ascensor Bailong puede pasar de dos horas. Se gestiona madrugando (primera franja de las 07:00, subir por Tianzi si el Bailong está imposible) y comprando las entradas en el minuto en que se abra la venta. Si no queréis veros ahí esos días, las rutas 4 a 7 esquivan el problema.",
   legs:[["shanghai","wangxian","tren",480,"2 h 40 + 1 h de coche"],["wangxian","zhangjiajie","tren",900,"6 h"],["zhangjiajie","furong","bus",95,"1 h 15"],["furong","fenghuang","tren",60,"34 min"],["fenghuang","chongqing","tren",480,"3 h 30"],["chongqing","xian","tren",700,"5 h"],["xian","beijing","tren",1200,"4 h 30"],["beijing","mutianyu","bus",70,"1 h 15"]],
   days:[
   {d:"Dom 2",t:"Aterrizaje en Shanghái",img:"bund_1",cap:"El Bund y Pudong enfrente, un siglo mirándose",x:"Llegáis al amanecer con el directo del sábado. Paseo por el Bund, la Concesión Francesa a pie y el jardín Yu. Al caer la noche, el skyline de Pudong encendido desde la orilla. A la cama pronto, que mañana empieza el viaje de verdad."},
@@ -961,11 +961,11 @@ may:{
  condTitle:"Lo que condiciona todo el viaje",
  condLede:"Tres hechos que hay que aceptar antes de elegir ruta. Ninguno se negocia, los tres se gestionan. El orden en que se visitan los sitios importa más que qué sitios se visitan.",
  cards:[
-  {n:"7",col:"var(--r1)",h:"días de Golden Week",p:"Del <b>30 de abril al 6 de mayo</b> China entera se mueve. El comparable de 2026 registró 325 millones de viajes internos en cinco días. Cae justo en la primera mitad del viaje."},
+  {n:"5",col:"var(--r1)",h:"días de Golden Week",p:"Del <b>1 al 5 de mayo</b> China entera se mueve. Son las fechas oficiales que publicó el Consejo de Estado en noviembre de 2026, con el sábado 8 como laborable de recuperación. El comparable de 2026 registró 325 millones de viajes internos en cinco días. Cae justo en la primera mitad del viaje."},
   {n:"3",col:"var(--r3)",h:"días tarde para el Hyrox",p:"Hyrox Shanghái 2027 es el <b>14, 15 y 16 de mayo</b>. Con vuelta el 12 no entra. Alargando al 17 entra la carrera y cinco días más de viaje."},
   {n:"01:45",h:"hora de todos los regresos",p:"Los vuelos de China a España salen de madrugada. El último día completo en China es siempre <b>el día anterior</b> a aterrizar en Zaragoza."}],
  alertT:"La regla que ordena las ocho rutas",
- alertP:"Terracota, Zhangjiajie y la Gran Muralla van <b>siempre después del 6 de mayo</b>. El Golden Week se pasa en Shenzhen, que es ciudad de origen y se vacía cuando sus trabajadores se van a sus provincias, y en el desierto de Gansu, donde hay sitio de sobra. Por eso las rutas entran por el sur y terminan en el norte.",
+ alertP:"Terracota, Zhangjiajie y la Gran Muralla van <b>siempre a partir del 6 de mayo</b>, primer día laborable. El Golden Week se pasa en Shenzhen, que es ciudad de origen y se vacía cuando sus trabajadores se van a sus provincias, y en el desierto de Gansu, donde hay sitio de sobra. Por eso las rutas entran por el sur y terminan en el norte.",
  winTitle:"Vuelos: la ida decide cuántos días tenéis",
  winLede:"Con la restricción de no salir el viernes antes de las 20:00, la salida del viernes pierde su ventaja. Los dos escenarios posibles dan los mismos días útiles, pero uno dura siete horas más.",
  winTable:'<table><thead><tr><th>Opción de ida</th><th>Sale</th><th>Llega a China</th><th>Duración</th><th>Días en tierra</th><th></th></tr></thead><tbody>'+
