@@ -2,7 +2,7 @@
 
 Documento de **decisión** de viaje: compara **8 rutas por 2 ventanas de fechas** (mayo y
 agosto de 2027) para elegir antes de comprar los vuelos. Un solo archivo HTML que funciona
-sin conexión: **[index.html](index.html)** (8,4 MB, 63 fotos, tipografía y vídeo de portada
+sin conexión: **[index.html](index.html)** (18 MB, 63 fotos, tipografía y vídeo de portada en Full HD
 incrustados en base64).
 
 Publicado con GitHub Pages: `https://alvaroalonsoorigen-eng.github.io/china/`
