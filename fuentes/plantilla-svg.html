@@ -269,6 +269,32 @@ td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
 footer{padding:56px 0 76px;border-top:1px solid var(--line);color:var(--mute);font-size:.83rem}
 /* barra inferior tipo app, solo en movil (heredada del planner de referencia) */
 .bottomnav{display:none}
+/* los trenes del viaje */
+.trmapa{max-width:760px;margin-left:auto;margin-right:auto;margin-top:30px;border-radius:var(--rad);overflow:hidden;border:1px solid var(--line);background:#7FAFD6}
+#trsvg{display:block;width:100%;height:auto;aspect-ratio:4/3}
+#trsvg .leg{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 1.3px #fff) drop-shadow(0 0 1.3px #fff)}
+#trsvg .leg.tren{stroke-width:5}
+#trsvg .leg.avion{stroke-width:4;stroke-dasharray:10 7}
+#trsvg .leg.bus{stroke-width:3.4;stroke-dasharray:2 6}
+#trsvg .nd{fill:#fff;stroke-width:3;vector-effect:non-scaling-stroke}
+#trsvg text{font-weight:700;fill:#14161C;paint-order:stroke;stroke:#fff;stroke-linejoin:round}
+#trsvg .num circle{stroke:#fff;stroke-width:2.5;vector-effect:non-scaling-stroke}
+#trsvg .num text{fill:#fff;stroke:none;font-weight:800;text-anchor:middle;dominant-baseline:central}
+.trley{display:flex;gap:18px;flex-wrap:wrap;padding:10px 14px;background:#fff;font-size:.8rem;color:var(--ink2);border-top:1px solid var(--line)}
+.trley span{display:inline-flex;align-items:center;gap:7px}
+.trlist{display:grid;gap:12px;margin-top:24px}
+@media(min-width:760px){.trlist{grid-template-columns:1fr 1fr}}
+.trc{display:grid;grid-template-columns:42px 1fr;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.trc .tn{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;background:var(--brand)}
+.trc .tn.sin{background:#8A8C93}
+.trc .tn.sin svg{width:18px;height:18px}
+.trc .td{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--mute)}
+.trc h4{margin:2px 0 4px;font-size:1rem;line-height:1.3}
+.trc .tt{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--brand);font-size:.88rem}
+.trc dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:8px 0 0;font-size:.84rem;color:var(--ink2)}
+.trc dt{color:var(--mute)}
+.trc dd{margin:0}
+.trc .venta{color:var(--ink);font-weight:680}
 @media(max-width:999px){
   .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:960;display:flex;
     background:rgba(255,255,255,.92);backdrop-filter:blur(20px) saturate(180%);
@@ -580,6 +606,18 @@ html.mapafs,html.mapafs body{overflow:hidden}
   </div>
 </section>
 
+<section id="trenes">
+  <div class="wrap">
+    <div class="narrow stack">
+      <h2>Los trenes del viaje</h2>
+      <p class="lede">Todos los trayectos de la ruta, numerados sobre el mapa: dos nocturnos con literas, tres trenes rápidos por el interior, un coche con chófer y un vuelo. Cada ficha dice el día exacto en que sale a la venta.</p>
+    </div>
+    <div class="trmapa rv"><svg id="trsvg" role="img" aria-label="Mapa de los trayectos del viaje"></svg>
+      <div class="trley"><span><i class="lgline" style="border-top:5px solid var(--brand)"></i> Tren</span><span><i class="lgline" style="border-top:4px dashed var(--brand)"></i> Avión</span><span><i class="lgline" style="border-top:3px dotted var(--brand)"></i> Coche</span></div></div>
+    <div class="trlist rv" id="trlist"></div>
+  </div>
+</section>
+
 <section id="sitios">
   <div class="wrap">
     <div class="narrow stack">
@@ -605,7 +643,7 @@ html.mapafs,html.mapafs body{overflow:hidden}
 <footer>
   <div class="wrap">
     <p style="max-width:none">Documento de trabajo, no una reserva. Horarios de vuelo y tren según los
-    patrones publicados a día de hoy: las programaciones definitivas de 2027 salen a lo largo de 2026.<br>
+    patrones publicados a noviembre de 2026: los horarios definitivos de verano de 2027 salen hacia finales de marzo de 2027.<br>
     Fotografías de Wikimedia Commons, uso personal. Calendario laboral de Zaragoza 2027 verificado.</p>
   </div>
 </footer>
@@ -1346,9 +1384,51 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
 
 setSeason('ago');
 </script>
+<script>
+/* ---------- los trenes del viaje: mapa numerado y fichas ---------- */
+(function(){
+  var R=ROUTES.filter(function(r){return r.main})[0]||ROUTES[0];
+  var S=R&&R.ago, M=MAPA.rutas[R.id+'ago'];
+  var lista=document.getElementById('trlist'), sv=document.getElementById('trsvg');
+  if(!S||!S.trenes||!M){var sec=document.getElementById('trenes');if(sec)sec.style.display='none';return}
+  var NSx='http://www.w3.org/2000/svg';
+  function n(t,a){var e=document.createElementNS(NSx,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+  var v=M.vista.slice(), cx=v[0]+v[2]/2, cy=v[1]+v[3]/2, w=Math.max(v[2],v[3]*4/3)*1.04, h=w*3/4;
+  sv.setAttribute('viewBox',[cx-w/2,cy-h/2,w,h].map(function(x){return x.toFixed(1)}).join(' '));
+  if(MAPA.fondo){var fo=n('image',{x:MAPA.fondo.caja[0],y:MAPA.fondo.caja[1],width:MAPA.fondo.caja[2],height:MAPA.fondo.caja[3],preserveAspectRatio:'none'});fo.setAttribute('href',MAPA.fondo.src);sv.appendChild(fo)}
+  sv.appendChild(n('path',{d:MAPA.contorno,fill:'none',stroke:'rgba(120,70,40,.55)','stroke-width':1.2,'stroke-dasharray':'5 3','vector-effect':'non-scaling-stroke'}));
+  var k=w/560;
+  M.tramos.forEach(function(t){sv.appendChild(n('path',{'class':'leg '+t.modo,d:t.d,stroke:R.hex}))});
+  M.nodos.forEach(function(d){
+    if(d.sat)return;
+    sv.appendChild(n('circle',{'class':'nd',cx:d.x,cy:d.y,r:(6*k).toFixed(2),stroke:R.hex}));
+    var tx=n('text',{x:d.x+(d.dx||16)*k*0.9,y:d.y+(d.dy===undefined?7:d.dy)*k*0.9,'text-anchor':d.lado||'start','font-size':(15*k).toFixed(2),'stroke-width':(4.5*k).toFixed(2)});
+    tx.textContent=d.n; sv.appendChild(tx);
+  });
+  var num=0;
+  S.trenes.forEach(function(T){
+    var ico=ICO[T.modo]||'', etiqueta='';
+    if(T.leg>=0&&M.tramos[T.leg]){
+      num++; etiqueta=String(num);
+      var tr=M.tramos[T.leg], g=n('g',{'class':'num'});
+      g.appendChild(n('circle',{cx:tr.mx,cy:tr.my,r:(11*k).toFixed(2),fill:R.hex}));
+      var t=n('text',{x:tr.mx,y:tr.my,'font-size':(12*k).toFixed(2)}); t.textContent=etiqueta; g.appendChild(t);
+      sv.appendChild(g);
+    }
+    var c=document.createElement('div'); c.className='trc';
+    c.innerHTML='<div class="tn'+(etiqueta?'':' sin')+'">'+(etiqueta||ico)+'</div><div>'+
+      '<div class="td">'+T.d+'</div><h4>'+T.de+' a '+T.a+'</h4>'+
+      '<span class="tt">'+ico+T.tren+'</span>'+
+      '<dl><dt>Horario</dt><dd>'+T.hora+'</dd><dt>Duración</dt><dd>'+T.dur+'</dd><dt>Plaza</dt><dd>'+T.plaza+'</dd>'+
+      '<dt>Compra</dt><dd class="venta">'+T.venta+'</dd>'+(T.alt?'<dt>Plan B</dt><dd>'+T.alt+'</dd>':'')+'</dl></div>';
+    lista.appendChild(c);
+  });
+})();
+</script>
 <nav class="bottomnav" aria-label="Ir a una sección">
   <a href="#top" class="bn on" data-sec="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Inicio</a>
   <a href="#rutas" class="bn" data-sec="rutas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/></svg>Rutas</a>
+  <a href="#trenes" class="bn" data-sec="trenes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="13" rx="3"/><path d="M5 10h14M8 16l-1 4M16 16l1 4"/><circle cx="9" cy="13" r=".6"/><circle cx="15" cy="13" r=".6"/></svg>Trenes</a>
   <a href="#sitios" class="bn" data-sec="sitios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg>Sitios</a>
   <a href="#plan" class="bn" data-sec="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m4 5 1 1 2-2M4 11l1 1 2-2M4 17l1 1 2-2"/></svg>Plan</a>
 </nav>

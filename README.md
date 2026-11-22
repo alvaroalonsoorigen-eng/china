@@ -3,7 +3,7 @@
 Documento de viaje que compara **4 rutas** para quince días en China en agosto de 2027,
 encajadas en los vuelos ya comprados: **Madrid a Pekín el sábado 31 de julio** y
 **Shanghái a Barcelona el lunes 16 de agosto** (salida a las 00:40). Un solo archivo HTML:
-**[index.html](index.html)** (19 MB, 63 fotos, tipografía y vídeo de portada en Full HD
+**[index.html](index.html)** (39 MB, 211 fotos, tipografía y vídeo de portada en Full HD
 incrustados en base64).
 
 Publicado con GitHub Pages: `https://alvaroalonsoorigen-eng.github.io/china/`
